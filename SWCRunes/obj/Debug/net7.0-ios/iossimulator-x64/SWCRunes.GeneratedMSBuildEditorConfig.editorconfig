@@ -1,0 +1,59 @@
+is_global = true
+build_property.TargetFramework = net7.0-ios
+build_property.TargetPlatformMinVersion = 
+build_property.UsingMicrosoftNETSdkWeb = 
+build_property.ProjectTypeGuids = 
+build_property.InvariantGlobalization = false
+build_property.PlatformNeutralAssembly = 
+build_property.EnforceExtendedAnalyzerRules = 
+build_property._SupportedPlatformList = Linux,macOS,Windows
+build_property.RootNamespace = SWCRunes
+build_property.ProjectDir = /Users/sethcorduan/Projects/SWCRunes/SWCRunes/
+
+[/Users/sethcorduan/Projects/SWCRunes/SWCRunes/App.xaml]
+build_metadata.AdditionalFiles.GenKind = Xaml
+build_metadata.AdditionalFiles.ManifestResourceName = SWCRunes.App.xaml
+build_metadata.AdditionalFiles.TargetPath = App.xaml
+build_metadata.AdditionalFiles.RelativePath = App.xaml
+
+[/Users/sethcorduan/Projects/SWCRunes/SWCRunes/AppShell.xaml]
+build_metadata.AdditionalFiles.GenKind = Xaml
+build_metadata.AdditionalFiles.ManifestResourceName = SWCRunes.AppShell.xaml
+build_metadata.AdditionalFiles.TargetPath = AppShell.xaml
+build_metadata.AdditionalFiles.RelativePath = AppShell.xaml
+
+[/Users/sethcorduan/Projects/SWCRunes/SWCRunes/MainPage.xaml]
+build_metadata.AdditionalFiles.GenKind = Xaml
+build_metadata.AdditionalFiles.ManifestResourceName = SWCRunes.MainPage.xaml
+build_metadata.AdditionalFiles.TargetPath = MainPage.xaml
+build_metadata.AdditionalFiles.RelativePath = MainPage.xaml
+
+[/Users/sethcorduan/Projects/SWCRunes/SWCRunes/MonsterInventory/MonsterInventory.xaml]
+build_metadata.AdditionalFiles.GenKind = Xaml
+build_metadata.AdditionalFiles.ManifestResourceName = SWCRunes.MonsterInventory.MonsterInventory.xaml
+build_metadata.AdditionalFiles.TargetPath = MonsterInventory/MonsterInventory.xaml
+build_metadata.AdditionalFiles.RelativePath = MonsterInventory/MonsterInventory.xaml
+
+[/Users/sethcorduan/Projects/SWCRunes/SWCRunes/RecommendationInventory/RecommendationInventory.xaml]
+build_metadata.AdditionalFiles.GenKind = Xaml
+build_metadata.AdditionalFiles.ManifestResourceName = SWCRunes.RecommendationInventory.RecommendationInventory.xaml
+build_metadata.AdditionalFiles.TargetPath = RecommendationInventory/RecommendationInventory.xaml
+build_metadata.AdditionalFiles.RelativePath = RecommendationInventory/RecommendationInventory.xaml
+
+[/Users/sethcorduan/Projects/SWCRunes/SWCRunes/Resources/Styles/Colors.xaml]
+build_metadata.AdditionalFiles.GenKind = Xaml
+build_metadata.AdditionalFiles.ManifestResourceName = SWCRunes.Resources.Styles.Colors.xaml
+build_metadata.AdditionalFiles.TargetPath = Resources/Styles/Colors.xaml
+build_metadata.AdditionalFiles.RelativePath = Resources/Styles/Colors.xaml
+
+[/Users/sethcorduan/Projects/SWCRunes/SWCRunes/Resources/Styles/Styles.xaml]
+build_metadata.AdditionalFiles.GenKind = Xaml
+build_metadata.AdditionalFiles.ManifestResourceName = SWCRunes.Resources.Styles.Styles.xaml
+build_metadata.AdditionalFiles.TargetPath = Resources/Styles/Styles.xaml
+build_metadata.AdditionalFiles.RelativePath = Resources/Styles/Styles.xaml
+
+[/Users/sethcorduan/Projects/SWCRunes/SWCRunes/RuneInventory/RuneInventory.xaml]
+build_metadata.AdditionalFiles.GenKind = Xaml
+build_metadata.AdditionalFiles.ManifestResourceName = SWCRunes.RuneInventory.RuneInventory.xaml
+build_metadata.AdditionalFiles.TargetPath = RuneInventory/RuneInventory.xaml
+build_metadata.AdditionalFiles.RelativePath = RuneInventory/RuneInventory.xaml
