@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "GVPKV9pRh48UNiVz8qhKmTc8SiDcmAXz7nd2OFmvjTc2MO1cKZNV9NFGAQBFPFU1lGFh0KjDuj7oDokA2lzFcw==",
+  "dgSpecHash": "lHLMEduuUTEjCG0wiHllCSzWv6EIA3rAUzS0peEAOh5jshU96dhy+6FBdhvWg6HKwHFkhRvjmHYM07uaBBvJiA==",
   "success": true,
-  "projectFilePath": "/Users/sethcorduan/Projects/SWCRunes/SWCRunes/SWCRunes.csproj",
+  "projectFilePath": "/Users/sethcorduan/Projects/swcrunes/SWCRunes/SWCRunes.csproj",
   "expectedPackageFiles": [
     "/Users/sethcorduan/.nuget/packages/googlegson/2.9.1/googlegson.2.9.1.nupkg.sha512",
     "/Users/sethcorduan/.nuget/packages/microsoft.extensions.configuration/7.0.0/microsoft.extensions.configuration.7.0.0.nupkg.sha512",

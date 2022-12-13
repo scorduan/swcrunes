@@ -99,3 +99,6 @@
 /Users/sethcorduan/Projects/SWCRunes/SWCRuneTests/obj/Debug/net7.0/SWCRuneTests.pdb
 /Users/sethcorduan/Projects/SWCRunes/SWCRuneTests/obj/Debug/net7.0/SWCRuneTests.genruntimeconfig.cache
 /Users/sethcorduan/Projects/SWCRunes/SWCRuneTests/obj/Debug/net7.0/ref/SWCRuneTests.dll
+/Users/sethcorduan/Projects/swcrunes/SWCRuneTests/bin/Debug/net7.0/Monsters.data
+/Users/sethcorduan/Projects/swcrunes/SWCRuneTests/bin/Debug/net7.0/requests.data
+/Users/sethcorduan/Projects/swcrunes/SWCRuneTests/bin/Debug/net7.0/runes.data

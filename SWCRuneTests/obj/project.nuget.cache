@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "DMYg7uILuTyNnoaVGf3oC5w78LtQjrG42qEoOtVRFU+w7PrwEdBYGhUEc1UzWT/5vKzQ7WPZpNEkpHiRZGFbPw==",
+  "dgSpecHash": "nvGZSTuR+A2Xx1oAJiqAA3KQbnSihbb5+DBABcxxvQWPcrEPO8i45ykS8BQrHy4pzLhyppdz02gltj5qnuDK8A==",
   "success": true,
-  "projectFilePath": "/Users/sethcorduan/Projects/SWCRunes/SWCRuneTests/SWCRuneTests.csproj",
+  "projectFilePath": "/Users/sethcorduan/Projects/swcrunes/SWCRuneTests/SWCRuneTests.csproj",
   "expectedPackageFiles": [
     "/Users/sethcorduan/.nuget/packages/coverlet.collector/3.1.2/coverlet.collector.3.1.2.nupkg.sha512",
     "/Users/sethcorduan/.nuget/packages/microsoft.codecoverage/17.3.2/microsoft.codecoverage.17.3.2.nupkg.sha512",

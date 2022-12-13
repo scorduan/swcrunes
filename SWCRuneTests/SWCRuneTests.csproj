@@ -19,4 +19,15 @@
   <ItemGroup>
     <ProjectReference Include="..\SWCRunesLib\SWCRunesLib.csproj" />
   </ItemGroup>
+  <ItemGroup>
+    <None Update="Monsters.data">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="requests.data">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="runes.data">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
 </Project>

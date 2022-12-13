@@ -3979,11 +3979,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "/Users/sethcorduan/Projects/SWCRunes/SWCRuneTests/SWCRuneTests.csproj",
+      "projectUniqueName": "/Users/sethcorduan/Projects/swcrunes/SWCRuneTests/SWCRuneTests.csproj",
       "projectName": "SWCRuneTests",
-      "projectPath": "/Users/sethcorduan/Projects/SWCRunes/SWCRuneTests/SWCRuneTests.csproj",
+      "projectPath": "/Users/sethcorduan/Projects/swcrunes/SWCRuneTests/SWCRuneTests.csproj",
       "packagesPath": "/Users/sethcorduan/.nuget/packages/",
-      "outputPath": "/Users/sethcorduan/Projects/SWCRunes/SWCRuneTests/obj/",
+      "outputPath": "/Users/sethcorduan/Projects/swcrunes/SWCRuneTests/obj/",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "/usr/local/share/dotnet/sdk/NuGetFallbackFolder"
@@ -4002,8 +4002,8 @@
         "net7.0": {
           "targetAlias": "net7.0",
           "projectReferences": {
-            "/Users/sethcorduan/Projects/SWCRunes/SWCRunesLib/SWCRunesLib.csproj": {
-              "projectPath": "/Users/sethcorduan/Projects/SWCRunes/SWCRunesLib/SWCRunesLib.csproj"
+            "/Users/sethcorduan/Projects/swcrunes/SWCRunesLib/SWCRunesLib.csproj": {
+              "projectPath": "/Users/sethcorduan/Projects/swcrunes/SWCRunesLib/SWCRunesLib.csproj"
             }
           }
         }

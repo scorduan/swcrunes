@@ -8,4 +8,4 @@ build_property.PlatformNeutralAssembly =
 build_property.EnforceExtendedAnalyzerRules = 
 build_property._SupportedPlatformList = Linux,macOS,Windows
 build_property.RootNamespace = SWCRunesLib
-build_property.ProjectDir = /Users/sethcorduan/Projects/SWCRunes/SWCRunesLib/
+build_property.ProjectDir = /Users/sethcorduan/Projects/swcrunes/SWCRunesLib/

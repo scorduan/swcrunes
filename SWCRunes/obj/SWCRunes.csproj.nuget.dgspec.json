@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "/Users/sethcorduan/Projects/SWCRunes/SWCRunes/SWCRunes.csproj": {}
+    "/Users/sethcorduan/Projects/swcrunes/SWCRunes/SWCRunes.csproj": {}
   },
   "projects": {
-    "/Users/sethcorduan/Projects/SWCRunes/SWCRunes/SWCRunes.csproj": {
+    "/Users/sethcorduan/Projects/swcrunes/SWCRunes/SWCRunes.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/Users/sethcorduan/Projects/SWCRunes/SWCRunes/SWCRunes.csproj",
+        "projectUniqueName": "/Users/sethcorduan/Projects/swcrunes/SWCRunes/SWCRunes.csproj",
         "projectName": "SWCRunes",
-        "projectPath": "/Users/sethcorduan/Projects/SWCRunes/SWCRunes/SWCRunes.csproj",
+        "projectPath": "/Users/sethcorduan/Projects/swcrunes/SWCRunes/SWCRunes.csproj",
         "packagesPath": "/Users/sethcorduan/.nuget/packages/",
-        "outputPath": "/Users/sethcorduan/Projects/SWCRunes/SWCRunes/obj/",
+        "outputPath": "/Users/sethcorduan/Projects/swcrunes/SWCRunes/obj/",
         "projectStyle": "PackageReference",
         "crossTargeting": true,
         "fallbackFolders": [
@@ -33,24 +33,24 @@
           "net7.0-android33.0": {
             "targetAlias": "net7.0-android",
             "projectReferences": {
-              "/Users/sethcorduan/Projects/SWCRunes/SWCRunesLib/SWCRunesLib.csproj": {
-                "projectPath": "/Users/sethcorduan/Projects/SWCRunes/SWCRunesLib/SWCRunesLib.csproj"
+              "/Users/sethcorduan/Projects/swcrunes/SWCRunesLib/SWCRunesLib.csproj": {
+                "projectPath": "/Users/sethcorduan/Projects/swcrunes/SWCRunesLib/SWCRunesLib.csproj"
               }
             }
           },
           "net7.0-ios16.0": {
             "targetAlias": "net7.0-ios",
             "projectReferences": {
-              "/Users/sethcorduan/Projects/SWCRunes/SWCRunesLib/SWCRunesLib.csproj": {
-                "projectPath": "/Users/sethcorduan/Projects/SWCRunes/SWCRunesLib/SWCRunesLib.csproj"
+              "/Users/sethcorduan/Projects/swcrunes/SWCRunesLib/SWCRunesLib.csproj": {
+                "projectPath": "/Users/sethcorduan/Projects/swcrunes/SWCRunesLib/SWCRunesLib.csproj"
               }
             }
           },
           "net7.0-maccatalyst15.4": {
             "targetAlias": "net7.0-maccatalyst",
             "projectReferences": {
-              "/Users/sethcorduan/Projects/SWCRunes/SWCRunesLib/SWCRunesLib.csproj": {
-                "projectPath": "/Users/sethcorduan/Projects/SWCRunes/SWCRunesLib/SWCRunesLib.csproj"
+              "/Users/sethcorduan/Projects/swcrunes/SWCRunesLib/SWCRunesLib.csproj": {
+                "projectPath": "/Users/sethcorduan/Projects/swcrunes/SWCRunesLib/SWCRunesLib.csproj"
               }
             }
           }
@@ -329,14 +329,14 @@
         }
       }
     },
-    "/Users/sethcorduan/Projects/SWCRunes/SWCRunesLib/SWCRunesLib.csproj": {
+    "/Users/sethcorduan/Projects/swcrunes/SWCRunesLib/SWCRunesLib.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/Users/sethcorduan/Projects/SWCRunes/SWCRunesLib/SWCRunesLib.csproj",
+        "projectUniqueName": "/Users/sethcorduan/Projects/swcrunes/SWCRunesLib/SWCRunesLib.csproj",
         "projectName": "SWCRunesLib",
-        "projectPath": "/Users/sethcorduan/Projects/SWCRunes/SWCRunesLib/SWCRunesLib.csproj",
+        "projectPath": "/Users/sethcorduan/Projects/swcrunes/SWCRunesLib/SWCRunesLib.csproj",
         "packagesPath": "/Users/sethcorduan/.nuget/packages/",
-        "outputPath": "/Users/sethcorduan/Projects/SWCRunes/SWCRunesLib/obj/",
+        "outputPath": "/Users/sethcorduan/Projects/swcrunes/SWCRunesLib/obj/",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "/usr/local/share/dotnet/sdk/NuGetFallbackFolder"

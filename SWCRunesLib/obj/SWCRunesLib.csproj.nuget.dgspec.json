@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "/Users/sethcorduan/Projects/SWCRunes/SWCRunesLib/SWCRunesLib.csproj": {}
+    "/Users/sethcorduan/Projects/swcrunes/SWCRunesLib/SWCRunesLib.csproj": {}
   },
   "projects": {
-    "/Users/sethcorduan/Projects/SWCRunes/SWCRunesLib/SWCRunesLib.csproj": {
+    "/Users/sethcorduan/Projects/swcrunes/SWCRunesLib/SWCRunesLib.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/Users/sethcorduan/Projects/SWCRunes/SWCRunesLib/SWCRunesLib.csproj",
+        "projectUniqueName": "/Users/sethcorduan/Projects/swcrunes/SWCRunesLib/SWCRunesLib.csproj",
         "projectName": "SWCRunesLib",
-        "projectPath": "/Users/sethcorduan/Projects/SWCRunes/SWCRunesLib/SWCRunesLib.csproj",
+        "projectPath": "/Users/sethcorduan/Projects/swcrunes/SWCRunesLib/SWCRunesLib.csproj",
         "packagesPath": "/Users/sethcorduan/.nuget/packages/",
-        "outputPath": "/Users/sethcorduan/Projects/SWCRunes/SWCRunesLib/obj/",
+        "outputPath": "/Users/sethcorduan/Projects/swcrunes/SWCRunesLib/obj/",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "/usr/local/share/dotnet/sdk/NuGetFallbackFolder"

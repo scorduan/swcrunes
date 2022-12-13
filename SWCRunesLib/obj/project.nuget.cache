@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "LDNIqMatmn3ipcO99BwmfhRJ1mVhvoCOXHYGDHayWGIHoJ9v4uLihsPETVKACwcYhHdbAgmgxSKILQP2n3VauA==",
+  "dgSpecHash": "T9CsDjGoy5SDWyoHKuEv5E0vKiI5uRhrDnHd5UcZgqwf39l7/eaYCxANLkw+vtPvXxSuCGKdOlRyUANtE8VtQw==",
   "success": true,
-  "projectFilePath": "/Users/sethcorduan/Projects/SWCRunes/SWCRunesLib/SWCRunesLib.csproj",
+  "projectFilePath": "/Users/sethcorduan/Projects/swcrunes/SWCRunesLib/SWCRunesLib.csproj",
   "expectedPackageFiles": [],
   "logs": []
 }
