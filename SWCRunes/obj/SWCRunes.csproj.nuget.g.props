@@ -13,4 +13,13 @@
     <SourceRoot Include="/Users/sethcorduan/.nuget/packages/" />
     <SourceRoot Include="/usr/local/share/dotnet/sdk/NuGetFallbackFolder/" />
   </ItemGroup>
+  <PropertyGroup Condition=" '$(TargetFramework)' == 'net7.0-android' AND '$(ExcludeRestorePackageImports)' != 'true' ">
+    <PkgSonarAnalyzer_CSharp Condition=" '$(PkgSonarAnalyzer_CSharp)' == '' ">/Users/sethcorduan/.nuget/packages/sonaranalyzer.csharp/8.50.0.58025</PkgSonarAnalyzer_CSharp>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(TargetFramework)' == 'net7.0-ios' AND '$(ExcludeRestorePackageImports)' != 'true' ">
+    <PkgSonarAnalyzer_CSharp Condition=" '$(PkgSonarAnalyzer_CSharp)' == '' ">/Users/sethcorduan/.nuget/packages/sonaranalyzer.csharp/8.50.0.58025</PkgSonarAnalyzer_CSharp>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(TargetFramework)' == 'net7.0-maccatalyst' AND '$(ExcludeRestorePackageImports)' != 'true' ">
+    <PkgSonarAnalyzer_CSharp Condition=" '$(PkgSonarAnalyzer_CSharp)' == '' ">/Users/sethcorduan/.nuget/packages/sonaranalyzer.csharp/8.50.0.58025</PkgSonarAnalyzer_CSharp>
+  </PropertyGroup>
 </Project>

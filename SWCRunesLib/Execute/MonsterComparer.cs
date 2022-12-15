@@ -1,3 +1,4 @@
+namespace SWCRunesLib;
 using System.Collections.Generic;
 public class MonsterComparer : IComparer<Monster>
 {

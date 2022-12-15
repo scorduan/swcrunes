@@ -3,14 +3,43 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="SWCRunes.RecommendationInventory"
              xmlns:local="clr-namespace:SWCRunes"
+             xmlns:components="clr-namespace:SWCRunes.Components"
+             xmlns:lib="clr-namespace:SWCRunesLib;assembly=SWCRunesLib"
              Title="RecommendationInventory">
-    <ContentPage.BindingContext>
-        <local:RecommendationInventoryViewModel />
-    </ContentPage.BindingContext>
+
     <VerticalStackLayout>
         <Label 
             Text="Welcome to .NET MAUI!"
             VerticalOptions="Center" 
             HorizontalOptions="Center" />
+
+        <Button
+                x:Name="ProcessBtn"
+                Text="Process"
+                SemanticProperties.Hint="Counts the number of times you click"
+                Clicked="OnProcessClicked"
+                HorizontalOptions="Center" />
+        <CollectionView ItemsSource="{Binding RecStore}">
+            <CollectionView.ItemTemplate>
+                <DataTemplate>
+                    <HorizontalStackLayout x:DataType="lib:Recommendation" Background="gray">
+                        <Label Text="{Binding MonsterName}" />
+                        <Label Text="Count: "/>
+                        <Label Text="{Binding RecommendedSetup.Count}"/>
+                        <Label Text="Things"/>
+                        <CollectionView ItemsSource="{Binding RecommendedSetup}" >
+                            <CollectionView.ItemTemplate >
+                                <DataTemplate>
+                                    <components:Monster />
+                                </DataTemplate>
+                            </CollectionView.ItemTemplate>
+                            
+                        </CollectionView>
+                    </HorizontalStackLayout>
+
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
     </VerticalStackLayout>
+
 </ContentPage>

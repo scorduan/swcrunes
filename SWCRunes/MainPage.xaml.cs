@@ -21,10 +21,7 @@ public partial class MainPage : ContentPage
 
 		SemanticScreenReader.Announce(CounterBtn.Text);
 		*/
-		
-		MonsterStorage monStore = RuneSerializer.ReadMonstersFromFile("monsters.data");
-        RuneStorage runeStore = RuneSerializer.ReadRunesFromFile("runes.data");
-        RequestStorage reqStore = RuneSerializer.ReadRequestsFromFile("requests.data");
+
 
     }
 }

@@ -7,9 +7,9 @@
       <dSYMSourcePathExists>false</dSYMSourcePathExists>
       <NoSymbolStrip>true</NoSymbolStrip>
       <dSYMInfoPlistRelativePath>SWCRunes.app.dSYM\Contents\Info.plist</dSYMInfoPlistRelativePath>
-      <SymbolFile>/Users/sethcorduan/Projects/SWCRunes/SWCRunes/obj/Debug/net7.0-maccatalyst/maccatalyst-x64/mtouch-symbols.list</SymbolFile>
+      <SymbolFile>/Users/sethcorduan/Projects/swcrunes/SWCRunes/obj/Debug/net7.0-maccatalyst/maccatalyst-x64/mtouch-symbols.list</SymbolFile>
       <DSymName>SWCRunes.app.dSYM</DSymName>
-      <SourceProjectPath>/Users/sethcorduan/Projects/SWCRunes/SWCRunes</SourceProjectPath>
+      <SourceProjectPath>/Users/sethcorduan/Projects/swcrunes/SWCRunes</SourceProjectPath>
     </_PostProcessingItem>
   </ItemGroup>
 </Project>

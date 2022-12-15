@@ -295,6 +295,9 @@
     <_LinkerFrameworks Include="AVRouting">
       <IsWeak>true</IsWeak>
     </_LinkerFrameworks>
+    <_LinkerFrameworks Include="BackgroundAssets">
+      <IsWeak>true</IsWeak>
+    </_LinkerFrameworks>
     <_LinkerFrameworks Include="BackgroundTasks">
       <IsWeak>true</IsWeak>
     </_LinkerFrameworks>

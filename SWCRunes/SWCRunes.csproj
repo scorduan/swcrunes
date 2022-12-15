@@ -50,6 +50,10 @@
 
 	<ItemGroup>
 		<PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="7.0.0" />
+		<PackageReference Include="SonarAnalyzer.CSharp" Version="8.50.0.58025">
+		  <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+		  <PrivateAssets>all</PrivateAssets>
+		</PackageReference>
 	</ItemGroup>
 
 	<ItemGroup>
@@ -62,14 +66,29 @@
 	  <MauiXaml Update="MonsterInventory\MonsterInventory.xaml">
 	    <SubType></SubType>
 	  </MauiXaml>
+	  <MauiXaml Update="Components\Monster.xaml">
+	    <SubType></SubType>
+	  </MauiXaml>
+	  <MauiXaml Update="Components\Rune.xaml">
+	    <SubType></SubType>
+	  </MauiXaml>
+	  <MauiXaml Update="Components\RuneSet.xaml">
+	    <SubType></SubType>
+	  </MauiXaml>
+	  <MauiXaml Update="Components\RuneAttribute.xaml">
+	    <SubType></SubType>
+	  </MauiXaml>
 	</ItemGroup>
 	<ItemGroup>
 	  <None Remove="RuneInventory\" />
 	  <None Remove="MonsterInventory\" />
+	  <None Remove="Components\" />
+	  <None Remove="SonarAnalyzer.CSharp" />
 	</ItemGroup>
 	<ItemGroup>
 	  <Folder Include="RuneInventory\" />
 	  <Folder Include="MonsterInventory\" />
+	  <Folder Include="Components\" />
 	</ItemGroup>
 	<ItemGroup>
 	  <ProjectReference Include="..\SWCRunesLib\SWCRunesLib.csproj" />
