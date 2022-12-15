@@ -78,9 +78,6 @@
 	  <MauiXaml Update="Components\RuneAttribute.xaml">
 	    <SubType></SubType>
 	  </MauiXaml>
-	  <MauiXaml Update="RuneInventory\RuneEditPage.xaml">
-	    <SubType></SubType>
-	  </MauiXaml>
 	</ItemGroup>
 	<ItemGroup>
 	  <None Remove="RuneInventory\" />

@@ -7,70 +7,154 @@
              xmlns:lib="clr-namespace:SWCRunesLib;assembly=SWCRunesLib"
              Title="RuneInventory" >
     <VerticalStackLayout>
+        <HorizontalStackLayout>
+            
+        </HorizontalStackLayout>
+                <Grid Padding="10">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="80" />
+                <ColumnDefinition Width="80" />
+                <ColumnDefinition Width="80" />
+                <ColumnDefinition Width="80" />
+                <ColumnDefinition Width="80" />
+                <ColumnDefinition Width="80" />
+                <ColumnDefinition Width="80" />
+                <ColumnDefinition Width="80" />
+                <ColumnDefinition Width="80" />
+                <ColumnDefinition Width="80" />
+                <ColumnDefinition Width="80" />
+                <ColumnDefinition Width="80" />
+                <ColumnDefinition Width="80" />
+                <ColumnDefinition Width="80" />
+                <ColumnDefinition Width="80" />
+                <ColumnDefinition Width="80" />
+            </Grid.ColumnDefinitions>
+            <Entry Grid.Column="1"
+                           Placeholder="Slot"                            
+                           FontAttributes="Bold" />
+            <Entry Grid.Column="2"
+                           Placeholder="ATK%"
+                           FontAttributes="Bold" Text="{Binding NewATKP}" />
+            <Entry Grid.Column="3"
+                           Placeholder="ATK"
+                           FontAttributes="Bold" />
+            <Entry Grid.Column="4"
+                           Placeholder="DEF%"
+                           FontAttributes="Bold" />
+            <Entry Grid.Column="5"
+                           Placeholder="DEF"
+                           FontAttributes="Bold" />
+            <Entry Grid.Column="6"
+                           Placeholder="HP%"
+                           FontAttributes="Bold" />
+            <Entry Grid.Column="7"
+                           Placeholder="HP"
+                           FontAttributes="Bold" />
+            <Entry Grid.Column="8"
+                           Placeholder="SPD"
+                           FontAttributes="Bold" />
+            <Entry Grid.Column="9"
+                           Placeholder="CR"
+                           FontAttributes="Bold" />
+            <Entry Grid.Column="10"
+                           Placeholder="CD"
+                           FontAttributes="Bold" />
+            <Entry Grid.Column="11"
+                           Placeholder="ACC"
+                           FontAttributes="Bold" />
+            <Entry Grid.Column="12"
+                           Placeholder="RES"
+                           FontAttributes="Bold" />
+            <Entry Grid.Column="13"
+                           Placeholder="PR"
+                           FontAttributes="Bold" />
+            <Entry Grid.Column="14"
+                           Placeholder="EV"
+                           FontAttributes="Bold" />
+             <Button Grid.Column="15" Text="Add" WidthRequest="80" Clicked="OnAddClicked"/>
+        </Grid>
         <Grid Padding="10">
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto" />
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="60" />
-                <ColumnDefinition Width="60" />
-                <ColumnDefinition Width="60" />
-                <ColumnDefinition Width="60" />
-                <ColumnDefinition Width="60" />
-                <ColumnDefinition Width="60" />
-                <ColumnDefinition Width="60" />
-                <ColumnDefinition Width="60" />
-                <ColumnDefinition Width="60" />
-                <ColumnDefinition Width="60" />
-                <ColumnDefinition Width="60" />
-                <ColumnDefinition Width="60" />
-                <ColumnDefinition Width="60" />
-                <ColumnDefinition Width="60" />
-                <ColumnDefinition Width="60" />
+                <ColumnDefinition Width="80" />
+                <ColumnDefinition Width="80" />
+                <ColumnDefinition Width="80" />
+                <ColumnDefinition Width="80" />
+                <ColumnDefinition Width="80" />
+                <ColumnDefinition Width="80" />
+                <ColumnDefinition Width="80" />
+                <ColumnDefinition Width="80" />
+                <ColumnDefinition Width="80" />
+                <ColumnDefinition Width="80" />
+                <ColumnDefinition Width="80" />
+                <ColumnDefinition Width="80" />
+                <ColumnDefinition Width="80" />
+                <ColumnDefinition Width="80" />
+                <ColumnDefinition Width="80" />
             </Grid.ColumnDefinitions>
             <Label Grid.Column="1"
                            Text="Slot"
+                   HorizontalTextAlignment="Center"
                            FontAttributes="Bold" />
             <Label Grid.Column="2"
                            Text="ATK%"
+                   HorizontalTextAlignment="Center"
                            FontAttributes="Bold" />
             <Label Grid.Column="3"
                            Text="ATK"
+                   HorizontalTextAlignment="Center"
                            FontAttributes="Bold" />
             <Label Grid.Column="4"
                            Text="DEF%"
+                   HorizontalTextAlignment="Center"
                            FontAttributes="Bold" />
             <Label Grid.Column="5"
                            Text="DEF"
+                   HorizontalTextAlignment="Center"
                            FontAttributes="Bold" />
             <Label Grid.Column="6"
                            Text="HP%"
+                   HorizontalTextAlignment="Center"
                            FontAttributes="Bold" />
             <Label Grid.Column="7"
                            Text="HP"
+                   HorizontalTextAlignment="Center"
                            FontAttributes="Bold" />
             <Label Grid.Column="8"
                            Text="SPD"
+                   HorizontalTextAlignment="Center"
                            FontAttributes="Bold" />
             <Label Grid.Column="9"
                            Text="CR"
+                   HorizontalTextAlignment="Center"
                            FontAttributes="Bold" />
             <Label Grid.Column="10"
                            Text="CD"
+                   HorizontalTextAlignment="Center"
                            FontAttributes="Bold" />
             <Label Grid.Column="11"
                            Text="ACC"
+                   HorizontalTextAlignment="Center"
                            FontAttributes="Bold" />
             <Label Grid.Column="12"
                            Text="RES"
+                   HorizontalTextAlignment="Center"
                            FontAttributes="Bold" />
             <Label Grid.Column="13"
                            Text="PR"
+                   HorizontalTextAlignment="Center"
                            FontAttributes="Bold" />
             <Label Grid.Column="14"
                            Text="EV"
+                   HorizontalTextAlignment="Center"
                            FontAttributes="Bold" />
         </Grid>
+        <Border StrokeThickness="5">
         <ListView ItemsSource="{Binding Runes}">
             <ListView.ItemTemplate>
                 <DataTemplate >
@@ -80,21 +164,21 @@
                                 <RowDefinition Height="Auto" />
                             </Grid.RowDefinitions>
                             <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="60" />
-                                <ColumnDefinition Width="60" />
-                                <ColumnDefinition Width="60" />
-                                <ColumnDefinition Width="60" />
-                                <ColumnDefinition Width="60" />
-                                <ColumnDefinition Width="60" />
-                                <ColumnDefinition Width="60" />
-                                <ColumnDefinition Width="60" />
-                                <ColumnDefinition Width="60" />
-                                <ColumnDefinition Width="60" />
-                                <ColumnDefinition Width="60" />
-                                <ColumnDefinition Width="60" />
-                                <ColumnDefinition Width="60" />
-                                <ColumnDefinition Width="60" />
-                                <ColumnDefinition Width="60" />
+                                <ColumnDefinition Width="80" />
+                                <ColumnDefinition Width="80" />
+                                <ColumnDefinition Width="80" />
+                                <ColumnDefinition Width="80" />
+                                <ColumnDefinition Width="80" />
+                                <ColumnDefinition Width="80" />
+                                <ColumnDefinition Width="80" />
+                                <ColumnDefinition Width="80" />
+                                <ColumnDefinition Width="80" />
+                                <ColumnDefinition Width="80" />
+                                <ColumnDefinition Width="80" />
+                                <ColumnDefinition Width="80" />
+                                <ColumnDefinition Width="80" />
+                                <ColumnDefinition Width="80" />
+                                <ColumnDefinition Width="80" />
                             </Grid.ColumnDefinitions>
 
                             <Label Grid.Column="1" Text="{Binding Slot}"/>
@@ -120,9 +204,6 @@
                 </DataTemplate>
             </ListView.ItemTemplate>
         </ListView>
-        <HorizontalStackLayout>
-            <Button Text="Add Rune" WidthRequest="100" Clicked="OnAddClicked"/>
-            <Button Text="Delete Selected" WidthRequest="150"/>
-        </HorizontalStackLayout>
+        </Border>
     </VerticalStackLayout>
 </ContentPage>

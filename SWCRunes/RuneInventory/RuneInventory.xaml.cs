@@ -13,6 +13,6 @@ public partial class RuneInventory : ContentPage
 
     void OnAddClicked(System.Object sender, System.EventArgs e)
     {
-		RuneEditPage page = new RuneEditPage();
+		_viewModel.SaveNewRune();
     }
 }

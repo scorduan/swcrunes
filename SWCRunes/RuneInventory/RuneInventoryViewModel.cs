@@ -14,6 +14,16 @@ namespace SWCRunes
         public event PropertyChangedEventHandler PropertyChanged;
 
         public List<Rune> Runes { get => _runeStore; }
+
+        public int NewATKP { get; set; }
+
+        public void SaveNewRune()
+        {
+            Rune rune = new Rune();
+            rune.ATKP = NewATKP;
+            Runes.Add(rune);
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("Runes"));
+        }
     }
 }
 
