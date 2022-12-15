@@ -1,4 +1,5 @@
 using NUnit.Framework;
+using SWCRunesLib;
 
 namespace netswop.tests
 {

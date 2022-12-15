@@ -1,0 +1,14 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="SWCRunes.Components.RuneAttribute"
+             xmlns:lib="clr-namespace:SWCRunesLib;assembly=SWCRunesLib"
+             xmlns:components="clr-namespace:SWCRunes.Components"
+             WidthRequest="80"
+             >
+    <HorizontalStackLayout x:Name="mainLayout">
+        <Label x:Name="textLabel" Text="" FontAttributes="Bold" TextColor="Black" BackgroundColor="LightYellow"/>
+        <Label x:Name="valueLabel" Text="" BackgroundColor="Yellow" />
+    </HorizontalStackLayout>
+</ContentView>
+

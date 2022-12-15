@@ -1,0 +1,15 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="SWCRunes.Components.Rune"
+             xmlns:lib="clr-namespace:SWCRunesLib;assembly=SWCRunesLib"
+             xmlns:components="clr-namespace:SWCRunes.Components">
+        <ContentView.Resources>
+        <components:Int3ToPercConverter x:Key="int3ToPerc" />
+    </ContentView.Resources>
+
+    <HorizontalStackLayout x:DataType="lib:Rune" x:Name="mainContainer">
+        <Label Text="Slot:" WidthRequest="35"/><Label Text="{Binding Slot}" WidthRequest="50"/>        
+    </HorizontalStackLayout>
+</ContentView>
+

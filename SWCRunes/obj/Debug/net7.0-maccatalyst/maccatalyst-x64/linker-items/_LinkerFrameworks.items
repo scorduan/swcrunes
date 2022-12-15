@@ -295,6 +295,12 @@
     <_LinkerFrameworks Include="AutomaticAssessmentConfiguration">
       <IsWeak>true</IsWeak>
     </_LinkerFrameworks>
+    <_LinkerFrameworks Include="AVRouting">
+      <IsWeak>true</IsWeak>
+    </_LinkerFrameworks>
+    <_LinkerFrameworks Include="BackgroundAssets">
+      <IsWeak>true</IsWeak>
+    </_LinkerFrameworks>
     <_LinkerFrameworks Include="ClassKit">
       <IsWeak>true</IsWeak>
     </_LinkerFrameworks>
@@ -308,6 +314,9 @@
       <IsWeak>true</IsWeak>
     </_LinkerFrameworks>
     <_LinkerFrameworks Include="CoreWLAN">
+      <IsWeak>true</IsWeak>
+    </_LinkerFrameworks>
+    <_LinkerFrameworks Include="ExecutionPolicy">
       <IsWeak>true</IsWeak>
     </_LinkerFrameworks>
     <_LinkerFrameworks Include="HomeKit">
@@ -337,7 +346,16 @@
     <_LinkerFrameworks Include="SensorKit">
       <IsWeak>true</IsWeak>
     </_LinkerFrameworks>
+    <_LinkerFrameworks Include="SharedWithYou">
+      <IsWeak>true</IsWeak>
+    </_LinkerFrameworks>
+    <_LinkerFrameworks Include="SharedWithYouCore">
+      <IsWeak>true</IsWeak>
+    </_LinkerFrameworks>
     <_LinkerFrameworks Include="ShazamKit">
+      <IsWeak>true</IsWeak>
+    </_LinkerFrameworks>
+    <_LinkerFrameworks Include="ThreadNetwork">
       <IsWeak>true</IsWeak>
     </_LinkerFrameworks>
     <_LinkerFrameworks Include="UniformTypeIdentifiers">

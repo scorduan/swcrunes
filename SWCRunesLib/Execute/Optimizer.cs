@@ -1,3 +1,4 @@
+namespace SWCRunesLib;
 using System.Collections.Generic;
 public class Optimizer
 {
@@ -60,6 +61,7 @@ public class Optimizer
         foreach (RuneSet set in runeSets)
         {
             Monster m = Monster.FromJson(monsterJson);
+            m.Name = req.MonsterName;
             m.Runes=set;
             Monster resultMon = m.GetModified();
             resultMon.Runes=set;

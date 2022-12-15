@@ -26,6 +26,30 @@ build_metadata.AdditionalFiles.ManifestResourceName = SWCRunes.AppShell.xaml
 build_metadata.AdditionalFiles.TargetPath = AppShell.xaml
 build_metadata.AdditionalFiles.RelativePath = AppShell.xaml
 
+[/Users/sethcorduan/Projects/swcrunes/SWCRunes/Components/Monster.xaml]
+build_metadata.AdditionalFiles.GenKind = Xaml
+build_metadata.AdditionalFiles.ManifestResourceName = SWCRunes.Components.Monster.xaml
+build_metadata.AdditionalFiles.TargetPath = Components/Monster.xaml
+build_metadata.AdditionalFiles.RelativePath = Components/Monster.xaml
+
+[/Users/sethcorduan/Projects/swcrunes/SWCRunes/Components/Rune.xaml]
+build_metadata.AdditionalFiles.GenKind = Xaml
+build_metadata.AdditionalFiles.ManifestResourceName = SWCRunes.Components.Rune.xaml
+build_metadata.AdditionalFiles.TargetPath = Components/Rune.xaml
+build_metadata.AdditionalFiles.RelativePath = Components/Rune.xaml
+
+[/Users/sethcorduan/Projects/swcrunes/SWCRunes/Components/RuneAttribute.xaml]
+build_metadata.AdditionalFiles.GenKind = Xaml
+build_metadata.AdditionalFiles.ManifestResourceName = SWCRunes.Components.RuneAttribute.xaml
+build_metadata.AdditionalFiles.TargetPath = Components/RuneAttribute.xaml
+build_metadata.AdditionalFiles.RelativePath = Components/RuneAttribute.xaml
+
+[/Users/sethcorduan/Projects/swcrunes/SWCRunes/Components/RuneSet.xaml]
+build_metadata.AdditionalFiles.GenKind = Xaml
+build_metadata.AdditionalFiles.ManifestResourceName = SWCRunes.Components.RuneSet.xaml
+build_metadata.AdditionalFiles.TargetPath = Components/RuneSet.xaml
+build_metadata.AdditionalFiles.RelativePath = Components/RuneSet.xaml
+
 [/Users/sethcorduan/Projects/swcrunes/SWCRunes/MainPage.xaml]
 build_metadata.AdditionalFiles.GenKind = Xaml
 build_metadata.AdditionalFiles.ManifestResourceName = SWCRunes.MainPage.xaml
