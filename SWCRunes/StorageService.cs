@@ -14,9 +14,6 @@ namespace SWCRunes
             string runesFile = System.IO.Path.Combine(FileSystem.Current.AppDataDirectory, "runes.data");
             string requestsFile = System.IO.Path.Combine(FileSystem.Current.AppDataDirectory, "requests.data");
 
-            //string monstersFile = System.IO.Path.Combine("~", "monsters.data");
-            //string runesFile = System.IO.Path.Combine("~", "runes.data");
-            //string requestsFile = System.IO.Path.Combine("~", "requests.data");
 
             if (!File.Exists(monstersFile))
             {
@@ -40,11 +37,11 @@ namespace SWCRunes
             _reqStore = RuneSerializer.ReadRequestsFromFile(requestsFile);
         }
 
-        private RuneStorage _runeStore;
+        private readonly RuneStorage _runeStore;
 
-        private MonsterStorage _monStore;
+        private readonly MonsterStorage _monStore;
 
-        private RequestStorage _reqStore;
+        private readonly RequestStorage _reqStore;
 
 
         public RuneStorage RuneStore { get => _runeStore;  }

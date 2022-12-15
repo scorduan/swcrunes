@@ -3,18 +3,126 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="SWCRunes.RuneInventory"
              xmlns:local="clr-namespace:SWCRunes"
-             Title="RuneInventory">
-    <ContentPage.BindingContext>
-        <local:RuneInventoryViewModel />
-    </ContentPage.BindingContext>
+             xmlns:components="clr-namespace:SWCRunes.Components"
+             xmlns:lib="clr-namespace:SWCRunesLib;assembly=SWCRunesLib"
+             Title="RuneInventory" >
     <VerticalStackLayout>
-        <Grid>
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*" />
-            </Grid.ColumnDefinitions>
+        <Grid Padding="10">
             <Grid.RowDefinitions>
-                <RowDefinition Height="*" />
+                <RowDefinition Height="Auto" />
             </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="60" />
+                <ColumnDefinition Width="60" />
+                <ColumnDefinition Width="60" />
+                <ColumnDefinition Width="60" />
+                <ColumnDefinition Width="60" />
+                <ColumnDefinition Width="60" />
+                <ColumnDefinition Width="60" />
+                <ColumnDefinition Width="60" />
+                <ColumnDefinition Width="60" />
+                <ColumnDefinition Width="60" />
+                <ColumnDefinition Width="60" />
+                <ColumnDefinition Width="60" />
+                <ColumnDefinition Width="60" />
+                <ColumnDefinition Width="60" />
+                <ColumnDefinition Width="60" />
+            </Grid.ColumnDefinitions>
+            <Label Grid.Column="1"
+                           Text="Slot"
+                           FontAttributes="Bold" />
+            <Label Grid.Column="2"
+                           Text="ATK%"
+                           FontAttributes="Bold" />
+            <Label Grid.Column="3"
+                           Text="ATK"
+                           FontAttributes="Bold" />
+            <Label Grid.Column="4"
+                           Text="DEF%"
+                           FontAttributes="Bold" />
+            <Label Grid.Column="5"
+                           Text="DEF"
+                           FontAttributes="Bold" />
+            <Label Grid.Column="6"
+                           Text="HP%"
+                           FontAttributes="Bold" />
+            <Label Grid.Column="7"
+                           Text="HP"
+                           FontAttributes="Bold" />
+            <Label Grid.Column="8"
+                           Text="SPD"
+                           FontAttributes="Bold" />
+            <Label Grid.Column="9"
+                           Text="CR"
+                           FontAttributes="Bold" />
+            <Label Grid.Column="10"
+                           Text="CD"
+                           FontAttributes="Bold" />
+            <Label Grid.Column="11"
+                           Text="ACC"
+                           FontAttributes="Bold" />
+            <Label Grid.Column="12"
+                           Text="RES"
+                           FontAttributes="Bold" />
+            <Label Grid.Column="13"
+                           Text="PR"
+                           FontAttributes="Bold" />
+            <Label Grid.Column="14"
+                           Text="EV"
+                           FontAttributes="Bold" />
         </Grid>
+        <ListView ItemsSource="{Binding Runes}">
+            <ListView.ItemTemplate>
+                <DataTemplate >
+                    <ViewCell>
+                        <Grid Padding="10">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto" />
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="60" />
+                                <ColumnDefinition Width="60" />
+                                <ColumnDefinition Width="60" />
+                                <ColumnDefinition Width="60" />
+                                <ColumnDefinition Width="60" />
+                                <ColumnDefinition Width="60" />
+                                <ColumnDefinition Width="60" />
+                                <ColumnDefinition Width="60" />
+                                <ColumnDefinition Width="60" />
+                                <ColumnDefinition Width="60" />
+                                <ColumnDefinition Width="60" />
+                                <ColumnDefinition Width="60" />
+                                <ColumnDefinition Width="60" />
+                                <ColumnDefinition Width="60" />
+                                <ColumnDefinition Width="60" />
+                            </Grid.ColumnDefinitions>
+
+                            <Label Grid.Column="1" Text="{Binding Slot}"/>
+                            <Label Grid.Column="2" Text="{Binding ATKP}"  />
+                            <Label Grid.Column="3" Text="{Binding ATKF}" />
+                            <Label Grid.Column="4" Text="{Binding DEFP}"/>
+                            <Label Grid.Column="5" Text="{Binding DEFF}" />
+                            <Label Grid.Column="6" Text="{Binding HPP}"/>
+                            <Label Grid.Column="7" Text="{Binding HPF}"/>
+                            <Label Grid.Column="8" Text="{Binding SPD}"/>
+                            <Label Grid.Column="9" Text="{Binding CR}"/>
+                            <Label Grid.Column="10" Text="{Binding CD}"/>
+                            <Label Grid.Column="11" Text="{Binding ACC}"/>
+                            <Label Grid.Column="12" Text="{Binding RES}"/>
+                            <Label Grid.Column="13" Text="{Binding PR}"/>
+                            <Label Grid.Column="14" Text="{Binding EV}"/>
+
+
+
+                        </Grid>
+
+                    </ViewCell>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+        <HorizontalStackLayout>
+            <Button Text="Add Rune" WidthRequest="100" Clicked="OnAddClicked"/>
+            <Button Text="Delete Selected" WidthRequest="150"/>
+        </HorizontalStackLayout>
     </VerticalStackLayout>
 </ContentPage>
