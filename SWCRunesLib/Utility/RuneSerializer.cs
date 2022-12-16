@@ -48,5 +48,10 @@ public class RuneSerializer
             Console.WriteLine(rec.ToJson());
         }
     }   
-    
+
+    public static void SaveRunes(List<Rune> runes)
+    {
+
+    }
+
 }

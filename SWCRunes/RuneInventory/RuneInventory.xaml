@@ -8,9 +8,9 @@
              Title="RuneInventory" >
     <VerticalStackLayout>
         <HorizontalStackLayout>
-            
+
         </HorizontalStackLayout>
-                <Grid Padding="10">
+        <Grid Padding="10">
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto" />
             </Grid.RowDefinitions>
@@ -34,47 +34,47 @@
             </Grid.ColumnDefinitions>
             <Entry Grid.Column="1"
                            Placeholder="Slot"                            
-                           FontAttributes="Bold" />
+                           FontAttributes="Bold" Text="{Binding NewSlot}"/>
             <Entry Grid.Column="2"
                            Placeholder="ATK%"
                            FontAttributes="Bold" Text="{Binding NewATKP}" />
             <Entry Grid.Column="3"
                            Placeholder="ATK"
-                           FontAttributes="Bold" />
+                           FontAttributes="Bold" Text="{Binding NewATKF}"/>
             <Entry Grid.Column="4"
                            Placeholder="DEF%"
-                           FontAttributes="Bold" />
+                           FontAttributes="Bold" Text="{Binding NewDEFP}"/>
             <Entry Grid.Column="5"
                            Placeholder="DEF"
-                           FontAttributes="Bold" />
+                           FontAttributes="Bold" Text="{Binding NewDEFF}"/>
             <Entry Grid.Column="6"
                            Placeholder="HP%"
-                           FontAttributes="Bold" />
+                           FontAttributes="Bold" Text="{Binding NewHPP}"/>
             <Entry Grid.Column="7"
                            Placeholder="HP"
-                           FontAttributes="Bold" />
+                           FontAttributes="Bold" Text="{Binding NewHPF}"/>
             <Entry Grid.Column="8"
                            Placeholder="SPD"
-                           FontAttributes="Bold" />
+                           FontAttributes="Bold" Text="{Binding NewSPD}"/>
             <Entry Grid.Column="9"
                            Placeholder="CR"
-                           FontAttributes="Bold" />
+                           FontAttributes="Bold" Text="{Binding NewCR}"/>
             <Entry Grid.Column="10"
                            Placeholder="CD"
-                           FontAttributes="Bold" />
+                           FontAttributes="Bold" Text="{Binding NewCD}"/>
             <Entry Grid.Column="11"
                            Placeholder="ACC"
-                           FontAttributes="Bold" />
+                           FontAttributes="Bold" Text="{Binding NewACC}"/>
             <Entry Grid.Column="12"
                            Placeholder="RES"
-                           FontAttributes="Bold" />
+                           FontAttributes="Bold" Text="{Binding NewRES}"/>
             <Entry Grid.Column="13"
                            Placeholder="PR"
-                           FontAttributes="Bold" />
+                           FontAttributes="Bold" Text="{Binding NewPR}"/>
             <Entry Grid.Column="14"
                            Placeholder="EV"
-                           FontAttributes="Bold" />
-             <Button Grid.Column="15" Text="Add" WidthRequest="80" Clicked="OnAddClicked"/>
+                           FontAttributes="Bold" Text="{Binding NewEV}"/>
+            <Button Grid.Column="15" Text="Add" WidthRequest="80" Clicked="OnAddClicked"/>
         </Grid>
         <Grid Padding="10">
             <Grid.RowDefinitions>
@@ -154,56 +154,56 @@
                    HorizontalTextAlignment="Center"
                            FontAttributes="Bold" />
         </Grid>
-        <Border StrokeThickness="5">
-        <ListView ItemsSource="{Binding Runes}">
-            <ListView.ItemTemplate>
-                <DataTemplate >
-                    <ViewCell>
-                        <Grid Padding="10">
-                            <Grid.RowDefinitions>
-                                <RowDefinition Height="Auto" />
-                            </Grid.RowDefinitions>
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="80" />
-                                <ColumnDefinition Width="80" />
-                                <ColumnDefinition Width="80" />
-                                <ColumnDefinition Width="80" />
-                                <ColumnDefinition Width="80" />
-                                <ColumnDefinition Width="80" />
-                                <ColumnDefinition Width="80" />
-                                <ColumnDefinition Width="80" />
-                                <ColumnDefinition Width="80" />
-                                <ColumnDefinition Width="80" />
-                                <ColumnDefinition Width="80" />
-                                <ColumnDefinition Width="80" />
-                                <ColumnDefinition Width="80" />
-                                <ColumnDefinition Width="80" />
-                                <ColumnDefinition Width="80" />
-                            </Grid.ColumnDefinitions>
+        <Border>
+            <ListView ItemsSource="{Binding Runes}">
+                <ListView.ItemTemplate>
+                    <DataTemplate >
+                        <ViewCell>
+                            <Grid Padding="10">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto" />
+                                </Grid.RowDefinitions>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="80" />
+                                    <ColumnDefinition Width="80" />
+                                    <ColumnDefinition Width="80" />
+                                    <ColumnDefinition Width="80" />
+                                    <ColumnDefinition Width="80" />
+                                    <ColumnDefinition Width="80" />
+                                    <ColumnDefinition Width="80" />
+                                    <ColumnDefinition Width="80" />
+                                    <ColumnDefinition Width="80" />
+                                    <ColumnDefinition Width="80" />
+                                    <ColumnDefinition Width="80" />
+                                    <ColumnDefinition Width="80" />
+                                    <ColumnDefinition Width="80" />
+                                    <ColumnDefinition Width="80" />
+                                    <ColumnDefinition Width="80" />
+                                </Grid.ColumnDefinitions>
 
-                            <Label Grid.Column="1" Text="{Binding Slot}"/>
-                            <Label Grid.Column="2" Text="{Binding ATKP}"  />
-                            <Label Grid.Column="3" Text="{Binding ATKF}" />
-                            <Label Grid.Column="4" Text="{Binding DEFP}"/>
-                            <Label Grid.Column="5" Text="{Binding DEFF}" />
-                            <Label Grid.Column="6" Text="{Binding HPP}"/>
-                            <Label Grid.Column="7" Text="{Binding HPF}"/>
-                            <Label Grid.Column="8" Text="{Binding SPD}"/>
-                            <Label Grid.Column="9" Text="{Binding CR}"/>
-                            <Label Grid.Column="10" Text="{Binding CD}"/>
-                            <Label Grid.Column="11" Text="{Binding ACC}"/>
-                            <Label Grid.Column="12" Text="{Binding RES}"/>
-                            <Label Grid.Column="13" Text="{Binding PR}"/>
-                            <Label Grid.Column="14" Text="{Binding EV}"/>
+                                <Label Grid.Column="1" Text="{Binding Slot}"/>
+                                <Label Grid.Column="2" Text="{Binding ATKP}"  />
+                                <Label Grid.Column="3" Text="{Binding ATKF}" />
+                                <Label Grid.Column="4" Text="{Binding DEFP}"/>
+                                <Label Grid.Column="5" Text="{Binding DEFF}" />
+                                <Label Grid.Column="6" Text="{Binding HPP}"/>
+                                <Label Grid.Column="7" Text="{Binding HPF}"/>
+                                <Label Grid.Column="8" Text="{Binding SPD}"/>
+                                <Label Grid.Column="9" Text="{Binding CR}"/>
+                                <Label Grid.Column="10" Text="{Binding CD}"/>
+                                <Label Grid.Column="11" Text="{Binding ACC}"/>
+                                <Label Grid.Column="12" Text="{Binding RES}"/>
+                                <Label Grid.Column="13" Text="{Binding PR}"/>
+                                <Label Grid.Column="14" Text="{Binding EV}"/>
 
 
 
-                        </Grid>
+                            </Grid>
 
-                    </ViewCell>
-                </DataTemplate>
-            </ListView.ItemTemplate>
-        </ListView>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
         </Border>
     </VerticalStackLayout>
 </ContentPage>

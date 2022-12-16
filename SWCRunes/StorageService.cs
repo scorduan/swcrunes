@@ -2,6 +2,7 @@
 using SWCRunesLib;
 using System.IO;
 using System.Diagnostics;
+using System.Collections.ObjectModel;
 
 namespace SWCRunes
 {
@@ -50,6 +51,27 @@ namespace SWCRunes
 
         public RequestStorage ReqStore { get => _reqStore; }
 
+
+        public ObservableCollection<Rune> GetRunes()
+        {
+            ObservableCollection<Rune> runes = new ObservableCollection<Rune>();
+            foreach (Rune r in _runeStore.Runes)
+            {
+                runes.Add(r);
+            }
+
+            return runes;
+        }
+
+        public void SaveRunes(ObservableCollection<Rune> runes)
+        {
+            _runeStore.Runes.Clear();
+            foreach (Rune r in runes)
+            {
+                _runeStore.Runes.Add(r);
+            }
+            RuneSerializer.SaveRunes(_runeStore.Runes);
+        }
     }
 }
 
