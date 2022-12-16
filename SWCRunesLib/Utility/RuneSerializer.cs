@@ -47,6 +47,20 @@ public class RuneSerializer
         {
             Console.WriteLine(rec.ToJson());
         }
-    }   
-    
+    }
+
+    public static async Task SaveRunes(List<Rune> runes, string location)
+    {
+        using StreamWriter file = new(location);
+
+        foreach (Rune rune in runes)
+        {
+
+            await file.WriteLineAsync(rune.ToJson());
+
+        }
+    }
+
+
+
 }

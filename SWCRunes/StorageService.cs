@@ -2,6 +2,7 @@
 using SWCRunesLib;
 using System.IO;
 using System.Diagnostics;
+using System.Collections.ObjectModel;
 
 namespace SWCRunes
 {
@@ -10,13 +11,10 @@ namespace SWCRunes
         public StorageService()
         {
             Console.WriteLine(FileSystem.Current.AppDataDirectory);
-            string monstersFile = System.IO.Path.Combine(FileSystem.Current.AppDataDirectory, "monsters.data");
-            string runesFile = System.IO.Path.Combine(FileSystem.Current.AppDataDirectory, "runes.data");
-            string requestsFile = System.IO.Path.Combine(FileSystem.Current.AppDataDirectory, "requests.data");
+            monstersFile = System.IO.Path.Combine(FileSystem.Current.AppDataDirectory, "monsters.data");
+            runesFile = System.IO.Path.Combine(FileSystem.Current.AppDataDirectory, "runes.data");
+            requestsFile = System.IO.Path.Combine(FileSystem.Current.AppDataDirectory, "requests.data");
 
-            //string monstersFile = System.IO.Path.Combine("~", "monsters.data");
-            //string runesFile = System.IO.Path.Combine("~", "runes.data");
-            //string requestsFile = System.IO.Path.Combine("~", "requests.data");
 
             if (!File.Exists(monstersFile))
             {
@@ -40,11 +38,15 @@ namespace SWCRunes
             _reqStore = RuneSerializer.ReadRequestsFromFile(requestsFile);
         }
 
-        private RuneStorage _runeStore;
+        private readonly RuneStorage _runeStore;
 
-        private MonsterStorage _monStore;
+        private readonly MonsterStorage _monStore;
 
-        private RequestStorage _reqStore;
+        private readonly RequestStorage _reqStore;
+
+        private string runesFile;
+        private string monstersFile;
+        private string requestsFile;
 
 
         public RuneStorage RuneStore { get => _runeStore;  }
@@ -53,6 +55,27 @@ namespace SWCRunes
 
         public RequestStorage ReqStore { get => _reqStore; }
 
+
+        public ObservableCollection<Rune> GetRunes()
+        {
+            ObservableCollection<Rune> runes = new ObservableCollection<Rune>();
+            foreach (Rune r in _runeStore.Runes)
+            {
+                runes.Add(r);
+            }
+
+            return runes;
+        }
+
+        public void SaveRunes(ObservableCollection<Rune> runes)
+        {
+            _runeStore.Runes.Clear();
+            foreach (Rune r in runes)
+            {
+                _runeStore.Runes.Add(r);
+            }
+            RuneSerializer.SaveRunes(_runeStore.Runes, runesFile);
+        }
     }
 }
 
