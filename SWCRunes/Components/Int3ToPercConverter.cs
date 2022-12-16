@@ -13,8 +13,13 @@ namespace SWCRunes.Components
 
         public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            
-            return (int)(float.Parse((string)value) * 10f);
+            float val = 0;
+            if (!float.TryParse((string)value, out val))
+            {
+                val = 0;
+            }
+
+            return val*10;
         }
     }
 }

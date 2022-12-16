@@ -15,4 +15,15 @@ public partial class RuneInventory : ContentPage
     {
 		_viewModel.SaveNewRune();
     }
+
+	void OnSaveClicked(System.Object sender, System.EventArgs e)
+	{
+		_viewModel.SaveUpdatedRune();
+	}
+
+    void OnDelClicked(System.Object sender, System.EventArgs e)
+    {
+        _viewModel.RemoveRune((SWCRunesLib.Rune)((Button)sender).BindingContext);
+    }
+
 }

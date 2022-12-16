@@ -51,5 +51,7 @@ public partial class Rune : ContentView
 
         this.mainContainer.Add(ra);
         ra.updateLabel(text);
+
+        //TODO: Handle Rune Type
     }
 }

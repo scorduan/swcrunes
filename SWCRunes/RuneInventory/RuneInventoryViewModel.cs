@@ -2,12 +2,35 @@
 using System.ComponentModel;
 using System.Collections.ObjectModel;
 using SWCRunesLib;
+using Microsoft.Maui.Controls.Compatibility;
+using System.Reflection;
+
 namespace SWCRunes
 {
     public class RuneInventoryViewModel : INotifyPropertyChanged
     {
         public RuneInventoryViewModel(StorageService storageServ)
         {
+            SlotList = new List<Rune.RuneSlot>();
+            SlotList.Add(Rune.RuneSlot.ONE);
+            SlotList.Add(Rune.RuneSlot.TWO);
+            SlotList.Add(Rune.RuneSlot.THREE);
+            SlotList.Add(Rune.RuneSlot.FOUR);
+            SlotList.Add(Rune.RuneSlot.FIVE);
+            SlotList.Add(Rune.RuneSlot.SIX);
+
+            TypeList = new List<Rune.RuneType>();
+            TypeList.Add(Rune.RuneType.Energy);
+            TypeList.Add(Rune.RuneType.Guard);
+            TypeList.Add(Rune.RuneType.Blade);
+            TypeList.Add(Rune.RuneType.Rage);
+            TypeList.Add(Rune.RuneType.Fatal);
+            TypeList.Add(Rune.RuneType.Swift);
+            TypeList.Add(Rune.RuneType.Focus);
+            TypeList.Add(Rune.RuneType.Endure);
+            TypeList.Add(Rune.RuneType.Foresight);
+            TypeList.Add(Rune.RuneType.Assemble);
+
             NewSlot = Rune.RuneSlot.ONE;
             NewType = Rune.RuneType.Energy;
             _storageServ = storageServ;
@@ -23,6 +46,8 @@ namespace SWCRunes
             {
                 return _runes;
             }
+
+            //ToDO Handle Conversion of percs
         }
 
         StorageService _storageServ;
@@ -50,6 +75,9 @@ namespace SWCRunes
         public Rune.RuneSlot NewSlot { get; set; }
 
         public Rune.RuneType NewType { get; set; }
+
+        public List<Rune.RuneSlot> SlotList { get; set; }
+        public List<Rune.RuneType> TypeList { get; set; }
 
 
         public void SaveNewRune()
@@ -84,6 +112,16 @@ namespace SWCRunes
             
         }
 
+        public void SaveUpdatedRune()
+        {
+            _storageServ.SaveRunes(_runes);
+        }
+
+        public void RemoveRune(Rune r)
+        {
+            _runes.Remove(r);
+            _storageServ.SaveRunes(_runes);
+        }
     
     }
 }

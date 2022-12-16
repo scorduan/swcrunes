@@ -7,199 +7,206 @@
              xmlns:lib="clr-namespace:SWCRunesLib;assembly=SWCRunesLib"
              Title="RuneInventory" >
     <VerticalStackLayout>
-        <HorizontalStackLayout>
-
-        </HorizontalStackLayout>
-        <Grid Padding="10">
+        <Grid Padding="0" WidthRequest="1300">
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto" />
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="80" />
-                <ColumnDefinition Width="80" />
-                <ColumnDefinition Width="80" />
-                <ColumnDefinition Width="80" />
-                <ColumnDefinition Width="80" />
-                <ColumnDefinition Width="80" />
-                <ColumnDefinition Width="80" />
-                <ColumnDefinition Width="80" />
-                <ColumnDefinition Width="80" />
-                <ColumnDefinition Width="80" />
-                <ColumnDefinition Width="80" />
-                <ColumnDefinition Width="80" />
-                <ColumnDefinition Width="80" />
-                <ColumnDefinition Width="80" />
-                <ColumnDefinition Width="80" />
-                <ColumnDefinition Width="80" />
+                <ColumnDefinition Width="70" />
+                <ColumnDefinition Width="70" />
+                <ColumnDefinition Width="70" />
+                <ColumnDefinition Width="70" />
+                <ColumnDefinition Width="70" />
+                <ColumnDefinition Width="70" />
+                <ColumnDefinition Width="70" />
+                <ColumnDefinition Width="70" />
+                <ColumnDefinition Width="70" />
+                <ColumnDefinition Width="70" />
+                <ColumnDefinition Width="70" />
+                <ColumnDefinition Width="70" />
+                <ColumnDefinition Width="70" />
+                <ColumnDefinition Width="70" />
+                <ColumnDefinition Width="70" />
+                <ColumnDefinition Width="70" />
+                <ColumnDefinition Width="70" />
             </Grid.ColumnDefinitions>
-            <Entry Grid.Column="1"
-                           Placeholder="Slot"                            
-                           FontAttributes="Bold" Text="{Binding NewSlot}"/>
-            <Entry Grid.Column="2"
-                           Placeholder="ATK%"
-                           FontAttributes="Bold" Text="{Binding NewATKP}" />
+            <Picker Grid.Column="1"                           
+                           SelectedItem="{Binding NewSlot}" ItemsSource="{Binding SlotList}" />
+            <Picker Grid.Column="2"
+                           SelectedItem="{Binding NewType}" ItemsSource="{Binding TypeList}" />
             <Entry Grid.Column="3"
-                           Placeholder="ATK"
-                           FontAttributes="Bold" Text="{Binding NewATKF}"/>
+                           Placeholder="ATK%"
+                           Text="{Binding NewATKP, Converter={components:Int3ToPercConverter}}" />
             <Entry Grid.Column="4"
-                           Placeholder="DEF%"
-                           FontAttributes="Bold" Text="{Binding NewDEFP}"/>
+                           Placeholder="ATK"
+                           Text="{Binding NewATKF}" />
             <Entry Grid.Column="5"
-                           Placeholder="DEF"
-                           FontAttributes="Bold" Text="{Binding NewDEFF}"/>
+                           Placeholder="DEF%"
+                           Text="{Binding NewDEFP, Converter={components:Int3ToPercConverter}}" />
             <Entry Grid.Column="6"
-                           Placeholder="HP%"
-                           FontAttributes="Bold" Text="{Binding NewHPP}"/>
+                           Placeholder="DEF"
+                           Text="{Binding NewDEFF}" />
             <Entry Grid.Column="7"
-                           Placeholder="HP"
-                           FontAttributes="Bold" Text="{Binding NewHPF}"/>
+                           Placeholder="HP%"
+                           Text="{Binding NewHPP, Converter={components:Int3ToPercConverter}}" />
             <Entry Grid.Column="8"
-                           Placeholder="SPD"
-                           FontAttributes="Bold" Text="{Binding NewSPD}"/>
+                           Placeholder="HP"
+                           Text="{Binding NewHPF}"/>
             <Entry Grid.Column="9"
-                           Placeholder="CR"
-                           FontAttributes="Bold" Text="{Binding NewCR}"/>
+                           Placeholder="SPD"
+                           Text="{Binding NewSPD}"/>
             <Entry Grid.Column="10"
-                           Placeholder="CD"
-                           FontAttributes="Bold" Text="{Binding NewCD}"/>
+                           Placeholder="CR"
+                           Text="{Binding NewCR, Converter={components:Int3ToPercConverter}}" />
             <Entry Grid.Column="11"
-                           Placeholder="ACC"
-                           FontAttributes="Bold" Text="{Binding NewACC}"/>
+                           Placeholder="CD"
+                           Text="{Binding NewCD, Converter={components:Int3ToPercConverter}}" />
             <Entry Grid.Column="12"
-                           Placeholder="RES"
-                           FontAttributes="Bold" Text="{Binding NewRES}"/>
+                           Placeholder="ACC"
+                           Text="{Binding NewACC, Converter={components:Int3ToPercConverter}}" />
             <Entry Grid.Column="13"
-                           Placeholder="PR"
-                           FontAttributes="Bold" Text="{Binding NewPR}"/>
+                           Placeholder="RES"
+                           Text="{Binding NewRES, Converter={components:Int3ToPercConverter}}" />
             <Entry Grid.Column="14"
+                           Placeholder="PR"
+                           Text="{Binding NewPR, Converter={components:Int3ToPercConverter}}" />
+            <Entry Grid.Column="15"
                            Placeholder="EV"
-                           FontAttributes="Bold" Text="{Binding NewEV}"/>
-            <Button Grid.Column="15" Text="Add" WidthRequest="80" Clicked="OnAddClicked"/>
+                           Text="{Binding NewEV, Converter={components:Int3ToPercConverter}}" />
+            <Button Grid.Column="16" Text="Add" WidthRequest="70" Clicked="OnAddClicked"/>
         </Grid>
-        <Grid Padding="10">
+        <Grid Padding="0" WidthRequest="1300">
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto" />
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="80" />
-                <ColumnDefinition Width="80" />
-                <ColumnDefinition Width="80" />
-                <ColumnDefinition Width="80" />
-                <ColumnDefinition Width="80" />
-                <ColumnDefinition Width="80" />
-                <ColumnDefinition Width="80" />
-                <ColumnDefinition Width="80" />
-                <ColumnDefinition Width="80" />
-                <ColumnDefinition Width="80" />
-                <ColumnDefinition Width="80" />
-                <ColumnDefinition Width="80" />
-                <ColumnDefinition Width="80" />
-                <ColumnDefinition Width="80" />
-                <ColumnDefinition Width="80" />
+                <ColumnDefinition Width="70" />
+                <ColumnDefinition Width="70" />
+                <ColumnDefinition Width="70" />
+                <ColumnDefinition Width="70" />
+                <ColumnDefinition Width="70" />
+                <ColumnDefinition Width="70" />
+                <ColumnDefinition Width="70" />
+                <ColumnDefinition Width="70" />
+                <ColumnDefinition Width="70" />
+                <ColumnDefinition Width="70" />
+                <ColumnDefinition Width="70" />
+                <ColumnDefinition Width="70" />
+                <ColumnDefinition Width="70" />
+                <ColumnDefinition Width="70" />
+                <ColumnDefinition Width="70" />
+                <ColumnDefinition Width="70" />
             </Grid.ColumnDefinitions>
             <Label Grid.Column="1"
-                           Text="Slot"
+                           Text="Slot" FontFamily="" FontAttributes="Bold"
                    HorizontalTextAlignment="Center"
-                           FontAttributes="Bold" />
-            <Label Grid.Column="2"
-                           Text="ATK%"
+                           />
+            <Label Grid.Column="2" 
+                           Text="Type" FontFamily="" FontAttributes="Bold"
                    HorizontalTextAlignment="Center"
-                           FontAttributes="Bold" />
+                           />
             <Label Grid.Column="3"
-                           Text="ATK"
+                           Text="ATK%" FontFamily="" FontAttributes="Bold"
                    HorizontalTextAlignment="Center"
-                           FontAttributes="Bold" />
+                           />
             <Label Grid.Column="4"
-                           Text="DEF%"
+                           Text="ATK" FontFamily="" FontAttributes="Bold"
                    HorizontalTextAlignment="Center"
-                           FontAttributes="Bold" />
+                           />
             <Label Grid.Column="5"
-                           Text="DEF"
+                           Text="DEF%" FontFamily="" FontAttributes="Bold"
                    HorizontalTextAlignment="Center"
-                           FontAttributes="Bold" />
+                           />
             <Label Grid.Column="6"
-                           Text="HP%"
+                           Text="DEF" FontFamily="" FontAttributes="Bold"
                    HorizontalTextAlignment="Center"
-                           FontAttributes="Bold" />
+                           />
             <Label Grid.Column="7"
-                           Text="HP"
+                           Text="HP%" FontFamily="" FontAttributes="Bold"
                    HorizontalTextAlignment="Center"
-                           FontAttributes="Bold" />
+                           />
             <Label Grid.Column="8"
-                           Text="SPD"
+                           Text="HP" FontFamily="" FontAttributes="Bold"
                    HorizontalTextAlignment="Center"
-                           FontAttributes="Bold" />
+                           />
             <Label Grid.Column="9"
-                           Text="CR"
+                           Text="SPD" FontFamily="" FontAttributes="Bold"
                    HorizontalTextAlignment="Center"
-                           FontAttributes="Bold" />
+                           />
             <Label Grid.Column="10"
-                           Text="CD"
+                           Text="CR" FontFamily="" FontAttributes="Bold"
                    HorizontalTextAlignment="Center"
-                           FontAttributes="Bold" />
+                           />
             <Label Grid.Column="11"
-                           Text="ACC"
+                           Text="CD" FontFamily="" FontAttributes="Bold"
                    HorizontalTextAlignment="Center"
-                           FontAttributes="Bold" />
+                           />
             <Label Grid.Column="12"
-                           Text="RES"
+                           Text="ACC" FontFamily="" FontAttributes="Bold"
                    HorizontalTextAlignment="Center"
-                           FontAttributes="Bold" />
+                           />
             <Label Grid.Column="13"
-                           Text="PR"
+                           Text="RES" FontFamily="" FontAttributes="Bold"
                    HorizontalTextAlignment="Center"
-                           FontAttributes="Bold" />
+                           />
             <Label Grid.Column="14"
-                           Text="EV"
+                           Text="PR" FontFamily="" FontAttributes="Bold"
                    HorizontalTextAlignment="Center"
-                           FontAttributes="Bold" />
+                           />
+            <Label Grid.Column="15"
+                           Text="EV" FontFamily="" FontAttributes="Bold"
+                   HorizontalTextAlignment="Center"
+                           />
+
         </Grid>
-        <Border>
-            <ListView ItemsSource="{Binding Runes}">
+        <Border StrokeThickness="5" Padding="5" WidthRequest="1300" HeightRequest="1300">
+            <ListView ItemsSource="{Binding Runes}" RowHeight="45">
                 <ListView.ItemTemplate>
                     <DataTemplate >
                         <ViewCell>
-                            <Grid Padding="10">
+                            <Grid Padding="0">
                                 <Grid.RowDefinitions>
                                     <RowDefinition Height="Auto" />
                                 </Grid.RowDefinitions>
                                 <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="80" />
-                                    <ColumnDefinition Width="80" />
-                                    <ColumnDefinition Width="80" />
-                                    <ColumnDefinition Width="80" />
-                                    <ColumnDefinition Width="80" />
-                                    <ColumnDefinition Width="80" />
-                                    <ColumnDefinition Width="80" />
-                                    <ColumnDefinition Width="80" />
-                                    <ColumnDefinition Width="80" />
-                                    <ColumnDefinition Width="80" />
-                                    <ColumnDefinition Width="80" />
-                                    <ColumnDefinition Width="80" />
-                                    <ColumnDefinition Width="80" />
-                                    <ColumnDefinition Width="80" />
-                                    <ColumnDefinition Width="80" />
+                                    <ColumnDefinition Width="70" />
+                                    <ColumnDefinition Width="70" />
+                                    <ColumnDefinition Width="70" />
+                                    <ColumnDefinition Width="70" />
+                                    <ColumnDefinition Width="70" />
+                                    <ColumnDefinition Width="70" />
+                                    <ColumnDefinition Width="70" />
+                                    <ColumnDefinition Width="70" />
+                                    <ColumnDefinition Width="70" />
+                                    <ColumnDefinition Width="70" />
+                                    <ColumnDefinition Width="70" />
+                                    <ColumnDefinition Width="70" />
+                                    <ColumnDefinition Width="70" />
+                                    <ColumnDefinition Width="70" />
+                                    <ColumnDefinition Width="70" />
+                                    <ColumnDefinition Width="70" />
+                                    <ColumnDefinition Width="140" />
                                 </Grid.ColumnDefinitions>
 
                                 <Label Grid.Column="1" Text="{Binding Slot}"/>
-                                <Label Grid.Column="2" Text="{Binding ATKP}"  />
-                                <Label Grid.Column="3" Text="{Binding ATKF}" />
-                                <Label Grid.Column="4" Text="{Binding DEFP}"/>
-                                <Label Grid.Column="5" Text="{Binding DEFF}" />
-                                <Label Grid.Column="6" Text="{Binding HPP}"/>
-                                <Label Grid.Column="7" Text="{Binding HPF}"/>
-                                <Label Grid.Column="8" Text="{Binding SPD}"/>
-                                <Label Grid.Column="9" Text="{Binding CR}"/>
-                                <Label Grid.Column="10" Text="{Binding CD}"/>
-                                <Label Grid.Column="11" Text="{Binding ACC}"/>
-                                <Label Grid.Column="12" Text="{Binding RES}"/>
-                                <Label Grid.Column="13" Text="{Binding PR}"/>
-                                <Label Grid.Column="14" Text="{Binding EV}"/>
-
+                                <Label Grid.Column="2" Text="{Binding Type}"/>
+                                <Entry Grid.Column="3" Text="{Binding ATKP, Converter={components:Int3ToPercConverter}}"  BackgroundColor="AliceBlue"/>
+                                <Entry Grid.Column="4" Text="{Binding ATKF}" />
+                                <Entry Grid.Column="5" Text="{Binding DEFP, Converter={components:Int3ToPercConverter}}"  BackgroundColor="AliceBlue" />
+                                <Entry Grid.Column="6" Text="{Binding DEFF}" />
+                                <Entry Grid.Column="7" Text="{Binding HPP, Converter={components:Int3ToPercConverter}}"  BackgroundColor="AliceBlue" />
+                                <Entry Grid.Column="8" Text="{Binding HPF}"/>
+                                <Entry Grid.Column="9" Text="{Binding SPD}" BackgroundColor="AliceBlue"/>
+                                <Entry Grid.Column="10" Text="{Binding CR, Converter={components:Int3ToPercConverter}}" />
+                                <Entry Grid.Column="11" Text="{Binding CD, Converter={components:Int3ToPercConverter}}"  BackgroundColor="AliceBlue"/>
+                                <Entry Grid.Column="12" Text="{Binding ACC, Converter={components:Int3ToPercConverter}}" />
+                                <Entry Grid.Column="13" Text="{Binding RES, Converter={components:Int3ToPercConverter}}"  BackgroundColor="AliceBlue"/>
+                                <Entry Grid.Column="14" Text="{Binding PR, Converter={components:Int3ToPercConverter}}" />
+                                <Entry Grid.Column="15" Text="{Binding EV, Converter={components:Int3ToPercConverter}}"  BackgroundColor="AliceBlue"/>
+                                <HorizontalStackLayout Grid.Column="16"><Button  Text="Save" WidthRequest="65" Clicked="OnSaveClicked" /><Button  Text="Del" WidthRequest="65" Clicked="OnDelClicked" /></HorizontalStackLayout> 
 
 
                             </Grid>
-
                         </ViewCell>
                     </DataTemplate>
                 </ListView.ItemTemplate>
