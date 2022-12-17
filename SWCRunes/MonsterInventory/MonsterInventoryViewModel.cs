@@ -31,6 +31,8 @@ namespace SWCRunes
 
         StorageService _storageServ;
 
+        public String NewName { get; set; }
+
         public int NewATK { get; set; }
         public int NewATKB { get; set; }
 
@@ -63,6 +65,8 @@ namespace SWCRunes
         public void SaveNewMonster()
         {
             Monster monster = new Monster();
+
+            monster.Name = NewName;
 
             monster.ATK = NewATK;
             monster.ATKBoost = NewATKB;

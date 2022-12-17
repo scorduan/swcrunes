@@ -3,11 +3,113 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="SWCRunes.MonsterInventory"
              xmlns:local="clr-namespace:SWCRunes"
+             xmlns:lib="clr-namespace:SWCRunesLib;assembly=SWCRunesLib"
+             xmlns:components="clr-namespace:SWCRunes.Components"
              Title="MonsterInventory">
-    <VerticalStackLayout>
-        <Label 
-            Text="Welcome to .NET MAUI!"
-            VerticalOptions="Center" 
-            HorizontalOptions="Center" />
-    </VerticalStackLayout>
+    <HorizontalStackLayout VerticalOptions="Start">
+        <Border StrokeThickness="5" Padding="5" WidthRequest="100" HeightRequest="1000">
+            <ListView ItemsSource="{Binding Monsters}" ItemSelected="monsterList_ItemSelected" x:Name="monsterList" >
+                <ListView.ItemTemplate>
+                    <DataTemplate >
+                        <ViewCell>
+                            <HorizontalStackLayout>
+                                <Label Text="{Binding Name}"/>
+                            </HorizontalStackLayout>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+        </Border>
+        <VerticalStackLayout>
+            <components:Monster WidthRequest="1000" HeightRequest="350" x:Name="monsterDisplay"/>
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="70"/>
+                    <ColumnDefinition Width="70"/>
+                    <ColumnDefinition Width="70"/>
+
+                    <ColumnDefinition Width="70"/>
+                    <ColumnDefinition Width="70"/>
+                    <ColumnDefinition Width="70"/>
+
+                    <ColumnDefinition Width="70"/>
+                    <ColumnDefinition Width="70"/>
+                    <ColumnDefinition Width="70"/>
+
+                    <ColumnDefinition Width="70"/>
+                    <ColumnDefinition Width="70"/>
+                    <ColumnDefinition Width="70"/>
+
+                    <ColumnDefinition Width="70"/>
+                    <ColumnDefinition Width="70"/>
+                    <ColumnDefinition Width="70"/>
+                    <ColumnDefinition Width="70"/>
+                    <ColumnDefinition Width="70"/>
+
+                    
+                </Grid.ColumnDefinitions>
+                <Label Grid.Column="0" Text="Name"/>
+                <Label Grid.Column="1" Text="ATK"/>
+                <Label Grid.Column="2" Text="Bonus"/>
+                <Label Grid.Column="3" Text="DEF"/>
+                <Label Grid.Column="4" Text="Bonus"/>
+                <Label Grid.Column="5" Text="HP"/>
+                <Label Grid.Column="6" Text="Bonus"/>
+                <Label Grid.Column="7" Text="SPD"/>
+                <Label Grid.Column="8" Text="CR"/>
+                <Label Grid.Column="9" Text="CD"/>
+                <Label Grid.Column="10" Text="ACC"/>
+                <Label Grid.Column="11" Text="RES"/>
+                <Label Grid.Column="12" Text="Bonus"/>
+                <Label Grid.Column="13" Text="PR"/>
+                <Label Grid.Column="14" Text="EV"/>
+                <Label Grid.Column="15" Text="Bonus"/>
+            </Grid>
+            <Grid>
+                 <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="70"/>
+                    <ColumnDefinition Width="70"/>
+                    <ColumnDefinition Width="70"/>
+
+                    <ColumnDefinition Width="70"/>
+                    <ColumnDefinition Width="70"/>
+                    <ColumnDefinition Width="70"/>
+
+                    <ColumnDefinition Width="70"/>
+                    <ColumnDefinition Width="70"/>
+                    <ColumnDefinition Width="70"/>
+
+                    <ColumnDefinition Width="70"/>
+                    <ColumnDefinition Width="70"/>
+                    <ColumnDefinition Width="70"/>
+
+                    <ColumnDefinition Width="70"/>
+                    <ColumnDefinition Width="70"/>
+                    <ColumnDefinition Width="70"/>
+
+                     <ColumnDefinition Width="70"/>
+                     <ColumnDefinition Width="70"/>
+                      <ColumnDefinition Width="70"/>
+                </Grid.ColumnDefinitions>
+                <Entry Grid.Column="0" Text="{Binding NewName}"/>
+                <Entry Grid.Column="1" Text="{Binding NewATK}"/>
+                <Entry Grid.Column="2" Text="{Binding NewATKB}"/>
+                <Entry Grid.Column="3" Text="{Binding NewDEF}"/>
+                <Entry Grid.Column="4" Text="{Binding NewDEFB}"/>
+                <Entry Grid.Column="5" Text="{Binding NewHP}"/>
+                <Entry Grid.Column="6" Text="{Binding NewHPB}"/>
+                <Entry Grid.Column="7" Text="{Binding NewSPD}"/>
+                <Entry Grid.Column="8" Text="{Binding NewCR}"/>
+                <Entry Grid.Column="9" Text="{Binding NewCD}"/>
+                <Entry Grid.Column="10" Text="{Binding NewACC}"/>
+                <Entry Grid.Column="11" Text="{Binding NewRES}"/>
+                <Entry Grid.Column="12" Text="{Binding NewRESB}"/>
+                <Entry Grid.Column="13" Text="{Binding NewPR}"/>
+                <Entry Grid.Column="14" Text="{Binding NewEV}"/>
+                <Entry Grid.Column="15" Text="{Binding NewEVB}"/>
+                <Button Grid.Column="16" x:Name="Save" Text="Add" Clicked="Save_Clicked"/>
+
+            </Grid>
+        </VerticalStackLayout>
+    </HorizontalStackLayout>
 </ContentPage>

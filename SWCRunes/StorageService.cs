@@ -95,7 +95,7 @@ namespace SWCRunes
             {
                 _monStore.Monsters.Add(monster);
             }
-            RuneSerializer.SaveMonsters(_monStore.Monsters, runesFile);
+            RuneSerializer.SaveMonsters(_monStore.Monsters, monstersFile);
         }
     }
 }
