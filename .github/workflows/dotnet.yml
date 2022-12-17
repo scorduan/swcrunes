@@ -64,9 +64,9 @@ jobs:
       - name: Release
         run: dotnet build -c Release
       - name: publish Mac
-        run: dotnet publish /usr/local/share/dotnet/dotnet publish "/Users/sethcorduan/Projects/swcrunes/SWCRunes/SWCRunes.csproj" --configuration "Release" --framework "net7.0-maccatalyst" --output "rel/mac"
+        run: dotnet publish ./SWCRunes/SWCRunes.csproj -c Release -f net7.0-maccatalyst --no-restore -p:BuildIpa=True
       - name: publish Win
-        run: dotnet publish /usr/local/share/dotnet/dotnet publish "/Users/sethcorduan/Projects/swcrunes/SWCRunes/SWCRunes.csproj" --configuration "Release" --framework "net7.0-windows10.0.19041.0" --output "rel/win"
+        run: dotnet publish ./SWCRunes/SWCRunes.csproj -c Release -f net7.0-windows10.0.19041.0 --no-restore
 
       - name: Upload Windows Artifact
         uses: actions/upload-artifact@v2.3.1
