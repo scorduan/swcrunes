@@ -20,13 +20,13 @@ jobs:
       - name: Cache lib obj
         uses: actions/cache@v1
         with:
-          path: ~\SWCRunesLib\obj
+          path: .\SWCRunesLib\obj
           key: ${{ runner.os }}-LibObj
           restore-keys: ${{ runner.os }}-LibObj
       - name: Cache main obj
         uses: actions/cache@v1
         with:
-          path: ~\SWCRunes\obj
+          path: .\SWCRunes\obj
           key: ${{ runner.os }}-Obj
           restore-keys: ${{ runner.os }}-Obj
       - name: Cache SonarCloud packages
@@ -65,22 +65,22 @@ jobs:
         uses: actions/upload-artifact@v2.3.1
         with:
           name: windows-ci-build
-          path: src/SWCrunes/bin/Release/net7.0-windows*/**/SWCRunes*.msix
+          path: ./SWCrunes/bin/Release/net7.0-windows*/**/SWCRunes*.msix
       - name: Upload Windows Artifact (Debug)
         uses: actions/upload-artifact@v2.3.1
         with:
           name: windows-ci-build
-          path: src/SWCrunes/bin/Debug/net7.0-windows*/**/SWCRunes*.msix
+          path: ./SWCrunes/bin/Debug/net7.0-windows*/**/SWCRunes*.msix
       - name: Upload Mac Artifact
         uses: actions/upload-artifact@v2.3.1
         with:
           name: mac-ci-build
-          path: src/SWCrunesbin/Release/net7.0-maccatalyst*/**/SWCRunes*.app
+          path: ./SWCrunes/bin/Release/net7.0-maccatalyst*/**/SWCRunes*.app
       - name: Upload Mac Artifact (Debug)
         uses: actions/upload-artifact@v2.3.1
         with:
           name: mac-ci-build
-          path: src/SWCrunesbin/Debug/net7.0-maccatalyst*/**/SWCRunes*.app
+          path: ./SWCrunes/bin/Debug/net7.0-maccatalyst*/**/SWCRunes*.app
           
           
           
