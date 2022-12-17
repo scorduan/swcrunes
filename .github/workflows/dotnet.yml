@@ -66,22 +66,22 @@ jobs:
       - name: Upload Windows Artifact
         uses: actions/upload-artifact@v2.3.1
         with:
-          name: windows-ci-build
+          name: windows-ci-release
           path: ./SWCrunes/bin/Release/net7.0-windows*/**/SWCRunes*.msix
       - name: Upload Windows Artifact (Debug)
         uses: actions/upload-artifact@v2.3.1
         with:
-          name: windows-ci-build
+          name: windows-ci-debug
           path: ./SWCrunes/bin/Debug/net7.0-windows*/**/SWCRunes*.msix
       - name: Upload Mac Artifact
         uses: actions/upload-artifact@v2.3.1
         with:
-          name: mac-ci-build
+          name: mac-ci-release
           path: ./SWCrunes/bin/Release/net7.0-maccatalyst*/**/SWCRunes*.app
       - name: Upload Mac Artifact (Debug)
         uses: actions/upload-artifact@v2.3.1
         with:
-          name: mac-ci-build
+          name: mac-ci-debug
           path: ./SWCrunes/bin/Debug/net7.0-maccatalyst*/**/SWCRunes*.app
           
           
