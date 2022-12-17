@@ -47,7 +47,7 @@ namespace SWCRunes
                 return _runes;
             }
 
-            //ToDO Handle Conversion of percs
+            
         }
 
         StorageService _storageServ;

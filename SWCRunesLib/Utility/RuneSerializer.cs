@@ -61,6 +61,17 @@ public class RuneSerializer
         }
     }
 
+    public static async Task SaveMonsters(List<Monster> monsters, string location)
+    {
+        using StreamWriter file = new(location);
+
+        foreach (Monster monster in monsters)
+        {
+
+            await file.WriteLineAsync(monster.ToJson());
+
+        }
+    }
 
 
 }
