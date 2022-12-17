@@ -53,4 +53,13 @@ jobs:
         uses: actions/upload-artifact@v2.3.1
         with:
           name: windows-ci-build
-          path: src/MauiBeach/bin/Release/net6.0-windows*/**/MauiBeach*.msix
+          path: src/SWCrunes/bin/Release/net7.0-windows*/**/SWCRunes*.msix
+      - name: Upload Mac Artifact
+        uses: actions/upload-artifact@v2.3.1
+        with:
+          name: mac-ci-build
+          path: src/SWCrunesbin/Release/net7.0-maccatalyst*/**/SWCRunes*.app
+
+          
+          
+          
