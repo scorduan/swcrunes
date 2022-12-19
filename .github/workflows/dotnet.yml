@@ -71,9 +71,9 @@ jobs:
       - name: Release
         run: dotnet build -c Release
       - name: publish Mac
-        run: dotnet publish ./SWCRunes/SWCRunes.csproj -c Release -f net7.0-maccatalyst --no-restore -p:BuildIpa=True
+        run: dotnet publish ./SWCRunes/SWCRunes.csproj -c Release -f net7.0-maccatalyst --no-restore -p:BuildIpa=True --ouptut "./rel/mac"
       - name: publish Win
-        run: dotnet publish ./SWCRunes/SWCRunes.csproj -c Release -f net7.0-windows10.0.19041.0 --no-restore
+        run: dotnet publish ./SWCRunes/SWCRunes.csproj -c Release -f net7.0-windows10.0.19041.0 --no-restore --ouptut "./rel/win" 
 
       - name: Upload Windows Artifact
         uses: actions/upload-artifact@v2.3.1
@@ -99,11 +99,11 @@ jobs:
         uses: actions/upload-artifact@v2.3.1
         with:
           name: mac-ci-publish
-          path: ./rel/mac/SWCRunes*.app
+          path: ./rel/mac/**/*
       - name: Upload Windows Artifact (Publish)
         uses: actions/upload-artifact@v2.3.1
         with:
           name: windows-ci-publish
-          path: ./rel/win/SWCRunes*.app
+          path: ./rel/win/**/*
           
           
