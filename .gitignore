@@ -5,6 +5,7 @@
 
 .git/
 
+
 # User-specific files
 *.rsuser
 *.suo
@@ -33,6 +34,7 @@ bld/
 [Oo]bj/
 [Ll]og/
 [Ll]ogs/
+[Rr]el/
 
 # Visual Studio 2015/2017 cache/options directory
 .vs/
