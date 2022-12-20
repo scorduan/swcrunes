@@ -71,9 +71,9 @@ jobs:
       - name: Release
         run: dotnet build -c Release
       - name: publish Mac
-        run: dotnet publish ./SWCRunes/SWCRunes.csproj -c Release -f net7.0-maccatalyst --no-restore -p:BuildIpa=True --ouptut "./rel/mac"
+        run: dotnet publish ./SWCRunes/SWCRunes.csproj -c Release -f net7.0-maccatalyst --no-restore -p:BuildIpa=True --output "./rel/mac"
       - name: publish Win
-        run: dotnet publish ./SWCRunes/SWCRunes.csproj -c Release -f net7.0-windows10.0.19041.0 --no-restore --ouptut "./rel/win" 
+        run: dotnet publish ./SWCRunes/SWCRunes.csproj -c Release -f net7.0-windows10.0.19041.0 --no-restore --output "./rel/win" 
 
       - name: Upload Windows Artifact
         uses: actions/upload-artifact@v2.3.1
