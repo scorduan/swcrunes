@@ -30,7 +30,7 @@ public static class MauiProgram
     {
         mauiAppBuilder.Services.AddSingleton<RecommendationInventoryViewModel>();
 		mauiAppBuilder.Services.AddSingleton<RuneInventoryViewModel>();
-		mauiAppBuilder.Services.AddSingleton<MonsterInventory>();
+		mauiAppBuilder.Services.AddSingleton<MonsterInventoryViewModel>();
         
         return mauiAppBuilder;
     }

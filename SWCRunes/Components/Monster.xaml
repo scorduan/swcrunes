@@ -14,12 +14,12 @@
                 <HorizontalStackLayout><Label Text="DEF: "/><Label Text="{Binding DEF}"/></HorizontalStackLayout>
                 <HorizontalStackLayout><Label Text="HP: "/><Label Text="{Binding HP}"/></HorizontalStackLayout>
                 <HorizontalStackLayout><Label Text="SPD: "/><Label Text="{Binding SPD}"/></HorizontalStackLayout>
-                <HorizontalStackLayout><Label Text="CR: "/><Label Text="{Binding CR}"/></HorizontalStackLayout>
-                <HorizontalStackLayout><Label Text="CD: "/><Label Text="{Binding CD}"/></HorizontalStackLayout>
-                <HorizontalStackLayout><Label Text="ACC: "/><Label Text="{Binding ACC}"/></HorizontalStackLayout>
-                <HorizontalStackLayout><Label Text="RES: "/><Label Text="{Binding RES}"/></HorizontalStackLayout>
-                <HorizontalStackLayout><Label Text="PR: "/><Label Text="{Binding PR}"/></HorizontalStackLayout>
-                <HorizontalStackLayout><Label Text="EV: "/><Label Text="{Binding EV}"/></HorizontalStackLayout>
+                <HorizontalStackLayout><Label Text="CR: "/><Label Text="{Binding CR, Converter={components:Int3ToPercConverter}}"/></HorizontalStackLayout>
+                <HorizontalStackLayout><Label Text="CD: "/><Label Text="{Binding CD, Converter={components:Int3ToPercConverter}}"/></HorizontalStackLayout>
+                <HorizontalStackLayout><Label Text="ACC: "/><Label Text="{Binding ACC, Converter={components:Int3ToPercConverter}}"/></HorizontalStackLayout>
+                <HorizontalStackLayout><Label Text="RES: "/><Label Text="{Binding RES, Converter={components:Int3ToPercConverter}}"/></HorizontalStackLayout>
+                <HorizontalStackLayout><Label Text="PR: "/><Label Text="{Binding PR, Converter={components:Int3ToPercConverter}}"/></HorizontalStackLayout>
+                <HorizontalStackLayout><Label Text="EV: "/><Label Text="{Binding EV, Converter={components:Int3ToPercConverter}}"/></HorizontalStackLayout>
                 <HorizontalStackLayout><Label Text="DR: "/><Label Text="{Binding Damage}"/></HorizontalStackLayout>
                 <HorizontalStackLayout><Label Text="UDR: "/><Label Text="{Binding BasicDamage}"/></HorizontalStackLayout>
                 <HorizontalStackLayout><Label Text="SR: "/><Label Text="{Binding HPLoss100100}"/></HorizontalStackLayout>
