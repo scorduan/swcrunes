@@ -74,4 +74,16 @@ public class RuneSerializer
     }
 
 
+    public static async Task SaveRequests(List<Request> requests, string location)
+    {
+        using StreamWriter file = new(location);
+
+        foreach (Request request in requests)
+        {
+
+            await file.WriteLineAsync(request.ToJson());
+
+        }
+    }
+
 }

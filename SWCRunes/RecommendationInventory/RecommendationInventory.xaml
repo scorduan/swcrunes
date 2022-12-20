@@ -5,41 +5,34 @@
              xmlns:local="clr-namespace:SWCRunes"
              xmlns:components="clr-namespace:SWCRunes.Components"
              xmlns:lib="clr-namespace:SWCRunesLib;assembly=SWCRunesLib"
-             Title="RecommendationInventory">
-
+             Title="RecommendationInventory"
+             x:DataType="local:RecommendationInventoryViewModel"
+             >
     <VerticalStackLayout>
-        <Label 
-            Text="Welcome to .NET MAUI!"
-            VerticalOptions="Center" 
-            HorizontalOptions="Center" />
 
-        <Button
-                x:Name="ProcessBtn"
-                Text="Process"
-                SemanticProperties.Hint="Counts the number of times you click"
-                Clicked="OnProcessClicked"
-                HorizontalOptions="Center" />
-        <CollectionView ItemsSource="{Binding RecStore}">
-            <CollectionView.ItemTemplate>
-                <DataTemplate>
-                    <HorizontalStackLayout x:DataType="lib:Recommendation" Background="gray">
-                        <Label Text="{Binding MonsterName}" />
-                        <Label Text="Count: "/>
-                        <Label Text="{Binding RecommendedSetup.Count}"/>
-                        <Label Text="Things"/>
-                        <CollectionView ItemsSource="{Binding RecommendedSetup}" >
-                            <CollectionView.ItemTemplate >
-                                <DataTemplate>
-                                    <components:Monster />
-                                </DataTemplate>
-                            </CollectionView.ItemTemplate>
-                            
-                        </CollectionView>
-                    </HorizontalStackLayout>
-
-                </DataTemplate>
-            </CollectionView.ItemTemplate>
-        </CollectionView>
+        <Label Text="{Binding Recomm.MonsterName}" />
+        <Label Text="Count: "/>
+        <Label Text="{Binding Recomm.RecommendedSetup.Count}"/>
+        <Label Text="{Binding Recomm.InitiatingRequest.PrimaryAttribute}"/>
+        <Label Text="{Binding Recomm.InitiatingRequest.SecondaryAttribute}"/>
+        <Label Text="{Binding Recomm.InitiatingRequest.TertiaryAttribute}"/>
+        <Label Text="Things"/>
+        <HorizontalStackLayout Background="gray" >
+            <Border StrokeThickness="5" Padding="5" WidthRequest="100" HeightRequest="1000">
+                <ListView ItemsSource="{Binding Monsters}" ItemSelected="recommendList_ItemSelected" x:Name="recommendList">
+                    <ListView.ItemTemplate>
+                        <DataTemplate >
+                            <ViewCell x:DataType="lib:Monster">
+                                <HorizontalStackLayout>
+                                    <Label Text="{Binding EffectiveHP}" WidthRequest="50" />
+                                </HorizontalStackLayout>
+                            </ViewCell>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+            </Border>
+            <components:Monster WidthRequest="1000" HeightRequest="350" x:Name="monsterDisplay" BindingContext="SelectedMonster"/>
+        </HorizontalStackLayout>
     </VerticalStackLayout>
 
 </ContentPage>

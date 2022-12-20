@@ -4,11 +4,10 @@
              x:Class="SWCRunes.Components.RuneAttribute"
              xmlns:lib="clr-namespace:SWCRunesLib;assembly=SWCRunesLib"
              xmlns:components="clr-namespace:SWCRunes.Components"
-             WidthRequest="80"
              >
     <HorizontalStackLayout x:Name="mainLayout">
-        <Label x:Name="textLabel" Text="" FontAttributes="Bold" TextColor="Black" BackgroundColor="LightYellow"/>
-        <Label x:Name="valueLabel" Text="" BackgroundColor="Yellow" />
+        <Label x:Name="textLabel" Text="" FontFamily="" FontAttributes="Bold" WidthRequest="35"/>
+        <Label x:Name="valueLabel" Text="" WidthRequest="60" />
     </HorizontalStackLayout>
 </ContentView>
 

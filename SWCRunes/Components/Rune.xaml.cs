@@ -6,7 +6,20 @@ public partial class Rune : ContentView
 {
     public Rune()
     {
+
+
+
         InitializeComponent();
+        runeAttributes.Add(attr1);
+        runeAttributes.Add(attr2);
+        runeAttributes.Add(attr3);
+        runeAttributes.Add(attr4);
+        runeAttributes.Add(attr5);
+        runeAttributes.Add(attr5);
+        runeAttributes.Add(attr5);
+        runeAttributes.Add(attr5);
+        runeAttributes.Add(attr5);
+        runeAttributes.Add(attr5);
         this.BindingContextChanged += new EventHandler(BindingContext_Changed);
     }
 
@@ -15,43 +28,33 @@ public partial class Rune : ContentView
         if (this.BindingContext!=null) AddAttributes((SWCRunesLib.Rune)this.BindingContext);
     }
 
+    private List<RuneAttribute> runeAttributes = new List<RuneAttribute>();
+
     private void AddAttributes(SWCRunesLib.Rune r)
     {
-        //<components:RuneAttribute Text="ATK: " Value="{Binding ATKP, Converter={StaticResource int3ToPerc}, StringFormat='{0}%'}" WidthRequest="75"/>
-        if (r.ATKP > 0) setupAttribute(r, "ATK: ", "ATKP");
-        if (r.ATKF > 0) setupAttribute(r, "ATK: ", "ATKF", false);
-        if (r.DEFP > 0) setupAttribute(r, "DEF: ", "DEFP");
-        if (r.DEFF > 0) setupAttribute(r, "DEF: ", "DEFF", false);
-        if (r.HPP > 0) setupAttribute(r, "HP: ", "HPP");
-        if (r.HPF > 0) setupAttribute(r, "HP: ", "HPF", false);
-        if (r.SPD > 0) setupAttribute(r, "SPD: ", "SPD");
-        if (r.CR > 0) setupAttribute(r, "CR: ", "CR");
-        if (r.CD > 0) setupAttribute(r, "CD: ", "CD");
-        if (r.ACC > 0) setupAttribute(r, "ACC: ", "ACC");
-        if (r.RES > 0) setupAttribute(r, "RES: ", "RES");
-        if (r.PR > 0) setupAttribute(r, "PR: ", "PR");
-        if (r.EV > 0) setupAttribute(r, "EV: ", "EV");
-
-    }
-
-    private void setupAttribute(SWCRunesLib.Rune r, string text, string value, bool isPerc = true)
-    {
-        RuneAttribute ra = new RuneAttribute();
-
+        int i=0;
         
-        ra.BindingContext = r;
-        if (isPerc)
-        {
-            ra.SetBinding(RuneAttribute.ValueProperty, value, BindingMode.Default, new Int3ToPercConverter(), "{0}%");
-        }
-        else
-        {
-            ra.SetBinding(RuneAttribute.ValueProperty, value);
-        }
+        //<components:RuneAttribute Text="ATK: " Value="{Binding ATKP, Converter={StaticResource int3ToPerc}, StringFormat='{0}%'}" WidthRequest="75"/>
+        if (r.ATKP > 0) runeAttributes[i++].UpdateSettings("ATK: ", convert(r.ATKP)+"%");
+        if (r.ATKF > 0) runeAttributes[i++].UpdateSettings("ATK: ", r.ATKF.ToString());
+        if (r.DEFP > 0) runeAttributes[i++].UpdateSettings("DEF: ", convert(r.DEFP)+"%");
+        if (r.DEFF > 0) runeAttributes[i++].UpdateSettings("DEF: ", r.DEFF.ToString());
+        if (r.HPP > 0) runeAttributes[i++].UpdateSettings("HP: ", convert(r.HPP)+"%");
+        if (r.HPF > 0) runeAttributes[i++].UpdateSettings("HP: ", r.HPF.ToString()) ;
+        if (r.SPD > 0) runeAttributes[i++].UpdateSettings("SPD: ", r.SPD.ToString());
+        if (r.CR > 0) runeAttributes[i++].UpdateSettings("CR: ", convert(r.CR)+"%");
+        if (r.CD > 0) runeAttributes[i++].UpdateSettings("CD: ", convert(r.CD)+"%");
+        if (r.ACC > 0) runeAttributes[i++].UpdateSettings("ACC: ", convert(r.ACC)+"%");
+        if (r.RES > 0) runeAttributes[i++].UpdateSettings("RES: ", convert(r.RES)+"%");
+        if (r.PR > 0) runeAttributes[i++].UpdateSettings("PR: ", convert(r.PR)+"%");
+        if (r.EV > 0) runeAttributes[i++].UpdateSettings("EV: ", convert(r.EV)+"%");
 
-        this.mainContainer.Add(ra);
-        ra.updateLabel(text);
-
-        //TODO: Handle Rune Type
     }
+
+    
+    private string convert(int value)
+    {
+        return ((int)value / 10f).ToString();
+    }
+
 }

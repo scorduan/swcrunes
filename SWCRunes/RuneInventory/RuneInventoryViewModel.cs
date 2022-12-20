@@ -88,28 +88,60 @@ namespace SWCRunes
             rune.Type = NewType;
 
             rune.ATKP = NewATKP;
+            NewATKP = 0;
             rune.ATKF = NewATKF;
+            NewATKF = 0;
 
             rune.DEFP = NewDEFP;
+            NewDEFP = 0;
             rune.DEFF = NewDEFF;
+            NewDEFF = 0;
 
             rune.HPP = NewHPP;
+            NewHPP = 0;
             rune.HPF = NewHPF;
+            NewHPF = 0;
 
             rune.SPD = NewSPD;
+            NewSPD = 0;
 
             rune.CR = NewCR;
+            NewCR = 0;
             rune.CD = NewCD;
+            NewCD = 0;
 
             rune.ACC = NewACC;
+            NewACC = 0;
             rune.RES = NewRES;
-
+            NewRES = 0;
+            
             rune.PR = NewPR;
+            NewPR = 0;
             rune.EV = NewEV;
+            NewEV = 0;
 
             _runes.Add(rune);
             _storageServ.SaveRunes(_runes);
-            
+
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("NewATKP"));
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("NewATKF"));
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("NewDEFP"));
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("NewDEFF"));
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("NewHPP"));
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("NewHPF"));
+
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("NewSPD"));
+
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("NewCR"));
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("NewCD"));
+
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("NewACC"));
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("NewRES"));
+
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("NewPR"));
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("NewEV"));
+
+
         }
 
         public void SaveUpdatedRune()

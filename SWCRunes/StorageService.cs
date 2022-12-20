@@ -97,6 +97,27 @@ namespace SWCRunes
             }
             RuneSerializer.SaveMonsters(_monStore.Monsters, monstersFile);
         }
+
+        public ObservableCollection<Request> GetRequests()
+        {
+            ObservableCollection<Request> requests = new ObservableCollection<Request>();
+            foreach (Request r in _reqStore.Requests)
+            {
+                requests.Add(r);
+            }
+
+            return requests;
+        }
+
+        public void SaveRequests(ObservableCollection<Request> requests)
+        {
+            _reqStore.Requests.Clear();
+            foreach (Request request in requests)
+            {
+                _reqStore.Requests.Add(request);
+            }
+            RuneSerializer.SaveRequests(_reqStore.Requests, requestsFile);
+        }
     }
 }
 

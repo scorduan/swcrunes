@@ -33,7 +33,7 @@
         <Tab>
     <ShellContent
         Title="Requests"
-        ContentTemplate="{DataTemplate local:MainPage}"
+        ContentTemplate="{DataTemplate local:RequestInventory}"
         Route="MainPage" />
     </Tab>
     </FlyoutItem>

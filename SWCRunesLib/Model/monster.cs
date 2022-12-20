@@ -50,14 +50,17 @@ public class Monster
          
         get
         {
-            
-            int numAttacks=100;
-            double evasionDecimal=(double)EV/1000d;
-            int evadedAttacks =  (int)Math.Floor((evasionDecimal*(double)numAttacks));
-            int hitAttacks= numAttacks - evadedAttacks;
-            int rawDamage=hitAttacks*100;
 
-            return (int)Math.Floor(rawDamage * (1000f/1140 + (3.5*DEF))); /// 
+            double rawDamage = 100d;
+            double unevadedPerc = (1000d - EV)/1000d;
+
+            int numAttacksThrough = (int)Math.Ceiling(EffectiveHP / (unevadedPerc * rawDamage));
+
+            //(1-EV)*numAttacksThrough*rawDamage=EHP
+            //numAttacksThrough=EHP/rawDamage*(1-EV)
+
+
+            return numAttacksThrough;
         }
     }
 

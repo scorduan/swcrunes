@@ -10,20 +10,20 @@
         <Label Text="{Binding Name}" />
         <HorizontalStackLayout>
             <VerticalStackLayout WidthRequest="100">
-                <HorizontalStackLayout><Label Text="ATK: "/><Label Text="{Binding ATK}"/></HorizontalStackLayout>
-                <HorizontalStackLayout><Label Text="DEF: "/><Label Text="{Binding DEF}"/></HorizontalStackLayout>
-                <HorizontalStackLayout><Label Text="HP: "/><Label Text="{Binding HP}"/></HorizontalStackLayout>
-                <HorizontalStackLayout><Label Text="SPD: "/><Label Text="{Binding SPD}"/></HorizontalStackLayout>
-                <HorizontalStackLayout><Label Text="CR: "/><Label Text="{Binding CR, Converter={components:Int3ToPercConverter}}"/></HorizontalStackLayout>
-                <HorizontalStackLayout><Label Text="CD: "/><Label Text="{Binding CD, Converter={components:Int3ToPercConverter}}"/></HorizontalStackLayout>
-                <HorizontalStackLayout><Label Text="ACC: "/><Label Text="{Binding ACC, Converter={components:Int3ToPercConverter}}"/></HorizontalStackLayout>
-                <HorizontalStackLayout><Label Text="RES: "/><Label Text="{Binding RES, Converter={components:Int3ToPercConverter}}"/></HorizontalStackLayout>
-                <HorizontalStackLayout><Label Text="PR: "/><Label Text="{Binding PR, Converter={components:Int3ToPercConverter}}"/></HorizontalStackLayout>
-                <HorizontalStackLayout><Label Text="EV: "/><Label Text="{Binding EV, Converter={components:Int3ToPercConverter}}"/></HorizontalStackLayout>
-                <HorizontalStackLayout><Label Text="DR: "/><Label Text="{Binding Damage}"/></HorizontalStackLayout>
-                <HorizontalStackLayout><Label Text="UDR: "/><Label Text="{Binding BasicDamage}"/></HorizontalStackLayout>
-                <HorizontalStackLayout><Label Text="SR: "/><Label Text="{Binding HPLoss100100}"/></HorizontalStackLayout>
-                <HorizontalStackLayout><Label Text="EHR: "/><Label Text="{Binding EffectiveHP}"/></HorizontalStackLayout>
+                <HorizontalStackLayout><Label Text="ATK: " FontFamily="" FontAttributes="Bold"/><Label Text="{Binding ATK}"/></HorizontalStackLayout>
+                <HorizontalStackLayout><Label Text="DEF: " FontFamily="" FontAttributes="Bold"/><Label Text="{Binding DEF}"/></HorizontalStackLayout>
+                <HorizontalStackLayout><Label Text="HP: " FontFamily="" FontAttributes="Bold"/><Label Text="{Binding HP}"/></HorizontalStackLayout>
+                <HorizontalStackLayout><Label Text="SPD: " FontFamily="" FontAttributes="Bold"/><Label Text="{Binding SPD}"/></HorizontalStackLayout>
+                <HorizontalStackLayout><Label Text="CR: " FontFamily="" FontAttributes="Bold"/><Label Text="{Binding CR, Converter={components:Int3ToPercConverter}}"/></HorizontalStackLayout>
+                <HorizontalStackLayout><Label Text="CD: " FontFamily="" FontAttributes="Bold"/><Label Text="{Binding CD, Converter={components:Int3ToPercConverter}}"/></HorizontalStackLayout>
+                <HorizontalStackLayout><Label Text="ACC: " FontFamily="" FontAttributes="Bold"/><Label Text="{Binding ACC, Converter={components:Int3ToPercConverter}}"/></HorizontalStackLayout>
+                <HorizontalStackLayout><Label Text="RES: " FontFamily="" FontAttributes="Bold"/><Label Text="{Binding RES, Converter={components:Int3ToPercConverter}}"/></HorizontalStackLayout>
+                <HorizontalStackLayout><Label Text="PR: " FontFamily="" FontAttributes="Bold"/><Label Text="{Binding PR, Converter={components:Int3ToPercConverter}}"/></HorizontalStackLayout>
+                <HorizontalStackLayout><Label Text="EV: " FontFamily="" FontAttributes="Bold"/><Label Text="{Binding EV, Converter={components:Int3ToPercConverter}}"/></HorizontalStackLayout>
+                <HorizontalStackLayout><Label Text="DR: " FontFamily="" FontAttributes="Bold"/><Label Text="{Binding Damage}"/></HorizontalStackLayout>
+                <HorizontalStackLayout><Label Text="UDR: " FontFamily="" FontAttributes="Bold"/><Label Text="{Binding BasicDamage}"/></HorizontalStackLayout>
+                <HorizontalStackLayout><Label Text="SR: " FontFamily="" FontAttributes="Bold"/><Label Text="{Binding HPLoss100100}"/></HorizontalStackLayout>
+                <HorizontalStackLayout><Label Text="EHR: " FontFamily="" FontAttributes="Bold"/><Label Text="{Binding EffectiveHP}"/></HorizontalStackLayout>
             </VerticalStackLayout>
             <components:RuneSet BindingContext="{Binding Runes}"/>
         </HorizontalStackLayout>

@@ -1,0 +1,68 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="SWCRunes.RequestInventory"
+             xmlns:local="clr-namespace:SWCRunes"
+             xmlns:lib="clr-namespace:SWCRunesLib;assembly=SWCRunesLib"
+             xmlns:components="clr-namespace:SWCRunes.Components"
+             Title="RequestInventory">
+    <HorizontalStackLayout VerticalOptions="Start">
+        <Border StrokeThickness="5" Padding="5" WidthRequest="100" HeightRequest="1000">
+            <VerticalStackLayout>
+                <ListView ItemsSource="{Binding Requests}" ItemSelected="requestList_ItemSelected" x:Name="requestList">
+                    <ListView.ItemTemplate>
+                        <DataTemplate >
+                            <ViewCell>
+                                <HorizontalStackLayout>
+                                    <Label Text="{Binding MonsterName}"/>
+                                </HorizontalStackLayout>
+                            </ViewCell>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+                <Button Text="New" x:Name="NewBtn" Clicked="NewBtn_Clicked"/>
+                <Button x:Name="Save" Text="Save" Clicked="Save_Clicked"/>
+            </VerticalStackLayout>
+        </Border>
+        <VerticalStackLayout>
+            
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="70"/>
+                    <ColumnDefinition Width="70"/>
+                    <ColumnDefinition Width="70"/>
+
+                    <ColumnDefinition Width="70"/>
+
+
+                </Grid.ColumnDefinitions>
+                <Label Grid.Column="0" Text="Name"/>
+                <Label Grid.Column="1" Text="1st"/>
+                <Label Grid.Column="2" Text="2nd"/>
+                <Label Grid.Column="3" Text="3rd"/>
+
+            </Grid>
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="70"/>
+                    <ColumnDefinition Width="70"/>
+                    <ColumnDefinition Width="70"/>
+
+                    <ColumnDefinition Width="70"/>
+                    <ColumnDefinition Width="70"/>
+                    <ColumnDefinition Width="70"/>
+
+                </Grid.ColumnDefinitions>
+                <Entry Grid.Column="0" Text="{Binding Path=SelectedRequest.MonsterName}"/>
+                
+                <Picker Grid.Column="1" ItemsSource="{Binding AttributeList}" SelectedItem="{Binding Path=SelectedRequest.PrimaryAttribute}"/>
+                <Picker Grid.Column="2" ItemsSource="{Binding AttributeList}" SelectedItem="{Binding Path=SelectedRequest.SecondaryAttribute}"/>
+                <Picker Grid.Column="3" ItemsSource="{Binding AttributeList}" SelectedItem="{Binding Path=SelectedRequest.TertiaryAttribute}"/>
+
+                <Button Grid.Column="4" x:Name="Del" Text="Del" Clicked="Del_Clicked"/>
+                <Button Grid.Column="5" x:Name="Execute" Text="Execute" Clicked="Execute_Clicked"/>
+
+            </Grid>
+        </VerticalStackLayout>
+    </HorizontalStackLayout>
+</ContentPage>

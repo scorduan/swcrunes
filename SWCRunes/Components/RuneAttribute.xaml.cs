@@ -5,23 +5,14 @@ public partial class RuneAttribute : ContentView
 	public RuneAttribute()
 	{
 		InitializeComponent();
-
-
-        valueLabel.BindingContext = this;
-        valueLabel.SetBinding(Label.TextProperty,"Value");
         
     }
 
-    public static readonly BindableProperty ValueProperty = BindableProperty.Create("Value", typeof(string),typeof(RuneAttribute),"");
-	public string Value
-	{
-		get => (string)GetValue(ValueProperty);
-        set => SetValue(ValueProperty,value);
-    }
 
-    public void updateLabel(string text)
+    public void UpdateSettings(string text, string value)
     {
         textLabel.Text = text;
+        valueLabel.Text = value;
     }
 
 }

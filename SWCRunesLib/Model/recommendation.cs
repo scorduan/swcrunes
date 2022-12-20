@@ -8,6 +8,8 @@ public class Recommendation
     public string MonsterName { get; set; }
 
     public List<Monster> RecommendedSetup  { get; set; }
+
+    public Request InitiatingRequest { get; set; }
     public string ToJson()
     {
         return JsonSerializer.Serialize<Recommendation>(this);

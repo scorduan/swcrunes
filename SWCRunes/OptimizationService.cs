@@ -1,5 +1,6 @@
 ﻿using System;
 using SWCRunesLib;
+using System.Collections.ObjectModel;
 
 namespace SWCRunes
 {
@@ -9,7 +10,7 @@ namespace SWCRunes
 		{
 			_store = store;
 
-			_optim = new Optimizer(store.RuneStore,store.MonStore, store.ReqStore);
+			_optim = new Optimizer(store.RuneStore, store.MonStore, store.ReqStore);
 
 
 		}
@@ -22,5 +23,22 @@ namespace SWCRunes
 		{
 			return _optim.Process();
 		}
-	}
+
+
+		public Recommendation Recommended { get; set; }
+
+		public Recommendation ProcessRequest(Request req)
+		{
+			Recommended = _optim.ProcessReq(req);
+			OptimizationCompletedEvent?.Invoke(this,Recommended);
+			return Recommended;
+		}
+
+        // Declare the delegate (if using non-generic pattern).
+        public delegate void OptimizationCompletedHandler(object sender, Recommendation recommendation);
+
+		// Declare the event.
+		public event OptimizationCompletedHandler OptimizationCompletedEvent;
+
+    }
 }

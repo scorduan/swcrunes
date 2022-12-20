@@ -7,17 +7,17 @@
     <Border StrokeThickness="10">
     <VerticalStackLayout x:DataType="lib:RuneSet" BackgroundColor="AliceBlue">
         
-        <components:Rune BindingContext="{Binding RuneOne}"/>
+        <components:Rune BindingContext="{Binding RuneOne}" HeightRequest="45" />
         
-        <components:Rune BindingContext="{Binding RuneTwo}"/>
+        <components:Rune BindingContext="{Binding RuneTwo}" HeightRequest="45"/>
         
-        <components:Rune BindingContext="{Binding RuneThree}"/>
+        <components:Rune BindingContext="{Binding RuneThree}" HeightRequest="45"/>
         
-        <components:Rune BindingContext="{Binding RuneFour}"/>
+        <components:Rune BindingContext="{Binding RuneFour}" HeightRequest="45"/>
         
-        <components:Rune BindingContext="{Binding RuneFive}"/>
+        <components:Rune BindingContext="{Binding RuneFive}" HeightRequest="45"/>
         
-        <components:Rune BindingContext="{Binding RuneSix}"/>
+        <components:Rune BindingContext="{Binding RuneSix}" HeightRequest="45"/>
             
          </VerticalStackLayout>
         </Border>

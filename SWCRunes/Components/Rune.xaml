@@ -4,12 +4,28 @@
              x:Class="SWCRunes.Components.Rune"
              xmlns:lib="clr-namespace:SWCRunesLib;assembly=SWCRunesLib"
              xmlns:components="clr-namespace:SWCRunes.Components">
-        <ContentView.Resources>
-        <components:Int3ToPercConverter x:Key="int3ToPerc" />
+    <ContentView.Resources>
     </ContentView.Resources>
 
     <HorizontalStackLayout x:DataType="lib:Rune" x:Name="mainContainer">
-        <Label Text="Slot:" WidthRequest="35"/><Label Text="{Binding Slot}" WidthRequest="50"/>        
+        <VerticalStackLayout HorizontalOptions="Start">
+            <HorizontalStackLayout>
+                <Label Text="Slot:" FontFamily="" FontAttributes="Bold" WidthRequest="40"/>
+                <Label Text="{Binding Slot}" WidthRequest="50"/>
+                <Label Text="Type:" FontFamily="" FontAttributes="Bold" WidthRequest="45"/>
+                <Label Text="{Binding Type}" WidthRequest="75"/>
+            </HorizontalStackLayout>
+        <Border>
+            <HorizontalStackLayout BackgroundColor="LightYellow">
+                <components:RuneAttribute x:Name="attr1"/>
+                <components:RuneAttribute x:Name="attr2"/>
+                <components:RuneAttribute x:Name="attr3"/>
+                <components:RuneAttribute x:Name="attr4"/>
+                <components:RuneAttribute x:Name="attr5"/>
+            </HorizontalStackLayout>
+        </Border>
+        </VerticalStackLayout>
+
     </HorizontalStackLayout>
 </ContentView>
 

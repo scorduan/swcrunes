@@ -29,7 +29,8 @@ public static class MauiProgram
     public static MauiAppBuilder RegisterViewModels(this MauiAppBuilder mauiAppBuilder)
     {
         mauiAppBuilder.Services.AddSingleton<RecommendationInventoryViewModel>();
-		mauiAppBuilder.Services.AddSingleton<RuneInventoryViewModel>();
+        mauiAppBuilder.Services.AddSingleton<RequestInventoryViewModel>();
+        mauiAppBuilder.Services.AddSingleton<RuneInventoryViewModel>();
 		mauiAppBuilder.Services.AddSingleton<MonsterInventoryViewModel>();
         
         return mauiAppBuilder;
@@ -47,6 +48,7 @@ public static class MauiProgram
         mauiAppBuilder.Services.AddSingleton<RecommendationInventory>();
         mauiAppBuilder.Services.AddSingleton<MonsterInventory>();
         mauiAppBuilder.Services.AddSingleton<RuneInventory>();
+        mauiAppBuilder.Services.AddSingleton<RequestInventory>();
         return mauiAppBuilder;
     }
 }

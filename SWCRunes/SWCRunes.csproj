@@ -77,17 +77,22 @@
 	  <MauiXaml Update="Components\RuneAttribute.xaml">
 	    <SubType></SubType>
 	  </MauiXaml>
+	  <MauiXaml Condition=" '$(EnableDefaultXamlItems)' == 'true' " Update="RequestInventory\MonsterInventory.xaml">
+	    <SubType></SubType>
+	  </MauiXaml>
 	</ItemGroup>
 	<ItemGroup>
 	  <None Remove="RuneInventory\" />
 	  <None Remove="MonsterInventory\" />
 	  <None Remove="Components\" />
 	  <None Remove="SonarAnalyzer.CSharp" />
+	  <None Remove="RequestInventory\" />
 	</ItemGroup>
 	<ItemGroup>
 	  <Folder Include="RuneInventory\" />
 	  <Folder Include="MonsterInventory\" />
 	  <Folder Include="Components\" />
+	  <Folder Include="RequestInventory\" />
 	</ItemGroup>
 	<ItemGroup>
 	  <ProjectReference Include="..\SWCRunesLib\SWCRunesLib.csproj" />

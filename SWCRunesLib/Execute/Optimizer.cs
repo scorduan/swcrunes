@@ -52,6 +52,7 @@ public class Optimizer
     {
         Recommendation rec = new Recommendation();
         rec.MonsterName=req.MonsterName;
+        rec.InitiatingRequest = req;
         string monsterJson = monsters[req.MonsterName].ToJson();
         List<RuneSet> runeSets = BuildRunePermutations();
 
@@ -193,7 +194,7 @@ public class Optimizer
             rightVal=right.EffectiveHP;
  
         }
-        if (attr=="HPLoss100100")
+        if (attr=="Survival")
         {
             leftVal=left.HPLoss100100;
             rightVal=right.HPLoss100100;
@@ -212,10 +213,10 @@ public class Optimizer
  
         }
 
-    
-        //Might later calculate this as a percentage
-        tolerance=(int)(0.005 * (double)leftVal);
 
+        //Might later calculate this as a percentage
+        //tolerance=(int)(0.005 * (double)leftVal);
+        tolerance = 0;
         
 
         if (leftVal-tolerance > rightVal)
@@ -236,7 +237,7 @@ public class Optimizer
         }
 
 
-        return result;
+        return result*-1;
     }
 
 }
