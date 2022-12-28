@@ -13,7 +13,16 @@ public class Request
 
     public string TertiaryAttribute { get; set; }
 
-    public string AcceptableSets { get; set; }
+    public Rune.RuneType RestrictSetOne { get; set; } = Rune.RuneType.Null;
+
+    public Rune.RuneType RestrictSetTwo { get; set; } = Rune.RuneType.Null;
+
+    public Rune.RuneType RestrictSetThree { get; set; } = Rune.RuneType.Null;
+
+    public List<string> FocusStats { get; set; } = new List<string>();
+
+
+
     public string ToJson()
     {
         return JsonSerializer.Serialize<Request>(this);

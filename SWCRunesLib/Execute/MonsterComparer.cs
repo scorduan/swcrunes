@@ -88,8 +88,8 @@ public class MonsterComparer : IComparer<Monster>
         }
         if (attr=="Survival")
         {
-            leftVal=left.HPLoss100100;
-            rightVal=right.HPLoss100100;
+            leftVal=left.Survival;
+            rightVal=right.Survival;
             tolerance = 500;   
         }
         if (attr=="Damage")

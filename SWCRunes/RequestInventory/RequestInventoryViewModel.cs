@@ -31,6 +31,42 @@ namespace SWCRunes
             AttributeList.Add("Damage");
             AttributeList.Add("BasicDamage");
 
+            StatList.Add("ATKP");
+            StatList.Add("ATKF");
+
+            StatList.Add("DEFP");
+            StatList.Add("DEFF");
+
+            StatList.Add("HPP");
+            StatList.Add("HPF");
+
+            StatList.Add("SPD");
+
+            StatList.Add("CR");
+            StatList.Add("CD");
+
+            StatList.Add("ACC");
+            StatList.Add("RES");
+
+            StatList.Add("PR");
+            StatList.Add("EV");
+
+            TypeList.Add(Rune.RuneType.Null);
+
+            TypeList.Add(Rune.RuneType.Energy);
+            TypeList.Add(Rune.RuneType.Guard);
+
+            TypeList.Add(Rune.RuneType.Blade);
+            TypeList.Add(Rune.RuneType.Rage);
+
+            TypeList.Add(Rune.RuneType.Fatal);
+            TypeList.Add(Rune.RuneType.Swift);
+
+            TypeList.Add(Rune.RuneType.Focus);
+            TypeList.Add(Rune.RuneType.Endure);
+
+            TypeList.Add(Rune.RuneType.Foresight);
+            TypeList.Add(Rune.RuneType.Assemble);
 
 
 
@@ -57,6 +93,21 @@ namespace SWCRunes
         public Request SelectedRequest { get; set; }
 
         public ObservableCollection<String> AttributeList { get; set; }
+
+        public ObservableCollection<String> StatList { get; set; } = new ObservableCollection<string>();
+
+        public ObservableCollection<Rune.RuneType> TypeList { get; set; } = new ObservableCollection<Rune.RuneType>();
+
+        public ObservableCollection<Object> SelectedStats { get; set; } = new ObservableCollection<Object>();
+
+
+        public int RequestCount
+        {
+            get
+            {
+                return _optimizationService.CalculatePerms();
+            }
+        }    
 
         public void SaveNewRequest()
         {
@@ -85,14 +136,41 @@ namespace SWCRunes
 
         internal void ChangeSelectedRequest(Request selectedItem)
         {
+
+
+            //SelectedStats.Clear();
             SelectedRequest = selectedItem;
+
+            ObservableCollection<Object> selectedStats = new ObservableCollection<object>();
+            _optimizationService.UpdateRequest(selectedItem);
+            /*
+            foreach (string stat in SelectedRequest.FocusStats)
+            {
+                SelectedStats.Add(stat);
+            }*/
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("SelectedRequest"));
-            //PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("Requests"));
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("RequestCount"));
+            //PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("SelectedStats"));
         }
 
         internal void ProcessCurrent()
         {
             _optimizationService.ProcessRequest(SelectedRequest);
+        }
+
+        internal void UpdateSelectedStats(IReadOnlyList<object> currentSelection)
+        {
+            SelectedRequest.FocusStats.Clear();
+                foreach (string stat in currentSelection)
+                {
+                    SelectedRequest.FocusStats.Add(stat);
+                }
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("RequestCount"));
+        }
+
+        internal void GeneralSelectedIndexChanged()
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("RequestCount"));
         }
     }
 }

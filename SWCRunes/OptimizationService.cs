@@ -24,14 +24,26 @@ namespace SWCRunes
 			return _optim.Process();
 		}
 
+		public int CalculatePerms()
+		{
+			return _optim.CalculatePerms();
+		}
 
-		public Recommendation Recommended { get; set; }
+
+
+
+        public Recommendation Recommended { get; set; }
 
 		public Recommendation ProcessRequest(Request req)
 		{
 			Recommended = _optim.ProcessReq(req);
 			OptimizationCompletedEvent?.Invoke(this,Recommended);
 			return Recommended;
+		}
+
+		public void UpdateRequest(Request inReq)
+		{
+			_optim.UpdateReq(inReq);
 		}
 
         // Declare the delegate (if using non-generic pattern).

@@ -5,9 +5,9 @@ using System.Text.Json.Serialization;
 
 public class Recommendation
 {
-    public string MonsterName { get; set; }
+    public string MonsterName { get; set; } = "";
 
-    public List<Monster> RecommendedSetup  { get; set; }
+    public List<RecommendedMonster> RecommendedSetup  { get; set; }
 
     public Request InitiatingRequest { get; set; }
     public string ToJson()

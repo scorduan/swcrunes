@@ -45,14 +45,17 @@ public class Monster
            return (int)effectiveHP;
         } 
     }
-    public int HPLoss100100
+    public int Survival
     { 
          
         get
         {
+            //Assume enemy with 80 PR
+
+            double effectiveEV = Math.Max(EV - 800, 0d);
 
             double rawDamage = 100d;
-            double unevadedPerc = (1000d - EV)/1000d;
+            double unevadedPerc = (1000d - effectiveEV) /1000d;
 
             int numAttacksThrough = (int)Math.Ceiling(EffectiveHP / (unevadedPerc * rawDamage));
 
@@ -182,6 +185,28 @@ public class Monster
         return JsonSerializer.Deserialize<Monster>(text);
     }
 
+    public void EquipSet(RuneSet runeSet)
+    {
+        if (Runes != null)
+        {
+            if (Runes.RuneOne != null) Runes.RuneOne.EquippedOn = "";
+            if (Runes.RuneTwo != null) Runes.RuneOne.EquippedOn = "";
+            if (Runes.RuneThree != null) Runes.RuneOne.EquippedOn = "";
+            if (Runes.RuneFour != null) Runes.RuneOne.EquippedOn = "";
+            if (Runes.RuneFive != null) Runes.RuneOne.EquippedOn = "";
+            if (Runes.RuneSix != null) Runes.RuneOne.EquippedOn = "";
+        }
+        
+
+        Runes = runeSet;
+        Runes.RuneOne.EquippedOn = this.Name;
+        Runes.RuneTwo.EquippedOn = this.Name;
+        Runes.RuneThree.EquippedOn = this.Name;
+        Runes.RuneFour.EquippedOn = this.Name;
+        Runes.RuneFive.EquippedOn = this.Name;
+        Runes.RuneSix.EquippedOn = this.Name;
+
+    }
 }
 
 public class MonsterStorage
@@ -189,3 +214,4 @@ public class MonsterStorage
     public List<Monster> Monsters = new List<Monster>();
 
 }
+

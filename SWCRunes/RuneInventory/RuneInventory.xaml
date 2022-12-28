@@ -159,58 +159,61 @@
                            />
 
         </Grid>
-        <Border StrokeThickness="5" Padding="5" WidthRequest="1300" HeightRequest="1300">
-            <ListView ItemsSource="{Binding Runes}" RowHeight="45">
-                <ListView.ItemTemplate>
+        <Border StrokeThickness="5" Padding="5" WidthRequest="1300" HeightRequest="1000">
+            <CollectionView ItemsSource="{Binding Runes}" >
+                <CollectionView.ItemTemplate>
                     <DataTemplate >
-                        <ViewCell>
-                            <Grid Padding="0">
-                                <Grid.RowDefinitions>
-                                    <RowDefinition Height="Auto" />
-                                </Grid.RowDefinitions>
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="70" />
-                                    <ColumnDefinition Width="70" />
-                                    <ColumnDefinition Width="70" />
-                                    <ColumnDefinition Width="70" />
-                                    <ColumnDefinition Width="70" />
-                                    <ColumnDefinition Width="70" />
-                                    <ColumnDefinition Width="70" />
-                                    <ColumnDefinition Width="70" />
-                                    <ColumnDefinition Width="70" />
-                                    <ColumnDefinition Width="70" />
-                                    <ColumnDefinition Width="70" />
-                                    <ColumnDefinition Width="70" />
-                                    <ColumnDefinition Width="70" />
-                                    <ColumnDefinition Width="70" />
-                                    <ColumnDefinition Width="70" />
-                                    <ColumnDefinition Width="70" />
-                                    <ColumnDefinition Width="140" />
-                                </Grid.ColumnDefinitions>
 
-                                <Label Grid.Column="1" Text="{Binding Slot}"/>
-                                <Label Grid.Column="2" Text="{Binding Type}"/>
-                                <Entry Grid.Column="3" Text="{Binding ATKP, Converter={components:Int3ToPercConverter}}"  BackgroundColor="AliceBlue"/>
-                                <Entry Grid.Column="4" Text="{Binding ATKF}" />
-                                <Entry Grid.Column="5" Text="{Binding DEFP, Converter={components:Int3ToPercConverter}}"  BackgroundColor="AliceBlue" />
-                                <Entry Grid.Column="6" Text="{Binding DEFF}" />
-                                <Entry Grid.Column="7" Text="{Binding HPP, Converter={components:Int3ToPercConverter}}"  BackgroundColor="AliceBlue" />
-                                <Entry Grid.Column="8" Text="{Binding HPF}"/>
-                                <Entry Grid.Column="9" Text="{Binding SPD}" BackgroundColor="AliceBlue"/>
-                                <Entry Grid.Column="10" Text="{Binding CR, Converter={components:Int3ToPercConverter}}" />
-                                <Entry Grid.Column="11" Text="{Binding CD, Converter={components:Int3ToPercConverter}}"  BackgroundColor="AliceBlue"/>
-                                <Entry Grid.Column="12" Text="{Binding ACC, Converter={components:Int3ToPercConverter}}" />
-                                <Entry Grid.Column="13" Text="{Binding RES, Converter={components:Int3ToPercConverter}}"  BackgroundColor="AliceBlue"/>
-                                <Entry Grid.Column="14" Text="{Binding PR, Converter={components:Int3ToPercConverter}}" />
-                                <Entry Grid.Column="15" Text="{Binding EV, Converter={components:Int3ToPercConverter}}"  BackgroundColor="AliceBlue"/>
-                                <HorizontalStackLayout Grid.Column="16"><Button  Text="Save" WidthRequest="65" Clicked="OnSaveClicked" /><Button  Text="Del" WidthRequest="65" Clicked="OnDelClicked" /></HorizontalStackLayout> 
+                        <Grid Padding="0">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto" />
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="70" />
+                                <ColumnDefinition Width="70" />
+                                <ColumnDefinition Width="70" />
+                                <ColumnDefinition Width="70" />
+                                <ColumnDefinition Width="70" />
+                                <ColumnDefinition Width="70" />
+                                <ColumnDefinition Width="70" />
+                                <ColumnDefinition Width="70" />
+                                <ColumnDefinition Width="70" />
+                                <ColumnDefinition Width="70" />
+                                <ColumnDefinition Width="70" />
+                                <ColumnDefinition Width="70" />
+                                <ColumnDefinition Width="70" />
+                                <ColumnDefinition Width="70" />
+                                <ColumnDefinition Width="70" />
+                                <ColumnDefinition Width="70" />
+                                <ColumnDefinition Width="140" />
+                            </Grid.ColumnDefinitions>
+
+                            <Label Grid.Column="1" Text="{Binding Slot}"/>
+                            <Label Grid.Column="2" Text="{Binding Type}"/>
+                            <Entry Grid.Column="3" Text="{Binding ATKP, Converter={components:Int3ToPercConverter}}"  BackgroundColor="AliceBlue"/>
+                            <Entry Grid.Column="4" Text="{Binding ATKF}" />
+                            <Entry Grid.Column="5" Text="{Binding DEFP, Converter={components:Int3ToPercConverter}}"  BackgroundColor="AliceBlue" />
+                            <Entry Grid.Column="6" Text="{Binding DEFF}" />
+                            <Entry Grid.Column="7" Text="{Binding HPP, Converter={components:Int3ToPercConverter}}"  BackgroundColor="AliceBlue" />
+                            <Entry Grid.Column="8" Text="{Binding HPF}"/>
+                            <Entry Grid.Column="9" Text="{Binding SPD}" BackgroundColor="AliceBlue"/>
+                            <Entry Grid.Column="10" Text="{Binding CR, Converter={components:Int3ToPercConverter}}" />
+                            <Entry Grid.Column="11" Text="{Binding CD, Converter={components:Int3ToPercConverter}}"  BackgroundColor="AliceBlue"/>
+                            <Entry Grid.Column="12" Text="{Binding ACC, Converter={components:Int3ToPercConverter}}" />
+                            <Entry Grid.Column="13" Text="{Binding RES, Converter={components:Int3ToPercConverter}}"  BackgroundColor="AliceBlue"/>
+                            <Entry Grid.Column="14" Text="{Binding PR, Converter={components:Int3ToPercConverter}}" />
+                            <Entry Grid.Column="15" Text="{Binding EV, Converter={components:Int3ToPercConverter}}"  BackgroundColor="AliceBlue"/>
+                            <HorizontalStackLayout Grid.Column="16">
+                                <Button  Text="Save" WidthRequest="65" Clicked="OnSaveClicked" />
+                                <Button  Text="Del" WidthRequest="65" Clicked="OnDelClicked" />
+                            </HorizontalStackLayout>
 
 
-                            </Grid>
-                        </ViewCell>
+                        </Grid>
+
                     </DataTemplate>
-                </ListView.ItemTemplate>
-            </ListView>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
         </Border>
     </VerticalStackLayout>
 </ContentPage>

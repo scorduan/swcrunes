@@ -17,7 +17,7 @@ namespace SWCRunes
             _optService = optim;
             _optService.OptimizationCompletedEvent += _optService_OptimizationCompletedEvent;
 
-            Monsters = new ObservableCollection<Monster>();
+            Monsters = new ObservableCollection<RecommendedMonster>();
             loadFromService();
         }
 
@@ -33,7 +33,7 @@ namespace SWCRunes
 
         private OptimizationService _optService;
 
-        public ObservableCollection<Monster> Monsters { get; set; }
+        public ObservableCollection<RecommendedMonster> Monsters { get; set; }
 
         public Recommendation Recomm
         {
@@ -43,9 +43,9 @@ namespace SWCRunes
             }
         }
 
-        public Monster SelectedMonster { get; set; }
+        public RecommendedMonster SelectedMonster { get; set; }
 
-        public void ChangeSelectedMonster(Monster monster)
+        public void ChangeSelectedMonster(RecommendedMonster monster)
         {
             SelectedMonster = monster;
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("SelectedMonster"));
@@ -53,17 +53,39 @@ namespace SWCRunes
 
         private void loadFromService()
         {
-            Monsters.Clear();
-
+            //Monsters = null;
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("Monsters"));
+            //Monsters = new ObservableCollection<Monster>();
+            
+            
             if (_optService.Recommended != null)
             {
-                foreach (Monster m in _optService.Recommended.RecommendedSetup)
-                {
-                    Monsters.Add(m);
-                }
+                Monsters.Clear();
+                currentIndex = 0;
+                AddAdditional();
+
+            }
+            
+
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("Recomm"));
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("Monsters"));
+        }
+
+        int currentIndex = 0;
+        public void AddAdditional()
+        {
+            int maxIndex = currentIndex + 20;
+            if (maxIndex>_optService.Recommended.RecommendedSetup.Count)
+            {
+                maxIndex = _optService.Recommended.RecommendedSetup.Count;
             }
 
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("Monsters"));
+            for (int counter = currentIndex; counter < maxIndex; counter++)
+            {
+                Monsters.Add(_optService.Recommended.RecommendedSetup[counter]);
+            }
+
+            currentIndex = maxIndex;
         }
     }
 }

@@ -25,42 +25,82 @@
             </VerticalStackLayout>
         </Border>
         <VerticalStackLayout>
-            
+
             <Grid>
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="70"/>
-                    <ColumnDefinition Width="70"/>
-                    <ColumnDefinition Width="70"/>
+                    <ColumnDefinition Width="100"/>
 
-                    <ColumnDefinition Width="70"/>
+                    <ColumnDefinition Width="100"/>
+                    <ColumnDefinition Width="100"/>
+                    <ColumnDefinition Width="100"/>
+
+                    <ColumnDefinition Width="100"/>
+                    <ColumnDefinition Width="100"/>
+                    <ColumnDefinition Width="100"/>
+
+                    <ColumnDefinition Width="100"/>
+
 
 
                 </Grid.ColumnDefinitions>
                 <Label Grid.Column="0" Text="Name"/>
+
                 <Label Grid.Column="1" Text="1st"/>
                 <Label Grid.Column="2" Text="2nd"/>
                 <Label Grid.Column="3" Text="3rd"/>
 
+                <Label Grid.Column="4" Text="1st Type"/>
+                <Label Grid.Column="5" Text="2nd Type"/>
+                <Label Grid.Column="6" Text="3rd Type"/>
+
+                <Label Grid.Column="7" Text="Stats"/>
+
+
             </Grid>
             <Grid>
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="70"/>
-                    <ColumnDefinition Width="70"/>
-                    <ColumnDefinition Width="70"/>
+                    <ColumnDefinition Width="100"/>
 
-                    <ColumnDefinition Width="70"/>
-                    <ColumnDefinition Width="70"/>
-                    <ColumnDefinition Width="70"/>
+                    <ColumnDefinition Width="100"/>
+                    <ColumnDefinition Width="100"/>
+                    <ColumnDefinition Width="100"/>
+
+                    <ColumnDefinition Width="100"/>
+                    <ColumnDefinition Width="100"/>
+                    <ColumnDefinition Width="100"/>
+
+                    <ColumnDefinition Width="100"/>
+                    
+                    <ColumnDefinition Width="100"/>
+                    <ColumnDefinition Width="100"/>
+
+                
 
                 </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="100"/>
+
+                </Grid.RowDefinitions>
                 <Entry Grid.Column="0" Text="{Binding Path=SelectedRequest.MonsterName}"/>
-                
+
                 <Picker Grid.Column="1" ItemsSource="{Binding AttributeList}" SelectedItem="{Binding Path=SelectedRequest.PrimaryAttribute}"/>
                 <Picker Grid.Column="2" ItemsSource="{Binding AttributeList}" SelectedItem="{Binding Path=SelectedRequest.SecondaryAttribute}"/>
                 <Picker Grid.Column="3" ItemsSource="{Binding AttributeList}" SelectedItem="{Binding Path=SelectedRequest.TertiaryAttribute}"/>
 
-                <Button Grid.Column="4" x:Name="Del" Text="Del" Clicked="Del_Clicked"/>
-                <Button Grid.Column="5" x:Name="Execute" Text="Execute" Clicked="Execute_Clicked"/>
+                <Picker Grid.Column="4" ItemsSource="{Binding TypeList}" SelectedItem="{Binding Path=SelectedRequest.RestrictSetOne}" SelectedIndexChanged="Picker_SelectedIndexChanged"/>
+                <Picker Grid.Column="5" ItemsSource="{Binding TypeList}" SelectedItem="{Binding Path=SelectedRequest.RestrictSetTwo}"/>
+                <Picker Grid.Column="6" ItemsSource="{Binding TypeList}" SelectedItem="{Binding Path=SelectedRequest.RestrictSetThree}"/>
+
+                <CollectionView Grid.Column="7"
+                                ItemsSource="{Binding StatList}"
+                                SelectedItems="{Binding SelectedStats, Mode=TwoWay}"
+                                SelectionMode="Multiple"
+                                x:Name="statSelector"
+                                SelectionChanged="statSelector_SelectionChanged"
+                                ></CollectionView>
+
+                <Button Grid.Column="8" x:Name="Del" Text="Del" Clicked="Del_Clicked"/>
+                <Button Grid.Column="9" x:Name="Execute" Text="{Binding RequestCount, Mode=OneWay}" Clicked="Execute_Clicked"/>
 
             </Grid>
         </VerticalStackLayout>

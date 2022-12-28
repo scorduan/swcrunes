@@ -65,14 +65,14 @@ public class Rune
     public int PR { get; set;}
     public int EV { get; set;}
 
-    
 
 
 
 
 
 
-    public bool IsEquipped {get; set;} = false;
+
+    public string EquippedOn = "";
 
     public string ToJson()
     {

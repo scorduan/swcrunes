@@ -1,2 +1,2 @@
-{"Name":"Shannon","Runes":null,"ATK":920,"ATKBoost":188,"DEFBoost":280,"DEF":845,"HP":13797,"HPBoost":3204,"SPD":90,"CR":100,"CD":200,"ACC":220,"RES":450,"RESBoost":60,"PR":800,"EV":50,"EVBoost":30,"EffectiveHP":0,"HPLoss100100":0,"Damage":0}
-{"Name":"Shannon2","Runes":null,"ATK":920,"ATKBoost":188,"DEFBoost":280,"DEF":845,"HP":13797,"HPBoost":3204,"SPD":90,"CR":100,"CD":200,"ACC":220,"RES":450,"RESBoost":60,"PR":800,"EV":50,"EVBoost":30,"EffectiveHP":0,"HPLoss100100":0,"Damage":0}
+{"Name":"Shannon","Runes":null,"ATK":920,"ATKBoost":188,"DEFBoost":280,"DEF":845,"HP":13797,"HPBoost":3204,"SPD":90,"CR":100,"CD":200,"ACC":220,"RES":450,"RESBoost":60,"PR":800,"EV":50,"EVBoost":30,"EffectiveHP":0,"Survival":0,"Damage":0}
+{"Name":"Shannon2","Runes":null,"ATK":920,"ATKBoost":188,"DEFBoost":280,"DEF":845,"HP":13797,"HPBoost":3204,"SPD":90,"CR":100,"CD":200,"ACC":220,"RES":450,"RESBoost":60,"PR":800,"EV":50,"EVBoost":30,"EffectiveHP":0,"Survival":0,"Damage":0}

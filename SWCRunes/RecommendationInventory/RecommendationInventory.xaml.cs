@@ -19,7 +19,12 @@ public partial class RecommendationInventory : ContentPage
     void recommendList_ItemSelected(System.Object sender, Microsoft.Maui.Controls.SelectedItemChangedEventArgs e)
     {
         monsterDisplay.BindingContext = ((ListView)sender).SelectedItem;
-        _viewModel.ChangeSelectedMonster((Monster)((ListView)sender).SelectedItem);
+        _viewModel.ChangeSelectedMonster((RecommendedMonster)((ListView)sender).SelectedItem);
 
+    }
+
+    void recommendList_Refreshing(System.Object sender, System.EventArgs e)
+    {
+        _viewModel.AddAdditional();
     }
 }

@@ -18,20 +18,33 @@
         <Label Text="{Binding Recomm.InitiatingRequest.TertiaryAttribute}"/>
         <Label Text="Things"/>
         <HorizontalStackLayout Background="gray" >
+            <VerticalStackLayout>
             <Border StrokeThickness="5" Padding="5" WidthRequest="100" HeightRequest="1000">
-                <ListView ItemsSource="{Binding Monsters}" ItemSelected="recommendList_ItemSelected" x:Name="recommendList">
+                <ListView ItemsSource="{Binding Monsters}"
+                          ItemSelected="recommendList_ItemSelected"
+                          x:Name="recommendList"
+                          WidthRequest="95"
+                          RowHeight="70"
+                          
+                          >
                     <ListView.ItemTemplate>
                         <DataTemplate >
-                            <ViewCell x:DataType="lib:Monster">
-                                <HorizontalStackLayout>
-                                    <Label Text="{Binding EffectiveHP}" WidthRequest="50" />
-                                </HorizontalStackLayout>
+                            <ViewCell x:DataType="lib:RecommendedMonster">
+                                <Border WidthRequest="60" HeightRequest="60">
+                                <VerticalStackLayout>
+                                    <Label Text="{Binding FirstValue }" WidthRequest="50" />
+                                    <Label Text="{Binding SecondValue }" WidthRequest="50" />
+                                    <Label Text="{Binding ThirdValue }" WidthRequest="50" />
+                                </VerticalStackLayout>
+                                </Border>
                             </ViewCell>
                         </DataTemplate>
                     </ListView.ItemTemplate>
                 </ListView>
             </Border>
-            <components:Monster WidthRequest="1000" HeightRequest="350" x:Name="monsterDisplay" BindingContext="SelectedMonster"/>
+            <Button Text="More..." Clicked="recommendList_Refreshing"/>
+            </VerticalStackLayout>
+            <components:Monster WidthRequest="1000" HeightRequest="350" x:Name="monsterDisplay"/>
         </HorizontalStackLayout>
     </VerticalStackLayout>
 
