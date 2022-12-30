@@ -8,32 +8,32 @@ public class Optimizer
     {
 
 
-        typedStattedSlottedRunes[Rune.RuneType.Energy] = new Dictionary<string, Dictionary<Rune.RuneSlot, List<Rune>>>();
-        InitStattedSlottedRuneList(typedStattedSlottedRunes[Rune.RuneType.Energy]);
-        typedStattedSlottedRunes[Rune.RuneType.Guard] = new Dictionary<string, Dictionary<Rune.RuneSlot, List<Rune>>>();
-        InitStattedSlottedRuneList(typedStattedSlottedRunes[Rune.RuneType.Guard]);
+        typedStattedSlottedRunes[RuneType.Energy] = new Dictionary<string, Dictionary<RuneSlot, List<Rune>>>();
+        InitStattedSlottedRuneList(typedStattedSlottedRunes[RuneType.Energy]);
+        typedStattedSlottedRunes[RuneType.Guard] = new Dictionary<string, Dictionary<RuneSlot, List<Rune>>>();
+        InitStattedSlottedRuneList(typedStattedSlottedRunes[RuneType.Guard]);
 
 
-        typedStattedSlottedRunes[Rune.RuneType.Blade] = new Dictionary<string, Dictionary<Rune.RuneSlot, List<Rune>>>();
-        InitStattedSlottedRuneList(typedStattedSlottedRunes[Rune.RuneType.Blade]);
-        typedStattedSlottedRunes[Rune.RuneType.Rage] = new Dictionary<string, Dictionary<Rune.RuneSlot, List<Rune>>>();
-        InitStattedSlottedRuneList(typedStattedSlottedRunes[Rune.RuneType.Rage]);
+        typedStattedSlottedRunes[RuneType.Blade] = new Dictionary<string, Dictionary<RuneSlot, List<Rune>>>();
+        InitStattedSlottedRuneList(typedStattedSlottedRunes[RuneType.Blade]);
+        typedStattedSlottedRunes[RuneType.Rage] = new Dictionary<string, Dictionary<RuneSlot, List<Rune>>>();
+        InitStattedSlottedRuneList(typedStattedSlottedRunes[RuneType.Rage]);
 
-        typedStattedSlottedRunes[Rune.RuneType.Fatal] = new Dictionary<string, Dictionary<Rune.RuneSlot, List<Rune>>>();
-        InitStattedSlottedRuneList(typedStattedSlottedRunes[Rune.RuneType.Fatal]);
-        typedStattedSlottedRunes[Rune.RuneType.Swift] = new Dictionary<string, Dictionary<Rune.RuneSlot, List<Rune>>>();
-        InitStattedSlottedRuneList(typedStattedSlottedRunes[Rune.RuneType.Swift]);
+        typedStattedSlottedRunes[RuneType.Fatal] = new Dictionary<string, Dictionary<RuneSlot, List<Rune>>>();
+        InitStattedSlottedRuneList(typedStattedSlottedRunes[RuneType.Fatal]);
+        typedStattedSlottedRunes[RuneType.Swift] = new Dictionary<string, Dictionary<RuneSlot, List<Rune>>>();
+        InitStattedSlottedRuneList(typedStattedSlottedRunes[RuneType.Swift]);
 
-        typedStattedSlottedRunes[Rune.RuneType.Focus] = new Dictionary<string, Dictionary<Rune.RuneSlot, List<Rune>>>();
-        InitStattedSlottedRuneList(typedStattedSlottedRunes[Rune.RuneType.Focus]);
-        typedStattedSlottedRunes[Rune.RuneType.Endure] = new Dictionary<string, Dictionary<Rune.RuneSlot, List<Rune>>>();
-        InitStattedSlottedRuneList(typedStattedSlottedRunes[Rune.RuneType.Endure]);
+        typedStattedSlottedRunes[RuneType.Focus] = new Dictionary<string, Dictionary<RuneSlot, List<Rune>>>();
+        InitStattedSlottedRuneList(typedStattedSlottedRunes[RuneType.Focus]);
+        typedStattedSlottedRunes[RuneType.Endure] = new Dictionary<string, Dictionary<RuneSlot, List<Rune>>>();
+        InitStattedSlottedRuneList(typedStattedSlottedRunes[RuneType.Endure]);
 
 
-        typedStattedSlottedRunes[Rune.RuneType.Foresight] = new Dictionary<string, Dictionary<Rune.RuneSlot, List<Rune>>>();
-        InitStattedSlottedRuneList(typedStattedSlottedRunes[Rune.RuneType.Foresight]);
-        typedStattedSlottedRunes[Rune.RuneType.Assemble] = new Dictionary<string, Dictionary<Rune.RuneSlot, List<Rune>>>();
-        InitStattedSlottedRuneList(typedStattedSlottedRunes[Rune.RuneType.Assemble]);
+        typedStattedSlottedRunes[RuneType.Foresight] = new Dictionary<string, Dictionary<RuneSlot, List<Rune>>>();
+        InitStattedSlottedRuneList(typedStattedSlottedRunes[RuneType.Foresight]);
+        typedStattedSlottedRunes[RuneType.Assemble] = new Dictionary<string, Dictionary<RuneSlot, List<Rune>>>();
+        InitStattedSlottedRuneList(typedStattedSlottedRunes[RuneType.Assemble]);
 
 
 
@@ -72,60 +72,60 @@ public class Optimizer
 
     }
 
-    private void InitSlottedRuneList(Dictionary<Rune.RuneSlot, List<Rune>> list)
+    private void InitSlottedRuneList(Dictionary<RuneSlot, List<Rune>> list)
     {
-        list[Rune.RuneSlot.ONE] = new List<Rune>();
-        list[Rune.RuneSlot.TWO] = new List<Rune>();
-        list[Rune.RuneSlot.THREE] = new List<Rune>();
-        list[Rune.RuneSlot.FOUR] = new List<Rune>();
-        list[Rune.RuneSlot.FIVE] = new List<Rune>();
-        list[Rune.RuneSlot.SIX] = new List<Rune>();
+        list[RuneSlot.ONE] = new List<Rune>();
+        list[RuneSlot.TWO] = new List<Rune>();
+        list[RuneSlot.THREE] = new List<Rune>();
+        list[RuneSlot.FOUR] = new List<Rune>();
+        list[RuneSlot.FIVE] = new List<Rune>();
+        list[RuneSlot.SIX] = new List<Rune>();
     }
 
-    private void InitStattedSlottedRuneList(Dictionary<string, Dictionary<Rune.RuneSlot, List<Rune>>> list)
+    private void InitStattedSlottedRuneList(Dictionary<string, Dictionary<RuneSlot, List<Rune>>> list)
     {
-        list["ATKP"] = new Dictionary<Rune.RuneSlot, List<Rune>>();
+        list["ATKP"] = new Dictionary<RuneSlot, List<Rune>>();
         InitSlottedRuneList(list["ATKP"]);
 
-        list["ATKF"] = new Dictionary<Rune.RuneSlot, List<Rune>>();
+        list["ATKF"] = new Dictionary<RuneSlot, List<Rune>>();
         InitSlottedRuneList(list["ATKF"]);
 
-        list["DEFP"] = new Dictionary<Rune.RuneSlot, List<Rune>>();
+        list["DEFP"] = new Dictionary<RuneSlot, List<Rune>>();
         InitSlottedRuneList(list["DEFP"]);
 
-        list["DEFF"] = new Dictionary<Rune.RuneSlot, List<Rune>>();
+        list["DEFF"] = new Dictionary<RuneSlot, List<Rune>>();
         InitSlottedRuneList(list["DEFF"]);
 
-        list["HPP"] = new Dictionary<Rune.RuneSlot, List<Rune>>();
+        list["HPP"] = new Dictionary<RuneSlot, List<Rune>>();
         InitSlottedRuneList(list["HPP"]);
 
-        list["HPF"] = new Dictionary<Rune.RuneSlot, List<Rune>>();
+        list["HPF"] = new Dictionary<RuneSlot, List<Rune>>();
         InitSlottedRuneList(list["HPF"]);
 
-        list["SPD"] = new Dictionary<Rune.RuneSlot, List<Rune>>();
+        list["SPD"] = new Dictionary<RuneSlot, List<Rune>>();
         InitSlottedRuneList(list["SPD"]);
 
-        list["CR"] = new Dictionary<Rune.RuneSlot, List<Rune>>();
+        list["CR"] = new Dictionary<RuneSlot, List<Rune>>();
         InitSlottedRuneList(list["CR"]);
 
-        list["CD"] = new Dictionary<Rune.RuneSlot, List<Rune>>();
+        list["CD"] = new Dictionary<RuneSlot, List<Rune>>();
         InitSlottedRuneList(list["CD"]);
 
-        list["ACC"] = new Dictionary<Rune.RuneSlot, List<Rune>>();
+        list["ACC"] = new Dictionary<RuneSlot, List<Rune>>();
         InitSlottedRuneList(list["ACC"]);
 
-        list["RES"] = new Dictionary<Rune.RuneSlot, List<Rune>>();
+        list["RES"] = new Dictionary<RuneSlot, List<Rune>>();
         InitSlottedRuneList(list["RES"]);
 
-        list["PR"] = new Dictionary<Rune.RuneSlot, List<Rune>>();
+        list["PR"] = new Dictionary<RuneSlot, List<Rune>>();
         InitSlottedRuneList(list["PR"]);
 
-        list["EV"] = new Dictionary<Rune.RuneSlot, List<Rune>>();
+        list["EV"] = new Dictionary<RuneSlot, List<Rune>>();
         InitSlottedRuneList(list["EV"]);
     }
 
     private Dictionary<string, Monster> monsters = new Dictionary<string, Monster>();
-    private Dictionary<Rune.RuneType, Dictionary<string, Dictionary<Rune.RuneSlot, List<Rune>>>> typedStattedSlottedRunes = new Dictionary<Rune.RuneType, Dictionary<string, Dictionary<Rune.RuneSlot, List<Rune>>>>();
+    private Dictionary<RuneType, Dictionary<string, Dictionary<RuneSlot, List<Rune>>>> typedStattedSlottedRunes = new Dictionary<RuneType, Dictionary<string, Dictionary<RuneSlot, List<Rune>>>>();
 
     private RequestStorage requests;
 
@@ -155,7 +155,9 @@ public class Optimizer
         _req = inReq;
         rec.MonsterName = _req.MonsterName;
         rec.InitiatingRequest = _req;
-        string monsterJson = monsters[_req.MonsterName].ToJson();
+        Monster origMonster = monsters[_req.MonsterName];
+        string monsterJson = origMonster.ToJson();
+        
         List<RuneSet> runeSets = BuildRunePermutations();
 
         List<RecommendedMonster> results = new List<RecommendedMonster>();
@@ -168,7 +170,7 @@ public class Optimizer
             m.Runes = set;
             Monster resultMon = m.GetModified();
             resultMon.Runes = set;
-            RecommendedMonster recMon = getRecommendedMonster(resultMon, _req);
+            RecommendedMonster recMon = getRecommendedMonster(resultMon, origMonster, _req);
 
 
 
@@ -184,9 +186,9 @@ public class Optimizer
         return rec;
     }
 
-    private RecommendedMonster getRecommendedMonster(Monster m, Request req)
+    private RecommendedMonster getRecommendedMonster(Monster m, Monster origMonster, Request req)
     {
-        RecommendedMonster recMon = new RecommendedMonster(m);
+        RecommendedMonster recMon = new RecommendedMonster(m, origMonster);
 
         if (req.PrimaryAttribute == "ATK") recMon.FirstValue = m.ATK;
         if (req.PrimaryAttribute == "DEF") recMon.FirstValue = m.DEF;
@@ -256,7 +258,7 @@ public class Optimizer
         List<RuneSet> perms = new List<RuneSet>();
 
 
-        List<Rune.RuneType> typeList = new List<Rune.RuneType>();
+        List<RuneType> typeList = new List<RuneType>();
 
         List<string> statList;
 
@@ -273,66 +275,72 @@ public class Optimizer
         List<Rune> used6 = new List<Rune>();
 
 
-        foreach (Rune.RuneType type1 in typeList)
+        foreach (RuneType type1 in typeList)
         {
            
             foreach (string stat1 in statList)
             {
 
-                foreach (Rune rune1 in typedStattedSlottedRunes[type1][stat1][Rune.RuneSlot.ONE])
+                foreach (Rune rune1 in typedStattedSlottedRunes[type1][stat1][RuneSlot.ONE])
                 {
                     if (used1.Contains(rune1)) continue;
+                    if ((rune1.EquippedOn != "")&& (rune1.EquippedOn != _req.MonsterName)) continue;
                     used1.Add(rune1);
 
-                    foreach (Rune.RuneType type2 in typeList)
+                    foreach (RuneType type2 in typeList)
                     {
                         foreach (string stat2 in statList)
                         {
 
-                            foreach (Rune rune2 in typedStattedSlottedRunes[type2][stat2][Rune.RuneSlot.TWO])
+                            foreach (Rune rune2 in typedStattedSlottedRunes[type2][stat2][RuneSlot.TWO])
                             {
                                 if (used2.Contains(rune2)) continue;
+                                if ((rune2.EquippedOn != "") && (rune2.EquippedOn != _req.MonsterName)) continue;
                                 used2.Add(rune2);
 
-                                foreach (Rune.RuneType type3 in typeList)
+                                foreach (RuneType type3 in typeList)
                                 {
                                     foreach (string stat3 in statList)
                                     {
-                                        foreach (Rune rune3 in typedStattedSlottedRunes[type3][stat3][Rune.RuneSlot.THREE])
+                                        foreach (Rune rune3 in typedStattedSlottedRunes[type3][stat3][RuneSlot.THREE])
                                         {
                                             if (used3.Contains(rune3)) continue;
+                                            if ((rune3.EquippedOn != "") && (rune3.EquippedOn != _req.MonsterName)) continue;
                                             used3.Add(rune3);
 
-                                            foreach (Rune.RuneType type4 in typeList)
+                                            foreach (RuneType type4 in typeList)
                                             {
                                                 foreach (string stat4 in statList)
                                                 {
 
 
-                                                    foreach (Rune rune4 in typedStattedSlottedRunes[type4][stat4][Rune.RuneSlot.FOUR])
+                                                    foreach (Rune rune4 in typedStattedSlottedRunes[type4][stat4][RuneSlot.FOUR])
                                                     {
 
                                                         if (used4.Contains(rune4)) continue;
+                                                        if ((rune4.EquippedOn != "") && (rune4.EquippedOn != _req.MonsterName)) continue;
                                                         used4.Add(rune4);
 
-                                                        foreach (Rune.RuneType type5 in typeList)
+                                                        foreach (RuneType type5 in typeList)
                                                         {
                                                             foreach (string stat5 in statList)
                                                             {
-                                                                foreach (Rune rune5 in typedStattedSlottedRunes[type5][stat5][Rune.RuneSlot.FIVE])
+                                                                foreach (Rune rune5 in typedStattedSlottedRunes[type5][stat5][RuneSlot.FIVE])
                                                                 {
 
                                                                     if (used5.Contains(rune5)) continue;
+                                                                    if ((rune5.EquippedOn != "") && (rune5.EquippedOn != _req.MonsterName)) continue;
                                                                     used5.Add(rune5);
 
-                                                                    foreach (Rune.RuneType type6 in typeList)
+                                                                    foreach (RuneType type6 in typeList)
                                                                     {
                                                                         foreach (string stat6 in statList)
                                                                         {
-                                                                            foreach (Rune rune6 in typedStattedSlottedRunes[type6][stat6][Rune.RuneSlot.SIX])
+                                                                            foreach (Rune rune6 in typedStattedSlottedRunes[type6][stat6][RuneSlot.SIX])
                                                                             {
 
                                                                                 if (used6.Contains(rune6)) continue;
+                                                                                if ((rune6.EquippedOn != "") && (rune6.EquippedOn != _req.MonsterName)) continue;
                                                                                 used6.Add(rune6);
 
                                                                                 RuneSet set = new RuneSet();
@@ -409,41 +417,41 @@ public class Optimizer
         return statList;
     }
 
-    private List<Rune.RuneType> buildTypeList()
+    private List<RuneType> buildTypeList()
     {
-        List<Rune.RuneType> typeList = new List<Rune.RuneType>();
+        List<RuneType> typeList = new List<RuneType>();
 
-        if (_req.RestrictSetOne != Rune.RuneType.Null)
+        if (_req.RestrictSetOne != RuneType.Null)
         {
             typeList.Add(_req.RestrictSetOne);
         }
 
-        if (_req.RestrictSetTwo != Rune.RuneType.Null)
+        if (_req.RestrictSetTwo != RuneType.Null)
         {
             typeList.Add(_req.RestrictSetTwo);
         }
 
-        if (_req.RestrictSetThree != Rune.RuneType.Null)
+        if (_req.RestrictSetThree != RuneType.Null)
         {
             typeList.Add(_req.RestrictSetThree);
         }
 
         if (typeList.Count == 0)
         {
-            typeList.Add(Rune.RuneType.Energy);
-            typeList.Add(Rune.RuneType.Guard);
+            typeList.Add(RuneType.Energy);
+            typeList.Add(RuneType.Guard);
 
-            typeList.Add(Rune.RuneType.Blade);
-            typeList.Add(Rune.RuneType.Rage);
+            typeList.Add(RuneType.Blade);
+            typeList.Add(RuneType.Rage);
 
-            typeList.Add(Rune.RuneType.Fatal);
-            typeList.Add(Rune.RuneType.Swift);
+            typeList.Add(RuneType.Fatal);
+            typeList.Add(RuneType.Swift);
 
-            typeList.Add(Rune.RuneType.Focus);
-            typeList.Add(Rune.RuneType.Endure);
+            typeList.Add(RuneType.Focus);
+            typeList.Add(RuneType.Endure);
 
-            typeList.Add(Rune.RuneType.Foresight);
-            typeList.Add(Rune.RuneType.Assemble);
+            typeList.Add(RuneType.Foresight);
+            typeList.Add(RuneType.Assemble);
         }
 
         return typeList;
@@ -460,19 +468,19 @@ public class Optimizer
         int runeSixCount = 0;
 
 
-        List<Rune.RuneType> typeList = buildTypeList();
+        List<RuneType> typeList = buildTypeList();
         List<string> statList = buildStatList();
 
-        foreach (Rune.RuneType runeType in typeList)
+        foreach (RuneType runeType in typeList)
         {
             foreach (string stat in statList)
             {
-                runeOneCount += typedStattedSlottedRunes[runeType][stat][Rune.RuneSlot.ONE].Count();
-                runeTwoCount += typedStattedSlottedRunes[runeType][stat][Rune.RuneSlot.TWO].Count();
-                runeThreeCount += typedStattedSlottedRunes[runeType][stat][Rune.RuneSlot.THREE].Count();
-                runeFourCount += typedStattedSlottedRunes[runeType][stat][Rune.RuneSlot.FOUR].Count();
-                runeFiveCount += typedStattedSlottedRunes[runeType][stat][Rune.RuneSlot.FIVE].Count();
-                runeSixCount += typedStattedSlottedRunes[runeType][stat][Rune.RuneSlot.SIX].Count();
+                runeOneCount += typedStattedSlottedRunes[runeType][stat][RuneSlot.ONE].Count();
+                runeTwoCount += typedStattedSlottedRunes[runeType][stat][RuneSlot.TWO].Count();
+                runeThreeCount += typedStattedSlottedRunes[runeType][stat][RuneSlot.THREE].Count();
+                runeFourCount += typedStattedSlottedRunes[runeType][stat][RuneSlot.FOUR].Count();
+                runeFiveCount += typedStattedSlottedRunes[runeType][stat][RuneSlot.FIVE].Count();
+                runeSixCount += typedStattedSlottedRunes[runeType][stat][RuneSlot.SIX].Count();
             }
         }
 

@@ -11,28 +11,28 @@ namespace SWCRunes
     {
         public RuneInventoryViewModel(StorageService storageServ)
         {
-            SlotList = new List<Rune.RuneSlot>();
-            SlotList.Add(Rune.RuneSlot.ONE);
-            SlotList.Add(Rune.RuneSlot.TWO);
-            SlotList.Add(Rune.RuneSlot.THREE);
-            SlotList.Add(Rune.RuneSlot.FOUR);
-            SlotList.Add(Rune.RuneSlot.FIVE);
-            SlotList.Add(Rune.RuneSlot.SIX);
+            SlotList = new List<RuneSlot>();
+            SlotList.Add(RuneSlot.ONE);
+            SlotList.Add(RuneSlot.TWO);
+            SlotList.Add(RuneSlot.THREE);
+            SlotList.Add(RuneSlot.FOUR);
+            SlotList.Add(RuneSlot.FIVE);
+            SlotList.Add(RuneSlot.SIX);
 
-            TypeList = new List<Rune.RuneType>();
-            TypeList.Add(Rune.RuneType.Energy);
-            TypeList.Add(Rune.RuneType.Guard);
-            TypeList.Add(Rune.RuneType.Blade);
-            TypeList.Add(Rune.RuneType.Rage);
-            TypeList.Add(Rune.RuneType.Fatal);
-            TypeList.Add(Rune.RuneType.Swift);
-            TypeList.Add(Rune.RuneType.Focus);
-            TypeList.Add(Rune.RuneType.Endure);
-            TypeList.Add(Rune.RuneType.Foresight);
-            TypeList.Add(Rune.RuneType.Assemble);
+            TypeList = new List<RuneType>();
+            TypeList.Add(RuneType.Energy);
+            TypeList.Add(RuneType.Guard);
+            TypeList.Add(RuneType.Blade);
+            TypeList.Add(RuneType.Rage);
+            TypeList.Add(RuneType.Fatal);
+            TypeList.Add(RuneType.Swift);
+            TypeList.Add(RuneType.Focus);
+            TypeList.Add(RuneType.Endure);
+            TypeList.Add(RuneType.Foresight);
+            TypeList.Add(RuneType.Assemble);
 
-            NewSlot = Rune.RuneSlot.ONE;
-            NewType = Rune.RuneType.Energy;
+            NewSlot = RuneSlot.ONE;
+            NewType = RuneType.Energy;
             _storageServ = storageServ;
             _runes = storageServ.GetRunes() ;
         }
@@ -51,6 +51,8 @@ namespace SWCRunes
         }
 
         StorageService _storageServ;
+
+
 
         public int NewATKP { get; set; }
         public int NewATKF { get; set; }
@@ -72,17 +74,17 @@ namespace SWCRunes
         public int NewPR { get; set; }
         public int NewEV { get; set; }
 
-        public Rune.RuneSlot NewSlot { get; set; }
+        public RuneSlot NewSlot { get; set; }
 
-        public Rune.RuneType NewType { get; set; }
+        public RuneType NewType { get; set; }
 
-        public List<Rune.RuneSlot> SlotList { get; set; }
-        public List<Rune.RuneType> TypeList { get; set; }
+        public List<RuneSlot> SlotList { get; set; }
+        public List<RuneType> TypeList { get; set; }
 
 
         public void SaveNewRune()
         {
-            Rune rune = new Rune();
+            Rune rune = new Rune("");
 
             rune.Slot = NewSlot;
             rune.Type = NewType;
@@ -153,6 +155,49 @@ namespace SWCRunes
         {
             _runes.Remove(r);
             _storageServ.SaveRunes(_runes);
+        }
+
+        // Bindable Properties
+        public ObservableCollection<IRune> VisibleRunes;
+
+        public RuneType SelectedType = RuneType.Energy;
+
+        public RuneSlot SelectedSlot = RuneSlot.ONE;
+
+        public IRune NewRune { get; set; }
+
+        // Service updaters methods
+
+        SimulationService _simulationService;
+
+        public void UpdateList()
+        {
+            List<IRune> runeList = _simulationService.GetRunesByTypeSlot(SelectedType, SelectedSlot);
+            
+            VisibleRunes = new ObservableCollection<IRune>(runeList);
+        }
+
+        public void AddNewRune()
+        {
+            NewRune = _simulationService.GetNewRune();
+        }
+
+        public void SaveUpdatedRune(IRune rune)
+        {
+            _simulationService.UpdateRune(rune);
+        }
+
+        public void AddNewRuneToList()
+        {
+            _simulationService.UpdateRune(NewRune);
+            UpdateList();
+            _simulationService.SaveState();
+        }
+
+        public void DeleteRune(IRune rune)
+        {
+            _simulationService.DeleteRune(rune.Id);
+            List<IRune> runeList = _simulationService.GetRunesByTypeSlot(SelectedType, SelectedSlot);
         }
     
     }

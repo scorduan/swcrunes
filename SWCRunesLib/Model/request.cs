@@ -3,8 +3,13 @@ using System.Collections.Generic;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
-public class Request
+public interface IRequest
 {
+}
+
+public class Request :IRequest
+{
+
     public string MonsterName { get; set; }
 
     public string PrimaryAttribute { get; set; }
@@ -13,11 +18,11 @@ public class Request
 
     public string TertiaryAttribute { get; set; }
 
-    public Rune.RuneType RestrictSetOne { get; set; } = Rune.RuneType.Null;
+    public RuneType RestrictSetOne { get; set; } = RuneType.Null;
 
-    public Rune.RuneType RestrictSetTwo { get; set; } = Rune.RuneType.Null;
+    public RuneType RestrictSetTwo { get; set; } = RuneType.Null;
 
-    public Rune.RuneType RestrictSetThree { get; set; } = Rune.RuneType.Null;
+    public RuneType RestrictSetThree { get; set; } = RuneType.Null;
 
     public List<string> FocusStats { get; set; } = new List<string>();
 

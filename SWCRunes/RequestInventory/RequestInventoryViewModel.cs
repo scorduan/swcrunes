@@ -51,22 +51,22 @@ namespace SWCRunes
             StatList.Add("PR");
             StatList.Add("EV");
 
-            TypeList.Add(Rune.RuneType.Null);
+            TypeList.Add(RuneType.Null);
 
-            TypeList.Add(Rune.RuneType.Energy);
-            TypeList.Add(Rune.RuneType.Guard);
+            TypeList.Add(RuneType.Energy);
+            TypeList.Add(RuneType.Guard);
 
-            TypeList.Add(Rune.RuneType.Blade);
-            TypeList.Add(Rune.RuneType.Rage);
+            TypeList.Add(RuneType.Blade);
+            TypeList.Add(RuneType.Rage);
 
-            TypeList.Add(Rune.RuneType.Fatal);
-            TypeList.Add(Rune.RuneType.Swift);
+            TypeList.Add(RuneType.Fatal);
+            TypeList.Add(RuneType.Swift);
 
-            TypeList.Add(Rune.RuneType.Focus);
-            TypeList.Add(Rune.RuneType.Endure);
+            TypeList.Add(RuneType.Focus);
+            TypeList.Add(RuneType.Endure);
 
-            TypeList.Add(Rune.RuneType.Foresight);
-            TypeList.Add(Rune.RuneType.Assemble);
+            TypeList.Add(RuneType.Foresight);
+            TypeList.Add(RuneType.Assemble);
 
 
 
@@ -96,7 +96,7 @@ namespace SWCRunes
 
         public ObservableCollection<String> StatList { get; set; } = new ObservableCollection<string>();
 
-        public ObservableCollection<Rune.RuneType> TypeList { get; set; } = new ObservableCollection<Rune.RuneType>();
+        public ObservableCollection<RuneType> TypeList { get; set; } = new ObservableCollection<RuneType>();
 
         public ObservableCollection<Object> SelectedStats { get; set; } = new ObservableCollection<Object>();
 

@@ -3,12 +3,22 @@ using System;
 using System.Collections.Generic;
 using System.Text.Json.Serialization;
 using System.Text.Json;
-public class Monster
+
+public interface IMonster
+{
+    public string Id { get; }
+}
+public class Monster : IMonster
 {
 
-    public string Name {  get; set; }
+    internal Monster(string id="")
+    {
+        _id = id;
+    }
 
-    public RuneSet Runes { get; set; }
+    public string Name { get; set; } = "";
+
+    public RuneSet Runes { get; set; } = new RuneSet();
 
     public int ATK { get; set; }
 
@@ -33,6 +43,8 @@ public class Monster
     public int EV { get; set; }
     public int EVBoost { get; set; }
 
+    private string _id;
+    public string Id { get => _id; }
 
     public int EffectiveHP 
     { 
@@ -92,18 +104,18 @@ public class Monster
     {
         Monster monster = new Monster();
 
-        Dictionary<Rune.RuneType,int> setCount = new Dictionary<Rune.RuneType, int>();
-        setCount[Rune.RuneType.Null]=0;
-        setCount[Rune.RuneType.Energy]=0;
-        setCount[Rune.RuneType.Guard]=0;
-        setCount[Rune.RuneType.Blade]=0;
-        setCount[Rune.RuneType.Rage]=0;
-        setCount[Rune.RuneType.Fatal]=0;
-        setCount[Rune.RuneType.Swift]=0;
-        setCount[Rune.RuneType.Focus]=0;
-        setCount[Rune.RuneType.Endure]=0;
-        setCount[Rune.RuneType.Foresight]=0;
-        setCount[Rune.RuneType.Assemble]=0;
+        Dictionary<RuneType,int> setCount = new Dictionary<RuneType, int>();
+        setCount[RuneType.Null]=0;
+        setCount[RuneType.Energy]=0;
+        setCount[RuneType.Guard]=0;
+        setCount[RuneType.Blade]=0;
+        setCount[RuneType.Rage]=0;
+        setCount[RuneType.Fatal]=0;
+        setCount[RuneType.Swift]=0;
+        setCount[RuneType.Focus]=0;
+        setCount[RuneType.Endure]=0;
+        setCount[RuneType.Foresight]=0;
+        setCount[RuneType.Assemble]=0;
 
 
         setCount[Runes.RuneOne.Type]++;
@@ -113,16 +125,16 @@ public class Monster
         setCount[Runes.RuneFive.Type]++;
         setCount[Runes.RuneSix.Type]++;
 
-        int numEnergySets= (int)Math.Floor((double)setCount[Rune.RuneType.Energy]/2d);
-        int numGuardSets= (int)Math.Floor((double)setCount[Rune.RuneType.Guard]/2d);
-        int numBladeSets= (int)Math.Floor((double)setCount[Rune.RuneType.Blade]/2d);
-        int numRageSets= (int)Math.Floor((double)setCount[Rune.RuneType.Rage]/4d);
-        int numFatalSets= (int)Math.Floor((double)setCount[Rune.RuneType.Fatal]/4d);
-        int numSwiftSets= (int)Math.Floor((double)setCount[Rune.RuneType.Swift]/4d);
-        int numFocusSets= (int)Math.Floor((double)setCount[Rune.RuneType.Focus]/2d);
-        int numEndureSets= (int)Math.Floor((double)setCount[Rune.RuneType.Endure]/2d);
-        int numForesightSets= (int)Math.Floor((double)setCount[Rune.RuneType.Foresight]/2d);
-        int numAssembleSets= (int)Math.Floor((double)setCount[Rune.RuneType.Assemble]/2d);
+        int numEnergySets= (int)Math.Floor((double)setCount[RuneType.Energy]/2d);
+        int numGuardSets= (int)Math.Floor((double)setCount[RuneType.Guard]/2d);
+        int numBladeSets= (int)Math.Floor((double)setCount[RuneType.Blade]/2d);
+        int numRageSets= (int)Math.Floor((double)setCount[RuneType.Rage]/4d);
+        int numFatalSets= (int)Math.Floor((double)setCount[RuneType.Fatal]/4d);
+        int numSwiftSets= (int)Math.Floor((double)setCount[RuneType.Swift]/4d);
+        int numFocusSets= (int)Math.Floor((double)setCount[RuneType.Focus]/2d);
+        int numEndureSets= (int)Math.Floor((double)setCount[RuneType.Endure]/2d);
+        int numForesightSets= (int)Math.Floor((double)setCount[RuneType.Foresight]/2d);
+        int numAssembleSets= (int)Math.Floor((double)setCount[RuneType.Assemble]/2d);
 
         
 
@@ -206,6 +218,50 @@ public class Monster
         Runes.RuneFive.EquippedOn = this.Name;
         Runes.RuneSix.EquippedOn = this.Name;
 
+    }
+
+    public void UnequipSlot(RuneSlot slot)
+    {
+        if (slot == RuneSlot.ONE)
+        {
+            Runes.RuneOne.EquippedOn = "";
+            Runes.RuneOne = null;
+        }
+        if (slot == RuneSlot.TWO)
+        {
+            Runes.RuneTwo.EquippedOn = "";
+            Runes.RuneTwo = null;
+        }
+        if (slot == RuneSlot.THREE)
+        {
+            Runes.RuneThree.EquippedOn = "";
+            Runes.RuneThree = null;
+        }
+        if (slot == RuneSlot.FOUR)
+        {
+            Runes.RuneFour.EquippedOn = "";
+            Runes.RuneFour = null;
+        }
+        if (slot == RuneSlot.FIVE)
+        {
+            Runes.RuneFive.EquippedOn = "";
+            Runes.RuneFive = null;
+        }
+        if (slot == RuneSlot.SIX)
+        {
+            Runes.RuneSix.EquippedOn = "";
+            Runes.RuneSix = null;
+        }
+    }
+
+    public void UnequipAll()
+    {
+        UnequipSlot(RuneSlot.ONE);
+        UnequipSlot(RuneSlot.TWO);
+        UnequipSlot(RuneSlot.THREE);
+        UnequipSlot(RuneSlot.FOUR);
+        UnequipSlot(RuneSlot.FIVE);
+        UnequipSlot(RuneSlot.SIX);
     }
 }
 

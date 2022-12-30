@@ -163,7 +163,7 @@ public class Tests
         m.Runes.RuneOne.ATKP=119;
         m.Runes.RuneOne.HPF=803;
         m.Runes.RuneOne.CR=41;
-        m.Runes.RuneOne.Type=Rune.RuneType.Foresight;
+        m.Runes.RuneOne.Type=RuneType.Foresight;
 
        
         m.Runes.RuneTwo.DEFP=359;
@@ -171,7 +171,7 @@ public class Tests
         m.Runes.RuneTwo.RES=49;
         m.Runes.RuneTwo.CR=44;
         m.Runes.RuneTwo.PR=50;
-        m.Runes.RuneTwo.Type=Rune.RuneType.Fatal;
+        m.Runes.RuneTwo.Type=RuneType.Fatal;
         
         
         m.Runes.RuneThree.DEFF=364;
@@ -179,14 +179,14 @@ public class Tests
         m.Runes.RuneThree.CD=136;
         m.Runes.RuneThree.RES=99;
         m.Runes.RuneThree.ACC=45;
-        m.Runes.RuneThree.Type=Rune.RuneType.Energy;
+        m.Runes.RuneThree.Type=RuneType.Energy;
         
         m.Runes.RuneFour.HPP=321;
         m.Runes.RuneFour.EV=104;
         m.Runes.RuneFour.DEFP=181;
         m.Runes.RuneFour.ATKF=21;
         m.Runes.RuneFour.PR=54;
-        m.Runes.RuneFour.Type=Rune.RuneType.Guard;
+        m.Runes.RuneFour.Type=RuneType.Guard;
 
         
         m.Runes.RuneFive.HPF=5040;
@@ -194,7 +194,7 @@ public class Tests
         m.Runes.RuneFive.DEFF=48;
         m.Runes.RuneFive.DEFP=123;
         m.Runes.RuneFive.HPP=64;
-        m.Runes.RuneFive.Type=Rune.RuneType.Energy;
+        m.Runes.RuneFive.Type=RuneType.Energy;
 
         
         m.Runes.RuneSix.ATKP=323;
@@ -202,7 +202,7 @@ public class Tests
         m.Runes.RuneSix.HPP=60;
         m.Runes.RuneSix.DEFF=30;
         m.Runes.RuneSix.SPD=5;
-        m.Runes.RuneSix.Type=Rune.RuneType.Guard;
+        m.Runes.RuneSix.Type=RuneType.Guard;
         
         
         Monster mod=m.GetModified();

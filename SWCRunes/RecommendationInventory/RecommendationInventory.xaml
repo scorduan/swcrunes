@@ -45,6 +45,7 @@
             <Button Text="More..." Clicked="recommendList_Refreshing"/>
             </VerticalStackLayout>
             <components:Monster WidthRequest="1000" HeightRequest="350" x:Name="monsterDisplay"/>
+            <Button x:Name="equipBtn" Text="Equip" Clicked="equipBtn_Clicked" HeightRequest="100" WidthRequest="100" />
         </HorizontalStackLayout>
     </VerticalStackLayout>
 

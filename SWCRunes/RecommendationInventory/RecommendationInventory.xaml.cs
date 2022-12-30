@@ -27,4 +27,9 @@ public partial class RecommendationInventory : ContentPage
     {
         _viewModel.AddAdditional();
     }
+
+    void equipBtn_Clicked(System.Object sender, System.EventArgs e)
+    {
+        _viewModel.EquipSelectedSet();
+    }
 }

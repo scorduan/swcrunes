@@ -1,28 +1,40 @@
 ﻿using System;
 namespace SWCRunesLib
 {
-	public class RecommendedMonster : Monster
+    public interface IRecommendedMonster : IMonster
+    {
+
+    }
+
+    public class RecommendedMonster : Monster, IRecommendedMonster
 	{
 
-		public RecommendedMonster(Monster m)
+		public RecommendedMonster(Monster newMonster, Monster origMonster)
 		{
-            ATK = m.ATK;
-            DEF = m.DEF;
-            HP = m.HP;
+            ATK = newMonster.ATK;
+            DEF = newMonster.DEF;
+            HP = newMonster.HP;
 
-            SPD = m.SPD;
+            SPD = newMonster.SPD;
 
-            CR = m.CR;
-            CD = m.CD;
+            CR = newMonster.CR;
+            CD = newMonster.CD;
 
-            ACC = m.ACC;
-            RES = m.RES;
+            ACC = newMonster.ACC;
+            RES = newMonster.RES;
 
-            PR = m.PR;
-            EV = m.EV;
+            PR = newMonster.PR;
+            EV = newMonster.EV;
 
-            Runes = m.Runes;
+            Runes = newMonster.Runes;
 
+            OriginalMonster = origMonster;
+        }
+
+        public Monster OriginalMonster
+        {
+            get;
+            set;
         }
 
 			public int FirstValue {get; set;}

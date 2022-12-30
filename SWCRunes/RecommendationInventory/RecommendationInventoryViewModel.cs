@@ -87,6 +87,11 @@ namespace SWCRunes
 
             currentIndex = maxIndex;
         }
+
+        internal void EquipSelectedSet()
+        {
+            SelectedMonster.OriginalMonster.EquipSet(SelectedMonster.Runes);
+        }
     }
 }
 
