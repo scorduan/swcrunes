@@ -11,39 +11,31 @@ namespace SWCRunes
 
 
 
-        public RecommendationInventoryViewModel(OptimizationService optim, StorageService storage)
+        public RecommendationInventoryViewModel(SimulationService simulation)
         {
-
-            _optService = optim;
-            _optService.OptimizationCompletedEvent += _optService_OptimizationCompletedEvent;
-
-            Monsters = new ObservableCollection<RecommendedMonster>();
+            _simulationService = simulation;
+            RequestList = simulation.GetAllRequests();
             loadFromService();
         }
 
 
+        public ObservableCollection<IRequest> RequestList;
 
+        private SimulationService _simulationService;
 
-        private void _optService_OptimizationCompletedEvent(object sender, Recommendation recommendation)
-        {
+        public ObservableCollection<IRecommendedMonster> Monsters { get; set; }
 
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("Recomm"));
-            loadFromService();
-        }
+        public IRequest SelectedRequest { get; set; }
 
-        private OptimizationService _optService;
-
-        public ObservableCollection<RecommendedMonster> Monsters { get; set; }
-
-        public Recommendation Recomm
-        {
-            get
-            {
-                return _optService.Recommended;
-            }
-        }
 
         public RecommendedMonster SelectedMonster { get; set; }
+
+
+        public void ChangeSelectedRequest()
+        {
+            loadFromService();
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("SelectedMonster"));
+        }
 
         public void ChangeSelectedMonster(RecommendedMonster monster)
         {
@@ -53,44 +45,21 @@ namespace SWCRunes
 
         private void loadFromService()
         {
-            //Monsters = null;
+            
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("Monsters"));
-            //Monsters = new ObservableCollection<Monster>();
-            
-            
-            if (_optService.Recommended != null)
-            {
-                Monsters.Clear();
-                currentIndex = 0;
-                AddAdditional();
-
-            }
             
 
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("Recomm"));
+            List<IRecommendedMonster> recommendedMonsters= _simulationService.GetRecommendationPageForMonster(SelectedRequest.MonsterId, 1, 10, out int pages);
+            Monsters = new ObservableCollection<IRecommendedMonster>(recommendedMonsters);
+           
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("Monsters"));
         }
 
-        int currentIndex = 0;
-        public void AddAdditional()
-        {
-            int maxIndex = currentIndex + 20;
-            if (maxIndex>_optService.Recommended.RecommendedSetup.Count)
-            {
-                maxIndex = _optService.Recommended.RecommendedSetup.Count;
-            }
-
-            for (int counter = currentIndex; counter < maxIndex; counter++)
-            {
-                Monsters.Add(_optService.Recommended.RecommendedSetup[counter]);
-            }
-
-            currentIndex = maxIndex;
-        }
+       
 
         internal void EquipSelectedSet()
         {
-            SelectedMonster.OriginalMonster.EquipSet(SelectedMonster.Runes);
+            _simulationService.EquipIRuneSet(SelectedMonster.Original.Id, SelectedMonster.Updated.Runes);
         }
     }
 }

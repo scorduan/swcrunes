@@ -38,8 +38,9 @@ public static class MauiProgram
 
     public static MauiAppBuilder RegisterServices(this MauiAppBuilder mauiAppBuilder)
     {
-		mauiAppBuilder.Services.AddSingleton<OptimizationService>();
-        mauiAppBuilder.Services.AddSingleton<StorageService>();
+		mauiAppBuilder.Services.AddSingleton<SimulationService>();
+        mauiAppBuilder.Services.AddSingleton<SWCRunesLib.ISimulation, SWCRunesLib.Simulation>();
+
         return mauiAppBuilder;
     }
 

@@ -5,17 +5,39 @@ using System.Text.Json.Serialization;
 
 public interface IRune
 {
-    public string Id { get; }
-}
+    public string Id { get; set;  }
 
+    public RuneSlot Slot { get; set; }
+    public RuneType Type { get; set; }
+
+    public int ATKP { get; set; }
+    public int ATKF { get; set; }
+    public int DEFP { get; set; }
+    public int DEFF { get; set; }
+    public int HPP { get; set; }
+    public int HPF { get; set; }
+    public int SPD { get; set; }
+    public int CR { get; set; }
+    public int CD { get; set; }
+    public int ACC { get; set; }
+    public int RES { get; set; }
+    public int PR { get; set; }
+    public int EV { get; set; }
+
+    public string EquippedOn
+    {
+        get;
+        set;
+    }
+}
 public class Rune :IRune
 {
 
-    
 
-    internal Rune(string id = "")
+    [JsonConstructor]
+    public Rune(string id = "")
     {
-        _id = id;
+        Id = id;
     }
 
 
@@ -38,9 +60,8 @@ public class Rune :IRune
 
 
 
-    private string _id;
-
-    public string Id { get => Id; }
+    
+    public string Id { get; set; }
 
 
     public string EquippedOn
@@ -63,26 +84,39 @@ public class Rune :IRune
 
 }
 
+
 public interface IRuneSet
 {
-    public Rune? RuneOne { get; set; }
-    public Rune? RuneTwo { get; set; }
-    public Rune? RuneThree { get; set; }
-    public Rune? RuneFour { get; set; } 
-    public Rune? RuneFive { get; set; } 
-    public Rune? RuneSix { get; set; }
-
+    public IRune? RuneOne { get; set; }
+    public IRune? RuneTwo { get; set; }
+    public IRune? RuneThree { get; set; }
+    public IRune? RuneFour { get; set; }
+    public IRune? RuneFive { get; set; }
+    public IRune? RuneSix { get; set; }
 }
+
 
 
 public class RuneSet : IRuneSet
 {
-    public Rune? RuneOne { get; set;} = null;
-    public Rune? RuneTwo { get; set;} = null;
-    public Rune? RuneThree { get; set;} = null;
-    public Rune? RuneFour { get; set;} = null;
-    public Rune? RuneFive { get; set;} = null;
-    public Rune? RuneSix { get; set;}  = null;  
+    public RuneSet()
+    {
+
+    }
+
+
+    [JsonConverter(typeof(InterfaceConverter<Rune, IRune>))]
+    public IRune? RuneOne { get; set;} = null;
+    [JsonConverter(typeof(InterfaceConverter<Rune, IRune>))]
+    public IRune? RuneTwo { get; set;} = null;
+    [JsonConverter(typeof(InterfaceConverter<Rune, IRune>))]
+    public IRune? RuneThree { get; set;} = null;
+    [JsonConverter(typeof(InterfaceConverter<Rune, IRune>))]
+    public IRune? RuneFour { get; set;} = null;
+    [JsonConverter(typeof(InterfaceConverter<Rune, IRune>))]
+    public IRune? RuneFive { get; set;} = null;
+    [JsonConverter(typeof(InterfaceConverter<Rune, IRune>))]
+    public IRune? RuneSix { get; set;}  = null;  
 }
 
 public class RuneStorage

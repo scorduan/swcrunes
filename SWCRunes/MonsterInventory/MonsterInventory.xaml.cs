@@ -5,10 +5,13 @@ public partial class MonsterInventory : ContentPage
 {
 	public MonsterInventory(MonsterInventoryViewModel viewModel)
 	{
-		this.BindingContext = viewModel;
-		this._viewModel = viewModel;
+
+        this.BindingContext = viewModel;
+        this._viewModel = viewModel;
 		InitializeComponent();
-	}
+       
+        
+    }
 
     private MonsterInventoryViewModel _viewModel;
 
@@ -19,18 +22,20 @@ public partial class MonsterInventory : ContentPage
 
     }
 
-    void Save_Clicked(System.Object sender, System.EventArgs e)
+    void Add_Clicked(System.Object sender, System.EventArgs e)
     {
-		_viewModel.SaveNewMonster();
+        _viewModel.AddNewMonster();
     }
 
-    void NewBtn_Clicked(System.Object sender, System.EventArgs e)
+    void Upd_Clicked(System.Object sender, System.EventArgs e)
     {
-		_viewModel.AddNew();
+        _viewModel.SaveSelected();
     }
+
 
     void Del_Clicked(System.Object sender, System.EventArgs e)
     {
+        
 		_viewModel.RemoveSelected();
     }
 }

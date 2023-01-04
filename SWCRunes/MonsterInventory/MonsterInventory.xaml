@@ -9,7 +9,7 @@
     <HorizontalStackLayout VerticalOptions="Start">
         <Border StrokeThickness="5" Padding="5" WidthRequest="100" HeightRequest="1000">
             <VerticalStackLayout>
-                <ListView ItemsSource="{Binding Monsters}" ItemSelected="monsterList_ItemSelected" x:Name="monsterList">
+                <ListView ItemsSource="{Binding VisibleMonsters, Mode=TwoWay}" ItemSelected="monsterList_ItemSelected" x:Name="monsterList">
                     <ListView.ItemTemplate>
                         <DataTemplate >
                             <ViewCell>
@@ -20,13 +20,10 @@
                         </DataTemplate>
                     </ListView.ItemTemplate>
                 </ListView>
-                <Button Text="New" x:Name="NewBtn" Clicked="NewBtn_Clicked"/>
-                <Button x:Name="Save" Text="Save" Clicked="Save_Clicked"/>
             </VerticalStackLayout>
         </Border>
         <VerticalStackLayout>
-            <components:Monster WidthRequest="1000" HeightRequest="350" x:Name="monsterDisplay" BindingContext="SelectedMonster"/>
-            <Grid>
+                        <Grid>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="70"/>
                     <ColumnDefinition Width="70"/>
@@ -95,6 +92,98 @@
                     <ColumnDefinition Width="70"/>
                     <ColumnDefinition Width="70"/>
                 </Grid.ColumnDefinitions>
+                <Entry Grid.Column="0" Text="{Binding Path=NewMonster.Name}"/>
+                
+                <Entry Grid.Column="1" Text="{Binding Path=NewMonster.ATK}"/>
+                <Entry Grid.Column="2" Text="{Binding Path=NewMonster.ATKBonus}"/>
+                <Entry Grid.Column="3" Text="{Binding Path=NewMonster.DEF}"/>
+                <Entry Grid.Column="4" Text="{Binding Path=NewMonster.DEFBonus}"/>
+                <Entry Grid.Column="5" Text="{Binding Path=NewMonster.HP}"/>
+                <Entry Grid.Column="6" Text="{Binding Path=NewMonster.HPBonus}"/>
+                <Entry Grid.Column="7" Text="{Binding Path=NewMonster.SPD}"/>
+                <Entry Grid.Column="8" Text="{Binding Path=NewMonster.CR}"/>
+                <Entry Grid.Column="9" Text="{Binding Path=NewMonster.CD}"/>
+                <Entry Grid.Column="10" Text="{Binding Path=NewMonster.ACC}"/>
+                <Entry Grid.Column="11" Text="{Binding Path=NewMonster.RES}"/>
+                <Entry Grid.Column="12" Text="{Binding Path=NewMonster.RESBonus}"/>
+                <Entry Grid.Column="13" Text="{Binding Path=NewMonster.PR}"/>
+                <Entry Grid.Column="14" Text="{Binding Path=NewMonster.EV}"/>
+                <Entry Grid.Column="15" Text="{Binding Path=NewMonster.EVBonus}"/>
+                <Button Grid.Column="16" x:Name="Add" Text="Add" Clicked="Add_Clicked"/>
+
+            </Grid>
+            <components:Monster WidthRequest="1000" HeightRequest="350" x:Name="monsterDisplay" BindingContext="SelectedMonster"/>
+            <Label>Base Values</Label>
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="70"/>
+                    <ColumnDefinition Width="70"/>
+                    <ColumnDefinition Width="70"/>
+
+                    <ColumnDefinition Width="70"/>
+                    <ColumnDefinition Width="70"/>
+                    <ColumnDefinition Width="70"/>
+
+                    <ColumnDefinition Width="70"/>
+                    <ColumnDefinition Width="70"/>
+                    <ColumnDefinition Width="70"/>
+
+                    <ColumnDefinition Width="70"/>
+                    <ColumnDefinition Width="70"/>
+                    <ColumnDefinition Width="70"/>
+
+                    <ColumnDefinition Width="70"/>
+                    <ColumnDefinition Width="70"/>
+                    <ColumnDefinition Width="70"/>
+                    <ColumnDefinition Width="70"/>
+                    <ColumnDefinition Width="70"/>
+
+
+                </Grid.ColumnDefinitions>
+                <Label Grid.Column="0" Text="Name"/>
+                <Label Grid.Column="1" Text="ATK"/>
+                <Label Grid.Column="2" Text="Bonus"/>
+                <Label Grid.Column="3" Text="DEF"/>
+                <Label Grid.Column="4" Text="Bonus"/>
+                <Label Grid.Column="5" Text="HP"/>
+                <Label Grid.Column="6" Text="Bonus"/>
+                <Label Grid.Column="7" Text="SPD"/>
+                <Label Grid.Column="8" Text="CR"/>
+                <Label Grid.Column="9" Text="CD"/>
+                <Label Grid.Column="10" Text="ACC"/>
+                <Label Grid.Column="11" Text="RES"/>
+                <Label Grid.Column="12" Text="Bonus"/>
+                <Label Grid.Column="13" Text="PR"/>
+                <Label Grid.Column="14" Text="EV"/>
+                <Label Grid.Column="15" Text="Bonus"/>
+            </Grid>
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="70"/>
+                    <ColumnDefinition Width="70"/>
+                    <ColumnDefinition Width="70"/>
+
+                    <ColumnDefinition Width="70"/>
+                    <ColumnDefinition Width="70"/>
+                    <ColumnDefinition Width="70"/>
+
+                    <ColumnDefinition Width="70"/>
+                    <ColumnDefinition Width="70"/>
+                    <ColumnDefinition Width="70"/>
+
+                    <ColumnDefinition Width="70"/>
+                    <ColumnDefinition Width="70"/>
+                    <ColumnDefinition Width="70"/>
+
+                    <ColumnDefinition Width="70"/>
+                    <ColumnDefinition Width="70"/>
+                    <ColumnDefinition Width="70"/>
+
+                    <ColumnDefinition Width="70"/>
+                    <ColumnDefinition Width="70"/>
+                    <ColumnDefinition Width="70"/>
+                    <ColumnDefinition Width="70"/>
+                </Grid.ColumnDefinitions>
                 <Entry Grid.Column="0" Text="{Binding Path=SelectedMonster.Name}"/>
                 
                 <Entry Grid.Column="1" Text="{Binding Path=SelectedMonster.ATK}"/>
@@ -113,6 +202,7 @@
                 <Entry Grid.Column="14" Text="{Binding Path=SelectedMonster.EV}"/>
                 <Entry Grid.Column="15" Text="{Binding Path=SelectedMonster.EVBonus}"/>
                 <Button Grid.Column="16" x:Name="Del" Text="Del" Clicked="Del_Clicked"/>
+                <Button Grid.Column="17" x:Name="Upd" Text="Upd" Clicked="Upd_Clicked"/>
 
             </Grid>
         </VerticalStackLayout>

@@ -10,11 +10,13 @@ namespace SWCRunes
 {
     public class RequestInventoryViewModel : INotifyPropertyChanged
     {
-        public RequestInventoryViewModel(OptimizationService optimServ,StorageService storageServ)
+        public RequestInventoryViewModel(SimulationService simulationService)
         {
-          
-            _storageServ = storageServ;
-            _optimizationService = optimServ;
+
+            _simulationService = simulationService;
+            VisibleRequests = _simulationService.GetAllRequests();
+            VisibleMonsters = _simulationService.GetAllMonsters();
+            NewRequest = _simulationService.GetNewRequest();
             AttributeList = new ObservableCollection<string>();
             AttributeList.Add("ATK");
             AttributeList.Add("DEF");
@@ -70,25 +72,13 @@ namespace SWCRunes
 
 
 
-            _requests = storageServ.GetRequests() ;
+            
         }
         
-        private ObservableCollection<Request> _requests;
+        
         public event PropertyChangedEventHandler PropertyChanged;
 
-        public ObservableCollection<Request> Requests
-        {
-            get
-            {
-                return _requests;
-            }
 
-           
-        }
-
-        OptimizationService _optimizationService;
-
-        StorageService _storageServ;
 
         public Request SelectedRequest { get; set; }
 
@@ -99,63 +89,28 @@ namespace SWCRunes
         public ObservableCollection<RuneType> TypeList { get; set; } = new ObservableCollection<RuneType>();
 
         public ObservableCollection<Object> SelectedStats { get; set; } = new ObservableCollection<Object>();
+        public ObservableCollection<Object> NewSelectedStats { get; set; } = new ObservableCollection<Object>();
 
+        public ObservableCollection<IMonster> VisibleMonsters { get; set; }
 
-        public int RequestCount
+        public IMonster NewSelectedMonster { get; set; }
+
+        public string SelectedMonsterName
         {
             get
             {
-                return _optimizationService.CalculatePerms();
+                string name = "";
+                if ((SelectedRequest !=null)&&(SelectedRequest.MonsterId!=""))
+                {
+                    name= _simulationService.GetMonsterNameForId(SelectedRequest.MonsterId);
+                }
+                return name;
             }
-        }    
-
-        public void SaveNewRequest()
-        {
-            Request Request = new Request();
-            _storageServ.SaveRequests(_requests);
-            
-        }
-
-        public void SaveUpdatedRequest()
-        {
-            _storageServ.SaveRequests(_requests);
-        }
-
-        public void RemoveSelected()
-        {
-            _requests.Remove(SelectedRequest);
-            SelectedRequest = null;
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("SelectedRequest"));
-
-        }
-
-        public void AddNew()
-        {
-            _requests.Add(new Request());
-        }
-
-        internal void ChangeSelectedRequest(Request selectedItem)
-        {
-
-
-            //SelectedStats.Clear();
-            SelectedRequest = selectedItem;
-
-            ObservableCollection<Object> selectedStats = new ObservableCollection<object>();
-            _optimizationService.UpdateRequest(selectedItem);
-            /*
-            foreach (string stat in SelectedRequest.FocusStats)
-            {
-                SelectedStats.Add(stat);
-            }*/
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("SelectedRequest"));
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("RequestCount"));
-            //PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("SelectedStats"));
         }
 
         internal void ProcessCurrent()
         {
-            _optimizationService.ProcessRequest(SelectedRequest);
+            _simulationService.Optimize(SelectedRequest);
         }
 
         internal void UpdateSelectedStats(IReadOnlyList<object> currentSelection)
@@ -168,9 +123,96 @@ namespace SWCRunes
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("RequestCount"));
         }
 
+        internal void UpdateNewSelectedStats(IReadOnlyList<object> currentSelection)
+        {
+            NewRequest.FocusStats.Clear();
+            foreach (string stat in currentSelection)
+            {
+                NewRequest.FocusStats.Add(stat);
+            }
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("NewRequestCount"));
+        }
+
         internal void GeneralSelectedIndexChanged()
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("RequestCount"));
+        }
+
+        internal void NewGeneralSelectedIndexChanged()
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("NewRequestCount"));
+        }
+
+
+        public int RequestCount
+        {
+            get
+            {
+                int count = 0;
+                if (SelectedRequest !=null)
+                {
+                    count=_simulationService.CalcPerms(SelectedRequest);
+                }
+                return count;
+            }
+        }
+
+        public int NewRequestCount
+        {
+            get
+            {
+                return _simulationService.CalcPerms(NewRequest);
+            }
+        }
+
+        // Binding Properties
+
+        public ObservableCollection<IRequest> VisibleRequests { get; private set; }
+
+        public IRequest NewRequest { get; set; }
+
+        private SimulationService _simulationService;
+
+        // Simulation Updaters 
+
+
+        public void RemoveSelected()
+        {
+            DeleteRequest(SelectedRequest);
+        }
+
+        public void SaveSelectedRequest()
+        {
+            SaveUpdatedRequest(SelectedRequest);
+        }
+
+        public void SaveUpdatedRequest(IRequest request)
+        {
+            _simulationService.UpdateRequest(request);
+        }
+
+        public void AddNewRequestToList()
+        {
+            _simulationService.UpdateRequest(NewRequest);
+            NewRequest = _simulationService.GetNewRequest();
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("NewRequest"));
+        }
+
+        public void DeleteRequest(IRequest request)
+        {
+            _simulationService.DeleteRequest(request.Id);
+        }
+
+        internal void SelectedRequestChanged()
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("SelectedMonsterName"));
+            
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("SelectedRequest"));
+        }
+
+        internal void UpdateNewRequestMonster()
+        {
+            NewRequest.MonsterId = NewSelectedMonster.Id;
         }
     }
 }

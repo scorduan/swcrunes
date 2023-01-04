@@ -1,9 +1,9 @@
 ﻿namespace SWCRunes.Components;
 using SWCRunesLib;
 using System.Text.Json;
-public partial class RuneSet : ContentView
+public partial class IRuneSet : ContentView
 {
-	public RuneSet()
+	public IRuneSet()
 	{
 		InitializeComponent();
     }

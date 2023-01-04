@@ -4,7 +4,7 @@ using System;
 using System.Collections.Generic;
 public class Optimizer
 {
-    public Optimizer(RuneStorage vRunes, MonsterStorage vMonsters, RequestStorage vRequests)
+    public Optimizer(List<IRune> vRunes)
     {
 
 
@@ -38,7 +38,7 @@ public class Optimizer
 
 
 
-        foreach (Rune aRune in vRunes.Runes)
+        foreach (Rune aRune in vRunes)
         {
 
 
@@ -63,12 +63,6 @@ public class Optimizer
             if (aRune.EV > 0) typedStattedSlottedRunes[aRune.Type]["EV"][aRune.Slot].Add(aRune);
         }
 
-        foreach (Monster monster in vMonsters.Monsters)
-        {
-            monsters.Add(monster.Name, monster);
-        }
-
-        requests = vRequests;
 
     }
 
@@ -124,53 +118,33 @@ public class Optimizer
         InitSlottedRuneList(list["EV"]);
     }
 
-    private Dictionary<string, Monster> monsters = new Dictionary<string, Monster>();
+    
     private Dictionary<RuneType, Dictionary<string, Dictionary<RuneSlot, List<Rune>>>> typedStattedSlottedRunes = new Dictionary<RuneType, Dictionary<string, Dictionary<RuneSlot, List<Rune>>>>();
 
-    private RequestStorage requests;
+    
+    private IRequest _req;
 
-    private Request _req;
 
-    public List<Recommendation> Process()
-    {
-        List<Recommendation> recoms = new List<Recommendation>();
-        foreach (Request req in requests.Requests)
-        {
-            Recommendation rec = ProcessReq(req);
-            recoms.Add(rec);
-        }
-
-        return recoms;
-
-    }
-
-    public void UpdateReq(Request inReq)
+    public void UpdateReq(IRequest inReq)
     {
         _req = inReq;
     }
 
-    public Recommendation ProcessReq(Request inReq)
-    {
-        Recommendation rec = new Recommendation();
-        _req = inReq;
-        rec.MonsterName = _req.MonsterName;
-        rec.InitiatingRequest = _req;
-        Monster origMonster = monsters[_req.MonsterName];
-        string monsterJson = origMonster.ToJson();
+    public List<IRecommendedMonster> ProcessReq(IRequest inReq,IMonster origMonster)
+    {        
         
-        List<RuneSet> runeSets = BuildRunePermutations();
+        List<IRuneSet> IRuneSets = BuildRunePermutations();
 
-        List<RecommendedMonster> results = new List<RecommendedMonster>();
+        List<IRecommendedMonster> results = new List<IRecommendedMonster>();
 
 
-        foreach (RuneSet set in runeSets)
+        foreach (IRuneSet set in IRuneSets)
         {
-            Monster m = Monster.FromJson(monsterJson);
-            m.Name = _req.MonsterName;
-            m.Runes = set;
-            Monster resultMon = m.GetModified();
-            resultMon.Runes = set;
-            RecommendedMonster recMon = getRecommendedMonster(resultMon, origMonster, _req);
+            IMonster m = (IMonster)origMonster.Clone();
+            
+            m.EquipSet(set);
+            
+            RecommendedMonster recMon = getRecommendedMonster(origMonster, m, _req);
 
 
 
@@ -181,14 +155,14 @@ public class Optimizer
 
 
 
-        rec.RecommendedSetup = results;
 
-        return rec;
+
+        return results;
     }
 
-    private RecommendedMonster getRecommendedMonster(Monster m, Monster origMonster, Request req)
+    private RecommendedMonster getRecommendedMonster(IMonster origMonster, IMonster m, IRequest req)
     {
-        RecommendedMonster recMon = new RecommendedMonster(m, origMonster);
+        RecommendedMonster recMon = new RecommendedMonster(origMonster, m);
 
         if (req.PrimaryAttribute == "ATK") recMon.FirstValue = m.ATK;
         if (req.PrimaryAttribute == "DEF") recMon.FirstValue = m.DEF;
@@ -253,9 +227,9 @@ public class Optimizer
         return recMon;
     }
 
-    public List<RuneSet> BuildRunePermutations()
+    public List<IRuneSet> BuildRunePermutations()
     {
-        List<RuneSet> perms = new List<RuneSet>();
+        List<IRuneSet> perms = new List<IRuneSet>();
 
 
         List<RuneType> typeList = new List<RuneType>();
@@ -284,7 +258,7 @@ public class Optimizer
                 foreach (Rune rune1 in typedStattedSlottedRunes[type1][stat1][RuneSlot.ONE])
                 {
                     if (used1.Contains(rune1)) continue;
-                    if ((rune1.EquippedOn != "")&& (rune1.EquippedOn != _req.MonsterName)) continue;
+                    if ((rune1.EquippedOn != "")&& (rune1.EquippedOn != _req.MonsterId)) continue;
                     used1.Add(rune1);
 
                     foreach (RuneType type2 in typeList)
@@ -295,7 +269,7 @@ public class Optimizer
                             foreach (Rune rune2 in typedStattedSlottedRunes[type2][stat2][RuneSlot.TWO])
                             {
                                 if (used2.Contains(rune2)) continue;
-                                if ((rune2.EquippedOn != "") && (rune2.EquippedOn != _req.MonsterName)) continue;
+                                if ((rune2.EquippedOn != "") && (rune2.EquippedOn != _req.MonsterId)) continue;
                                 used2.Add(rune2);
 
                                 foreach (RuneType type3 in typeList)
@@ -305,7 +279,7 @@ public class Optimizer
                                         foreach (Rune rune3 in typedStattedSlottedRunes[type3][stat3][RuneSlot.THREE])
                                         {
                                             if (used3.Contains(rune3)) continue;
-                                            if ((rune3.EquippedOn != "") && (rune3.EquippedOn != _req.MonsterName)) continue;
+                                            if ((rune3.EquippedOn != "") && (rune3.EquippedOn != _req.MonsterId)) continue;
                                             used3.Add(rune3);
 
                                             foreach (RuneType type4 in typeList)
@@ -318,7 +292,7 @@ public class Optimizer
                                                     {
 
                                                         if (used4.Contains(rune4)) continue;
-                                                        if ((rune4.EquippedOn != "") && (rune4.EquippedOn != _req.MonsterName)) continue;
+                                                        if ((rune4.EquippedOn != "") && (rune4.EquippedOn != _req.MonsterId)) continue;
                                                         used4.Add(rune4);
 
                                                         foreach (RuneType type5 in typeList)
@@ -329,7 +303,7 @@ public class Optimizer
                                                                 {
 
                                                                     if (used5.Contains(rune5)) continue;
-                                                                    if ((rune5.EquippedOn != "") && (rune5.EquippedOn != _req.MonsterName)) continue;
+                                                                    if ((rune5.EquippedOn != "") && (rune5.EquippedOn != _req.MonsterId)) continue;
                                                                     used5.Add(rune5);
 
                                                                     foreach (RuneType type6 in typeList)
@@ -340,10 +314,10 @@ public class Optimizer
                                                                             {
 
                                                                                 if (used6.Contains(rune6)) continue;
-                                                                                if ((rune6.EquippedOn != "") && (rune6.EquippedOn != _req.MonsterName)) continue;
+                                                                                if ((rune6.EquippedOn != "") && (rune6.EquippedOn != _req.MonsterId)) continue;
                                                                                 used6.Add(rune6);
 
-                                                                                RuneSet set = new RuneSet();
+                                                                                IRuneSet set = new RuneSet();
 
                                                                                 set.RuneOne = rune1;
                                                                                 set.RuneTwo = rune2;
@@ -488,36 +462,41 @@ public class Optimizer
         return runeOneCount*runeTwoCount*runeThreeCount*runeFourCount*runeFiveCount*runeSixCount;
     }
 
-    public int CompareMonsters(RecommendedMonster left, RecommendedMonster right)
+    public int CompareMonsters(IRecommendedMonster left, IRecommendedMonster right)
     {
-
+        //TODO: above target threshold is equal
         int result = 0;
 
-        if (left.FirstValue > right.FirstValue)
+        float thresholdPercent = .01f;
+        int firstThreshAmount = (int)((float)Math.Max(left.FirstValue, right.FirstValue)*thresholdPercent);
+        int secondThreshAmount = (int)((float)Math.Max(left.SecondValue, right.SecondValue) * thresholdPercent);
+        int thirdThreshAmount = (int)((float)Math.Max(left.ThirdValue, right.ThirdValue) * thresholdPercent);
+
+        if (left.FirstValue - firstThreshAmount > right.FirstValue)
         {
             result = 1;
         }
-        else if (right.FirstValue > left.FirstValue)
+        else if (right.FirstValue - firstThreshAmount > left.FirstValue)
         {
             result = -1;
         }
         else
         {
-            if (left.SecondValue > right.SecondValue)
+            if (left.SecondValue - secondThreshAmount > right.SecondValue)
             {
                 result = 1;
             }
-            else if (right.SecondValue > left.SecondValue)
+            else if (right.SecondValue - secondThreshAmount > left.SecondValue)
             {
                 result = -1;
             }
             else
             {
-                if (left.ThirdValue > right.ThirdValue)
+                if (left.ThirdValue - thirdThreshAmount > right.ThirdValue)
                 {
                     result = 1;
                 }
-                else if (right.ThirdValue > left.ThirdValue)
+                else if (right.ThirdValue - thirdThreshAmount > left.ThirdValue)
                 {
                     result = -1;
                 }

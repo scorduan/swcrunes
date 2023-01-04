@@ -9,56 +9,23 @@ namespace SWCRunes
 {
     public class MonsterInventoryViewModel : INotifyPropertyChanged
     {
-        public MonsterInventoryViewModel(StorageService storageServ, SimulationService simService)
+        public MonsterInventoryViewModel(SimulationService simService)
         {
-          
-            _storageServ = storageServ;
-            _monsters = storageServ.GetMonsters();
+
+            
             _simulationService = simService;
+            VisibleMonsters = _simulationService.GetAllMonsters();
+            NewMonster = _simulationService.GetNewMonster();
         }
         
-        private ObservableCollection<Monster> _monsters;
+        
         public event PropertyChangedEventHandler PropertyChanged;
 
-        public ObservableCollection<Monster> Monsters
-        {
-            get
-            {
-                return _monsters;
-            }
 
-           
-        }
-
-        private StorageService _storageServ;
 
         public Monster SelectedMonster { get; set; }
 
 
-        public void SaveNewMonster()
-        {
-            Monster monster = new Monster();
-            _storageServ.SaveMonsters(_monsters);
-            
-        }
-
-        public void SaveUpdatedMonster()
-        {
-            _storageServ.SaveMonsters(_monsters);
-        }
-
-        public void RemoveSelected()
-        {
-            _monsters.Remove(SelectedMonster);
-            SelectedMonster = null;
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("SelectedMonster"));
-
-        }
-
-        public void AddNew()
-        {
-            _monsters.Add(new Monster());
-        }
 
         internal void ChangeSelectedMonster(Monster selectedItem)
         {
@@ -69,7 +36,7 @@ namespace SWCRunes
 
         // Binding Properties
 
-        public ObservableCollection<IMonster> VisibleMonsters;
+        public ObservableCollection<IMonster> VisibleMonsters { get; private set; }
 
         public IMonster NewMonster { get; set; }
 
@@ -78,34 +45,28 @@ namespace SWCRunes
         // Simulation Updaters 
 
 
-        public void UpdateList()
-        {
-            List<IMonster> runeList = _simulationService.GetAllMonsters();
-
-            VisibleMonsters = new ObservableCollection<IMonster>(runeList);
-        }
-
         public void AddNewMonster()
         {
+            _simulationService.UpdateMonster(NewMonster);
             NewMonster = _simulationService.GetNewMonster();
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("NewMonster"));
         }
 
-        public void SaveUpdatedRune(IMonster monster)
+        public void SaveSelected()
         {
-            _simulationService.UpdateMonster(monster);
+            _simulationService.UpdateMonster(SelectedMonster);
         }
 
-        public void AddNewRuneToList()
+        public void AddNewMonstersToList()
         {
             _simulationService.UpdateMonster(NewMonster);
-            UpdateList();
-            _simulationService.SaveState();
+            
+            
         }
 
-        public void DeleteRune(IMonster monster)
+        public void RemoveSelected()
         {
-            _simulationService.DeleteRune(monster.Id);
-            UpdateList();
+            _simulationService.DeleteMonster(SelectedMonster.Id);
         }
     }
 }

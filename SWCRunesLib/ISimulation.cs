@@ -38,11 +38,11 @@ namespace SWCRunesLib
 
 
 		// Recommendations
-		public void Optimize(string requestId);
+		public void Optimize(IRequest request);
 
-		public List<IRecommendedMonster> GetRecommendationPageForMonster(string monsterId, out int numPages);
+		public List<IRecommendedMonster> GetRecommendationPageForMonster(string monsterId, int pageNum, int pageSize, out int numPages);
 
-		public void EquipRuneSet(string monsterId, RuneSet runeSet);
+		public void EquipIRuneSet(string monsterId, IRuneSet IRuneSet);
 
 		public void EquipRune(string monsterId, string runeId);
 
@@ -50,11 +50,11 @@ namespace SWCRunesLib
 
 		// Global
 
-		public void SaveState();
 
 		public void LoadState(string baseLocation);
 
-
+		public int CalculatePerms(IRequest request);
+		public IMonster GetMonsterForId(string id);
     }
 }
 

@@ -1,15 +1,23 @@
 ﻿using System;
 using SWCRunesLib;
+using System.Collections.ObjectModel;
 namespace SWCRunes
 {
-	public class SimulationService : ISimulation
+	public class SimulationService
 	{
 		public SimulationService(ISimulation simulation)
 		{
 			_simulation = simulation;
+            _simulation.LoadState(FileSystem.Current.AppDataDirectory);
+            refreshMonsters();
+            refreshRequests();
+
 		}
 
 		private ISimulation _simulation;
+        private ObservableCollection<IMonster> _monsters = new ObservableCollection<IMonster>();
+        private ObservableCollection<IRequest> _requests = new ObservableCollection<IRequest>();
+        private ObservableCollection<IRune> _runes = new ObservableCollection<IRune>();
 
 
         //Rune Maint
@@ -21,6 +29,7 @@ namespace SWCRunes
         public void UpdateRune(IRune rune)
         {
             _simulation.UpdateRune(rune);
+            UpdateRuneList(_lastRuneType, _lastRuneSlot);
         }
 
         public void DeleteRune(string runeId)
@@ -28,12 +37,26 @@ namespace SWCRunes
             _simulation.DeleteRune(runeId);
         }
 
-
-        public List<IRune> GetRunesByTypeSlot(RuneType runeType, RuneSlot runeSlot)
+        private RuneType _lastRuneType = RuneType.Energy;
+        private RuneSlot _lastRuneSlot = RuneSlot.ONE;
+        public void UpdateRuneList(RuneType runeType, RuneSlot runeSlot)
         {
-            return _simulation.GetRunesByTypeSlot(runeType, runeSlot);
+            _lastRuneType = runeType;
+            _lastRuneSlot = runeSlot;
+            List<IRune> runes = _simulation.GetRunesByTypeSlot(runeType, runeSlot);
+            _runes.Clear();
+            foreach (IRune rune in runes)
+            {
+                _runes.Add(rune);
+            }
+            
         }
 
+
+        public ObservableCollection<IRune> GetRunes()
+        {
+            return _runes;
+        }
 
         //Monster Maint
         public IMonster GetNewMonster()
@@ -44,16 +67,28 @@ namespace SWCRunes
         public void UpdateMonster(IMonster monster)
         {
             _simulation.UpdateMonster(monster);
+            refreshMonsters();
         }
 
         public void DeleteMonster(string monsterId)
         {
+            
             _simulation.DeleteMonster(monsterId);
+            refreshMonsters();
         }
 
-        public List<IMonster> GetAllMonsters()
+
+        private void refreshMonsters()
         {
-            return _simulation.GetAllMonsters();
+            _monsters.Clear();
+            List<IMonster> monsters = _simulation.GetAllMonsters();
+            foreach (IMonster m in monsters)
+                _monsters.Add(m);
+        }
+
+        public ObservableCollection<IMonster> GetAllMonsters()
+        {
+            return _monsters;
         }
 
 
@@ -67,32 +102,43 @@ namespace SWCRunes
         public void UpdateRequest(IRequest request)
         {
             _simulation.UpdateRequest(request);
+            refreshRequests();
         }
 
         public void DeleteRequest(string requestId)
         {
             _simulation.DeleteRequest(requestId);
+            refreshRequests();
         }
 
-        public List<IRequest> GetAllRequests()
+        private void refreshRequests()
         {
-            return _simulation.GetAllRequests();
+            _requests.Clear();
+            List<IRequest> requests = _simulation.GetAllRequests();
+            foreach (IRequest request in requests)
+                _requests.Add(request);
         }
+
+        public ObservableCollection<IRequest> GetAllRequests()
+        {
+            return _requests;
+        }
+
 
         //Recommendations
-        public void Optimize(string requestId)
+        public void Optimize(IRequest request)
         {
-            _simulation.Optimize(requestId);
+            _simulation.Optimize(request);
         }
 
-        public List<IRecommendedMonster> GetRecommendationPageForMonster(string monsterId, out int numPages)
+        public List<IRecommendedMonster> GetRecommendationPageForMonster(string monsterId, int pageNum, int pageSize, out int numPages)
         {
-            return _simulation.GetRecommendationPageForMonster(monsterId, out numPages);
+            return _simulation.GetRecommendationPageForMonster(monsterId, pageNum, pageSize, out numPages);
         }
 
-        public void EquipRuneSet(string monsterId, RuneSet runeSet)
+        public void EquipIRuneSet(string monsterId, IRuneSet IRuneSet)
         {
-            _simulation.EquipRuneSet(monsterId, runeSet);
+            _simulation.EquipIRuneSet(monsterId, IRuneSet);
         }
 
         public void EquipRune(string monsterId, string runeId)
@@ -100,18 +146,27 @@ namespace SWCRunes
             _simulation.EquipRune(monsterId, runeId);
         }
 
-        public void SaveState()
-        {
-            _simulation.SaveState();
-        }
 
         public void LoadState(string baseLocation)
         {
             _simulation.LoadState(baseLocation);
         }
 
+        public string GetMonsterNameForId(string id)
+        {
 
+            return _simulation.GetMonsterForId(id).Name;
+        }
 
+        public IMonster GetMonsterForId(string id)
+        {
+            return _simulation.GetMonsterForId(id);
+        }
+
+        public int CalcPerms(IRequest request)
+        {
+            return _simulation.CalculatePerms(request);
+        }
 
     }
 }

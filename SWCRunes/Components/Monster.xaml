@@ -25,7 +25,7 @@
                 <HorizontalStackLayout><Label Text="SR: " FontFamily="" FontAttributes="Bold"/><Label Text="{Binding Survival}"/></HorizontalStackLayout>
                 <HorizontalStackLayout><Label Text="EHR: " FontFamily="" FontAttributes="Bold"/><Label Text="{Binding EffectiveHP}"/></HorizontalStackLayout>
             </VerticalStackLayout>
-            <components:RuneSet BindingContext="{Binding Runes}"/>
+            <components:IRuneSet BindingContext="{Binding Runes}"/>
         </HorizontalStackLayout>
 
     </VerticalStackLayout>

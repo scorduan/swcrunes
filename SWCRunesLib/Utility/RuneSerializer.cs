@@ -8,34 +8,34 @@ using System.Text.Json.Serialization;
 public class RuneSerializer
 {
 
-    public static RuneStorage ReadRunesFromFile(string location)
+    public static List<IRune> ReadRunesFromFile(string location)
     {
-        RuneStorage runes = new RuneStorage();
+        List<IRune> runes = new List<IRune>();
         foreach (string line in System.IO.File.ReadLines(location))
         {
-            runes.Runes.Add(Rune.FromJson(line));
+            runes.Add(Rune.FromJson(line));
         }
 
         return runes;
     }
 
-    public static MonsterStorage ReadMonstersFromFile(string location)
+    public static List<IMonster> ReadMonstersFromFile(string location)
     {
-        MonsterStorage monsters = new MonsterStorage();
+        List<IMonster> monsters = new List<IMonster>();
         foreach (string line in System.IO.File.ReadLines(location))
         {
-            monsters.Monsters.Add(Monster.FromJson(line));
+            monsters.Add(Monster.FromJson(line));
         }
 
         return monsters;
     }
 
-    public static RequestStorage ReadRequestsFromFile(string location)
+    public static List<IRequest> ReadRequestsFromFile(string location)
     {
-        RequestStorage requests = new RequestStorage();
+        List<IRequest> requests = new List<IRequest>();
         foreach (string line in System.IO.File.ReadLines(location))
         {
-            requests.Requests.Add(Request.FromJson(line));
+            requests.Add(Request.FromJson(line));
         }
 
         return requests;
@@ -49,7 +49,7 @@ public class RuneSerializer
         }
     }
 
-    public static async Task SaveRunes(List<Rune> runes, string location)
+    public static async Task SaveRunes(List<IRune> runes, string location)
     {
         using StreamWriter file = new(location);
 
@@ -61,7 +61,7 @@ public class RuneSerializer
         }
     }
 
-    public static async Task SaveMonsters(List<Monster> monsters, string location)
+    public static async Task SaveMonsters(List<IMonster> monsters, string location)
     {
         using StreamWriter file = new(location);
 
@@ -74,7 +74,7 @@ public class RuneSerializer
     }
 
 
-    public static async Task SaveRequests(List<Request> requests, string location)
+    public static async Task SaveRequests(List<IRequest> requests, string location)
     {
         using StreamWriter file = new(location);
 
@@ -86,4 +86,15 @@ public class RuneSerializer
         }
     }
 
+}
+
+
+public class InterfaceConverter<M, I> : JsonConverter<I> where M : class, I
+{
+    public override I Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+    {
+        return JsonSerializer.Deserialize<M>(ref reader, options);
+    }
+
+    public override void Write(Utf8JsonWriter writer, I value, JsonSerializerOptions options) => JsonSerializer.Serialize<I>(writer, value, options);
 }

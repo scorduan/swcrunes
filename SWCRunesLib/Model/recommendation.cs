@@ -5,7 +5,7 @@ using System.Text.Json.Serialization;
 
 public class Recommendation
 {
-    public string MonsterName { get; set; } = "";
+    public IMonster origMonster { get;}
 
     public List<RecommendedMonster> RecommendedSetup  { get; set; }
 

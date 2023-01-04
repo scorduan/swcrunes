@@ -25,7 +25,7 @@ public partial class RecommendationInventory : ContentPage
 
     void recommendList_Refreshing(System.Object sender, System.EventArgs e)
     {
-        _viewModel.AddAdditional();
+        //_viewModel.AddAdditional();
     }
 
     void equipBtn_Clicked(System.Object sender, System.EventArgs e)

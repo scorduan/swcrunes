@@ -1,4 +1,5 @@
-﻿namespace SWCRunes;
+﻿using SWCRunesLib;
+namespace SWCRunes;
 
 public partial class RuneInventory : ContentPage
 {
@@ -18,12 +19,18 @@ public partial class RuneInventory : ContentPage
 
 	void OnSaveClicked(System.Object sender, System.EventArgs e)
 	{
-		_viewModel.SaveUpdatedRune();
+        IRune rune = (IRune)((Button)sender).BindingContext;
+		_viewModel.SaveUpdatedRune(rune);
 	}
 
     void OnDelClicked(System.Object sender, System.EventArgs e)
     {
-        _viewModel.RemoveRune((SWCRunesLib.Rune)((Button)sender).BindingContext);
+		IRune rune = (IRune)((Button)sender).BindingContext;
+		_viewModel.DeleteRune(rune);
     }
 
+    void ListView_ItemSelected(System.Object sender, Microsoft.Maui.Controls.SelectedItemChangedEventArgs e)
+    {
+		_viewModel.UpdateList();
+    }
 }

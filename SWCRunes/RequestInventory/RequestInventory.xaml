@@ -9,12 +9,12 @@
     <HorizontalStackLayout VerticalOptions="Start">
         <Border StrokeThickness="5" Padding="5" WidthRequest="100" HeightRequest="1000">
             <VerticalStackLayout>
-                <ListView ItemsSource="{Binding Requests}" ItemSelected="requestList_ItemSelected" x:Name="requestList">
+                <ListView ItemsSource="{Binding VisibleRequests}" ItemSelected="requestList_ItemSelected" x:Name="requestList" SelectedItem="{Binding SelectedRequest,Mode=TwoWay}">
                     <ListView.ItemTemplate>
                         <DataTemplate >
                             <ViewCell>
                                 <HorizontalStackLayout>
-                                    <Label Text="{Binding MonsterName}"/>
+                                    <Label Text="{Binding MonsterId}"/>
                                 </HorizontalStackLayout>
                             </ViewCell>
                         </DataTemplate>
@@ -25,7 +25,52 @@
             </VerticalStackLayout>
         </Border>
         <VerticalStackLayout>
+             <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="100"/>
 
+                    <ColumnDefinition Width="100"/>
+                    <ColumnDefinition Width="100"/>
+                    <ColumnDefinition Width="100"/>
+
+                    <ColumnDefinition Width="100"/>
+                    <ColumnDefinition Width="100"/>
+                    <ColumnDefinition Width="100"/>
+
+                    <ColumnDefinition Width="100"/>
+                    
+                    <ColumnDefinition Width="100"/>
+                    <ColumnDefinition Width="100"/>
+
+                
+
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="100"/>
+
+                </Grid.RowDefinitions>
+                <Picker Grid.Column="0" ItemsSource="{Binding VisibleMonsters}" x:Name="monsterPicker" ItemDisplayBinding="{Binding Name}" SelectedItem="{Binding NewSelectedMonster,Mode=TwoWay}" SelectedIndexChanged="monsterPicker_SelectedIndexChanged"/>
+                 
+                <Picker Grid.Column="1" ItemsSource="{Binding AttributeList}" SelectedItem="{Binding Path=NewRequest.PrimaryAttribute}"/>
+                <Picker Grid.Column="2" ItemsSource="{Binding AttributeList}" SelectedItem="{Binding Path=NewRequest.SecondaryAttribute}"/> 
+                <Picker Grid.Column="3" ItemsSource="{Binding AttributeList}" SelectedItem="{Binding Path=NewRequest.TertiaryAttribute}"/>  
+                 
+                <Picker Grid.Column="4" ItemsSource="{Binding TypeList}" SelectedItem="{Binding Path=NewRequest.RestrictSetOne}" SelectedIndexChanged="NewPicker_SelectedIndexChanged"/>
+                <Picker Grid.Column="5" ItemsSource="{Binding TypeList}" SelectedItem="{Binding Path=NewRequest.RestrictSetTwo}" SelectedIndexChanged="NewPicker_SelectedIndexChanged"/>
+                <Picker Grid.Column="6" ItemsSource="{Binding TypeList}" SelectedItem="{Binding Path=NewRequest.RestrictSetThree}" SelectedIndexChanged="NewPicker_SelectedIndexChanged"/>
+
+                <CollectionView Grid.Column="7"
+                                ItemsSource="{Binding StatList}"
+                                SelectedItems="{Binding NewSelectedStats, Mode=TwoWay}"
+                                SelectionMode="Multiple"
+                                x:Name="newStatSelector"
+                                SelectionChanged="newStatSelector_SelectionChanged"
+                                ></CollectionView>
+
+                <Button Grid.Column="8" x:Name="Add" Text="Add" Clicked="Add_Clicked"/>
+                <Label Grid.Column="9" x:Name="Count" Text="{Binding NewRequestCount, Mode=OneWay}" />
+
+            </Grid>
             <Grid>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="100"/>
@@ -73,7 +118,7 @@
                     
                     <ColumnDefinition Width="100"/>
                     <ColumnDefinition Width="100"/>
-
+                    <ColumnDefinition Width="100"/>
                 
 
                 </Grid.ColumnDefinitions>
@@ -81,16 +126,16 @@
                     <RowDefinition Height="100"/>
 
                 </Grid.RowDefinitions>
-                <Entry Grid.Column="0" Text="{Binding Path=SelectedRequest.MonsterName}"/>
+                <Label Grid.Column="0" Text="{Binding SelectedMonsterName}"/>
 
                 <Picker Grid.Column="1" ItemsSource="{Binding AttributeList}" SelectedItem="{Binding Path=SelectedRequest.PrimaryAttribute}"/>
                 <Picker Grid.Column="2" ItemsSource="{Binding AttributeList}" SelectedItem="{Binding Path=SelectedRequest.SecondaryAttribute}"/>
                 <Picker Grid.Column="3" ItemsSource="{Binding AttributeList}" SelectedItem="{Binding Path=SelectedRequest.TertiaryAttribute}"/>
 
                 <Picker Grid.Column="4" ItemsSource="{Binding TypeList}" SelectedItem="{Binding Path=SelectedRequest.RestrictSetOne}" SelectedIndexChanged="Picker_SelectedIndexChanged"/>
-                <Picker Grid.Column="5" ItemsSource="{Binding TypeList}" SelectedItem="{Binding Path=SelectedRequest.RestrictSetTwo}"/>
-                <Picker Grid.Column="6" ItemsSource="{Binding TypeList}" SelectedItem="{Binding Path=SelectedRequest.RestrictSetThree}"/>
-
+                <Picker Grid.Column="5" ItemsSource="{Binding TypeList}" SelectedItem="{Binding Path=SelectedRequest.RestrictSetTwo}" SelectedIndexChanged="Picker_SelectedIndexChanged"/>
+                <Picker Grid.Column="6" ItemsSource="{Binding TypeList}" SelectedItem="{Binding Path=SelectedRequest.RestrictSetThree}" SelectedIndexChanged="Picker_SelectedIndexChanged"/>
+                
                 <CollectionView Grid.Column="7"
                                 ItemsSource="{Binding StatList}"
                                 SelectedItems="{Binding SelectedStats, Mode=TwoWay}"
@@ -98,9 +143,10 @@
                                 x:Name="statSelector"
                                 SelectionChanged="statSelector_SelectionChanged"
                                 ></CollectionView>
-
+               
                 <Button Grid.Column="8" x:Name="Del" Text="Del" Clicked="Del_Clicked"/>
-                <Button Grid.Column="9" x:Name="Execute" Text="{Binding RequestCount, Mode=OneWay}" Clicked="Execute_Clicked"/>
+                <Button Grid.Column="9" x:Name="Upd" Text="Upd" Clicked="Upd_Clicked"/>
+                <Button Grid.Column="10" x:Name="Execute" Text="{Binding RequestCount, Mode=OneWay}" Clicked="Execute_Clicked"/>
 
             </Grid>
         </VerticalStackLayout>
