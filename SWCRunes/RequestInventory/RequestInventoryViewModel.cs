@@ -17,6 +17,7 @@ namespace SWCRunes
             VisibleRequests = _simulationService.GetAllRequests();
             VisibleMonsters = _simulationService.GetAllMonsters();
             NewRequest = _simulationService.GetNewRequest();
+            
             AttributeList = new ObservableCollection<string>();
             AttributeList.Add("ATK");
             AttributeList.Add("DEF");
@@ -111,15 +112,20 @@ namespace SWCRunes
         internal void ProcessCurrent()
         {
             _simulationService.Optimize(SelectedRequest);
+            DateTime time = DateTime.Now;
+
         }
 
         internal void UpdateSelectedStats(IReadOnlyList<object> currentSelection)
         {
-            SelectedRequest.FocusStats.Clear();
+            if (SelectedRequest != null)
+            {
+                SelectedRequest.FocusStats.Clear();
                 foreach (string stat in currentSelection)
                 {
                     SelectedRequest.FocusStats.Add(stat);
                 }
+            }
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("RequestCount"));
         }
 
@@ -143,12 +149,13 @@ namespace SWCRunes
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("NewRequestCount"));
         }
 
+       
 
-        public int RequestCount
+        public long RequestCount
         {
             get
             {
-                int count = 0;
+                long count = 0;
                 if (SelectedRequest !=null)
                 {
                     count=_simulationService.CalcPerms(SelectedRequest);
@@ -157,7 +164,7 @@ namespace SWCRunes
             }
         }
 
-        public int NewRequestCount
+        public long NewRequestCount
         {
             get
             {
@@ -175,7 +182,7 @@ namespace SWCRunes
 
         // Simulation Updaters 
 
-
+        public SimulationService Service { get => _simulationService; }
         public void RemoveSelected()
         {
             DeleteRequest(SelectedRequest);
@@ -213,6 +220,7 @@ namespace SWCRunes
         internal void UpdateNewRequestMonster()
         {
             NewRequest.MonsterId = NewSelectedMonster.Id;
+            NewRequest.MonsterName = _simulationService.GetMonsterNameForId(NewRequest.MonsterId);
         }
     }
 }

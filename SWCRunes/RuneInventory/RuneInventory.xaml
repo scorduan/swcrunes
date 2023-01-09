@@ -228,6 +228,7 @@
                                 <Entry Grid.Column="10" Text="{Binding RES, Converter={components:Int3ToPercConverter}}"  BackgroundColor="AliceBlue"/>
                                 <Entry Grid.Column="11" Text="{Binding PR, Converter={components:Int3ToPercConverter}}" />
                                 <Entry Grid.Column="12" Text="{Binding EV, Converter={components:Int3ToPercConverter}}"  BackgroundColor="AliceBlue"/>
+                                <Label Grid.Column="13" Text="{Binding EquippedMonster.Name}"/>
                                 <HorizontalStackLayout Grid.Column="14">
                                     <Button  Text="Save" WidthRequest="65" Clicked="OnSaveClicked" />
                                     <Button  Text="Del" WidthRequest="65" Clicked="OnDelClicked" />

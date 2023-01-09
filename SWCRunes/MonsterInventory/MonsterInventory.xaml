@@ -23,7 +23,7 @@
             </VerticalStackLayout>
         </Border>
         <VerticalStackLayout>
-                        <Grid>
+            <Grid>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="70"/>
                     <ColumnDefinition Width="70"/>
@@ -93,26 +93,31 @@
                     <ColumnDefinition Width="70"/>
                 </Grid.ColumnDefinitions>
                 <Entry Grid.Column="0" Text="{Binding Path=NewMonster.Name}"/>
-                
-                <Entry Grid.Column="1" Text="{Binding Path=NewMonster.ATK}"/>
-                <Entry Grid.Column="2" Text="{Binding Path=NewMonster.ATKBonus}"/>
-                <Entry Grid.Column="3" Text="{Binding Path=NewMonster.DEF}"/>
-                <Entry Grid.Column="4" Text="{Binding Path=NewMonster.DEFBonus}"/>
-                <Entry Grid.Column="5" Text="{Binding Path=NewMonster.HP}"/>
-                <Entry Grid.Column="6" Text="{Binding Path=NewMonster.HPBonus}"/>
-                <Entry Grid.Column="7" Text="{Binding Path=NewMonster.SPD}"/>
-                <Entry Grid.Column="8" Text="{Binding Path=NewMonster.CR}"/>
-                <Entry Grid.Column="9" Text="{Binding Path=NewMonster.CD}"/>
-                <Entry Grid.Column="10" Text="{Binding Path=NewMonster.ACC}"/>
-                <Entry Grid.Column="11" Text="{Binding Path=NewMonster.RES}"/>
-                <Entry Grid.Column="12" Text="{Binding Path=NewMonster.RESBonus}"/>
-                <Entry Grid.Column="13" Text="{Binding Path=NewMonster.PR}"/>
-                <Entry Grid.Column="14" Text="{Binding Path=NewMonster.EV}"/>
-                <Entry Grid.Column="15" Text="{Binding Path=NewMonster.EVBonus}"/>
+
+                <Entry Grid.Column="1" Text="{Binding Path=NewMonster.BaseATK}"/>
+                <Entry Grid.Column="2" Text="{Binding Path=NewMonster.BaseATKBoost}"/>
+                <Entry Grid.Column="3" Text="{Binding Path=NewMonster.BaseDEF}"/>
+                <Entry Grid.Column="4" Text="{Binding Path=NewMonster.BaseDEFBoost}"/>
+                <Entry Grid.Column="5" Text="{Binding Path=NewMonster.BaseHP}"/>
+                <Entry Grid.Column="6" Text="{Binding Path=NewMonster.BaseHPBoost}"/>
+                <Entry Grid.Column="7" Text="{Binding Path=NewMonster.BaseSPD}"/>
+                <Entry Grid.Column="8" Text="{Binding Path=NewMonster.BaseCR, Converter={components:Int3ToPercConverter}}"/>
+                <Entry Grid.Column="9" Text="{Binding Path=NewMonster.BaseCD, Converter={components:Int3ToPercConverter}}"/>
+                <Entry Grid.Column="10" Text="{Binding Path=NewMonster.BaseACC, Converter={components:Int3ToPercConverter}}"/>
+                <Entry Grid.Column="11" Text="{Binding Path=NewMonster.BaseRES, Converter={components:Int3ToPercConverter}}"/>
+                <Entry Grid.Column="12" Text="{Binding Path=NewMonster.BaseRESBoost, Converter={components:Int3ToPercConverter}}"/>
+                <Entry Grid.Column="13" Text="{Binding Path=NewMonster.BasePR, Converter={components:Int3ToPercConverter}}"/>
+                <Entry Grid.Column="14" Text="{Binding Path=NewMonster.BaseEV, Converter={components:Int3ToPercConverter}}"/>
+                <Entry Grid.Column="15" Text="{Binding Path=NewMonster.BaseEVBoost, Converter={components:Int3ToPercConverter}}"/>
                 <Button Grid.Column="16" x:Name="Add" Text="Add" Clicked="Add_Clicked"/>
 
             </Grid>
-            <components:Monster WidthRequest="1000" HeightRequest="350" x:Name="monsterDisplay" BindingContext="SelectedMonster"/>
+            <HorizontalStackLayout>
+            <components:Monster WidthRequest="1000" HeightRequest="350" x:Name="monsterDisplay"/>
+                <VerticalStackLayout>
+                <Button WidthRequest="100" HeightRequest="30" Text="Unequip" x:Name="unequipBtn" Clicked="unequipBtn_Clicked"/>
+                    </VerticalStackLayout>
+                </HorizontalStackLayout>
             <Label>Base Values</Label>
             <Grid>
                 <Grid.ColumnDefinitions>
@@ -185,22 +190,22 @@
                     <ColumnDefinition Width="70"/>
                 </Grid.ColumnDefinitions>
                 <Entry Grid.Column="0" Text="{Binding Path=SelectedMonster.Name}"/>
-                
-                <Entry Grid.Column="1" Text="{Binding Path=SelectedMonster.ATK}"/>
-                <Entry Grid.Column="2" Text="{Binding Path=SelectedMonster.ATKBonus}"/>
-                <Entry Grid.Column="3" Text="{Binding Path=SelectedMonster.DEF}"/>
-                <Entry Grid.Column="4" Text="{Binding Path=SelectedMonster.DEFBonus}"/>
-                <Entry Grid.Column="5" Text="{Binding Path=SelectedMonster.HP}"/>
-                <Entry Grid.Column="6" Text="{Binding Path=SelectedMonster.HPBonus}"/>
-                <Entry Grid.Column="7" Text="{Binding Path=SelectedMonster.SPD}"/>
-                <Entry Grid.Column="8" Text="{Binding Path=SelectedMonster.CR}"/>
-                <Entry Grid.Column="9" Text="{Binding Path=SelectedMonster.CD}"/>
-                <Entry Grid.Column="10" Text="{Binding Path=SelectedMonster.ACC}"/>
-                <Entry Grid.Column="11" Text="{Binding Path=SelectedMonster.RES}"/>
-                <Entry Grid.Column="12" Text="{Binding Path=SelectedMonster.RESBonus}"/>
-                <Entry Grid.Column="13" Text="{Binding Path=SelectedMonster.PR}"/>
-                <Entry Grid.Column="14" Text="{Binding Path=SelectedMonster.EV}"/>
-                <Entry Grid.Column="15" Text="{Binding Path=SelectedMonster.EVBonus}"/>
+
+                <Entry Grid.Column="1" Text="{Binding Path=SelectedMonster.BaseATK}"/>
+                <Entry Grid.Column="2" Text="{Binding Path=SelectedMonster.BaseATKBoost}"/>
+                <Entry Grid.Column="3" Text="{Binding Path=SelectedMonster.BaseDEF}"/>
+                <Entry Grid.Column="4" Text="{Binding Path=SelectedMonster.BaseDEFBoost}"/>
+                <Entry Grid.Column="5" Text="{Binding Path=SelectedMonster.BaseHP}"/>
+                <Entry Grid.Column="6" Text="{Binding Path=SelectedMonster.BaseHPBoost}"/>
+                <Entry Grid.Column="7" Text="{Binding Path=SelectedMonster.BaseSPD}"/>
+                <Entry Grid.Column="8" Text="{Binding Path=SelectedMonster.BaseCR, Converter={components:Int3ToPercConverter}}"/>
+                <Entry Grid.Column="9" Text="{Binding Path=SelectedMonster.BaseCD, Converter={components:Int3ToPercConverter}}"/>
+                <Entry Grid.Column="10" Text="{Binding Path=SelectedMonster.BaseACC, Converter={components:Int3ToPercConverter}}"/>
+                <Entry Grid.Column="11" Text="{Binding Path=SelectedMonster.BaseRES, Converter={components:Int3ToPercConverter}}"/>
+                <Entry Grid.Column="12" Text="{Binding Path=SelectedMonster.BaseRESBoost, Converter={components:Int3ToPercConverter}}"/>
+                <Entry Grid.Column="13" Text="{Binding Path=SelectedMonster.BasePR, Converter={components:Int3ToPercConverter}}"/>
+                <Entry Grid.Column="14" Text="{Binding Path=SelectedMonster.BaseEV, Converter={components:Int3ToPercConverter}}"/>
+                <Entry Grid.Column="15" Text="{Binding Path=SelectedMonster.BaseEVBoost, Converter={components:Int3ToPercConverter}}"/>
                 <Button Grid.Column="16" x:Name="Del" Text="Del" Clicked="Del_Clicked"/>
                 <Button Grid.Column="17" x:Name="Upd" Text="Upd" Clicked="Upd_Clicked"/>
 

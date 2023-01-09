@@ -15,11 +15,10 @@ namespace SWCRunes
         {
             _simulationService = simulation;
             RequestList = simulation.GetAllRequests();
-            loadFromService();
         }
 
 
-        public ObservableCollection<IRequest> RequestList;
+        public ObservableCollection<IRequest> RequestList { get; set; }
 
         private SimulationService _simulationService;
 
@@ -28,16 +27,28 @@ namespace SWCRunes
         public IRequest SelectedRequest { get; set; }
 
 
-        public RecommendedMonster SelectedMonster { get; set; }
+        public IRecommendedMonster SelectedMonster { get; set; }
+
+        public bool RequestHasRecommendation { get => _simulationService.RequestHasRecommendations(SelectedRequest); }
+        public int RequestRecommendationCount
+        {
+            get
+            {
+
+                //int retVal = _simulationService.RecommendationCount(SelectedRequest);
+                return 0;
+            }
+        }
 
 
         public void ChangeSelectedRequest()
         {
             loadFromService();
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("SelectedMonster"));
+                
         }
 
-        public void ChangeSelectedMonster(RecommendedMonster monster)
+        public void ChangeSelectedMonster(IRecommendedMonster monster)
         {
             SelectedMonster = monster;
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("SelectedMonster"));
@@ -60,6 +71,14 @@ namespace SWCRunes
         internal void EquipSelectedSet()
         {
             _simulationService.EquipIRuneSet(SelectedMonster.Original.Id, SelectedMonster.Updated.Runes);
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("SelectedMonster"));
+
+        }
+
+        internal void RefreshCounts()
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("SelectedMonster.Original"));
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("SelectedMonster.Updated"));
         }
     }
 }

@@ -29,6 +29,12 @@ public interface IRune
         get;
         set;
     }
+    [JsonIgnore]
+    public IMonster? EquippedMonster
+    {
+        get;
+        set;
+    }
 }
 public class Rune :IRune
 {
@@ -69,6 +75,13 @@ public class Rune :IRune
         get;
         set;
     } = "";
+
+    [JsonIgnore]
+    public IMonster? EquippedMonster
+    {
+        get;
+        set;
+    }
 
     public string ToJson()
     {

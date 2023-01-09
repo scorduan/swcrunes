@@ -3,18 +3,20 @@ using SWCRunesLib;
 
 public partial class RequestInventory : ContentPage
 {
-	public RequestInventory(RequestInventoryViewModel viewModel)
+	public RequestInventory(RequestInventoryViewModel viewModel, SimulationService simulationService)
 	{
 		this.BindingContext = viewModel;
 		this._viewModel = viewModel;
-		InitializeComponent();
+        
+        InitializeComponent();
 	}
 
     private RequestInventoryViewModel _viewModel;
 
-	void requestList_ItemSelected(System.Object sender, Microsoft.Maui.Controls.SelectedItemChangedEventArgs e)
+
+    void requestList_ItemSelected(System.Object sender, Microsoft.Maui.Controls.SelectedItemChangedEventArgs e)
 	{
-        //requestDisplay.BindingContext = ((ListView)sender).SelectedItem;
+        
         _viewModel.SelectedRequestChanged();
         List<object> selectedStats = new List<object>();
         foreach (object stat in statSelector.ItemsSource)
@@ -27,19 +29,10 @@ public partial class RequestInventory : ContentPage
         }
         
         statSelector.UpdateSelectedItems(selectedStats);
-       // statSelector.SetBinding(statSelector.ItemsSource, new Bin)
+       
 
     }
 
-    void Save_Clicked(System.Object sender, System.EventArgs e)
-    {
-		//_viewModel.SaveNewRequest();
-    }
-
-    void NewBtn_Clicked(System.Object sender, System.EventArgs e)
-    {
-		//_viewModel.AddNew();
-    }
 
     void Del_Clicked(System.Object sender, System.EventArgs e)
     {
@@ -59,6 +52,8 @@ public partial class RequestInventory : ContentPage
     void Execute_Clicked(System.Object sender, System.EventArgs e)
     {
         _viewModel.ProcessCurrent();
+        DateTime time = DateTime.Now;
+
     }
 
     void statSelector_SelectionChanged(System.Object sender, Microsoft.Maui.Controls.SelectionChangedEventArgs e)

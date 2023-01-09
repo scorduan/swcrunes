@@ -131,18 +131,19 @@ public class Optimizer
     }
 
     public List<IRecommendedMonster> ProcessReq(IRequest inReq,IMonster origMonster)
-    {        
-        
-        List<IRuneSet> IRuneSets = BuildRunePermutations();
-
+    {
+        DateTime time = DateTime.Now;
+        _req = inReq;
+        List<IRuneSet> runeSets = BuildRunePermutations();
+        time = DateTime.Now;
         List<IRecommendedMonster> results = new List<IRecommendedMonster>();
 
 
-        foreach (IRuneSet set in IRuneSets)
+        foreach (IRuneSet set in runeSets)
         {
             IMonster m = (IMonster)origMonster.Clone();
-            
-            m.EquipSet(set);
+            // Ensure that anything that happens to the clone doesn't happen...
+            m.EquipSet(set,true);
             
             RecommendedMonster recMon = getRecommendedMonster(origMonster, m, _req);
 
@@ -150,12 +151,13 @@ public class Optimizer
 
             results.Add(recMon);
         }
-
+        time = DateTime.Now;
         results.Sort(CompareMonsters);
 
+        time = DateTime.Now;
 
-
-
+        int x = 0;
+        x = x + 1;
 
         return results;
     }
@@ -241,14 +243,14 @@ public class Optimizer
 
         typeList = buildTypeList();
 
-        List<Rune> used1 = new List<Rune>();
-        List<Rune> used2 = new List<Rune>();
-        List<Rune> used3 = new List<Rune>();
-        List<Rune> used4 = new List<Rune>();
-        List<Rune> used5 = new List<Rune>();
-        List<Rune> used6 = new List<Rune>();
-
-
+        HashSet<string> used1 = new HashSet<string>();
+        HashSet<string> used2 = new HashSet<string>();
+        HashSet<string> used3 = new HashSet<string>();
+        HashSet<string> used4 = new HashSet<string>();
+        HashSet<string> used5 = new HashSet<string>();
+        HashSet<string> used6 = new HashSet<string>();
+        DateTime time = DateTime.Now;
+        int counter = 0;
         foreach (RuneType type1 in typeList)
         {
            
@@ -257,9 +259,9 @@ public class Optimizer
 
                 foreach (Rune rune1 in typedStattedSlottedRunes[type1][stat1][RuneSlot.ONE])
                 {
-                    if (used1.Contains(rune1)) continue;
+                    if (used1.Contains(rune1.Id)) continue;
                     if ((rune1.EquippedOn != "")&& (rune1.EquippedOn != _req.MonsterId)) continue;
-                    used1.Add(rune1);
+                    used1.Add(rune1.Id);
 
                     foreach (RuneType type2 in typeList)
                     {
@@ -268,9 +270,9 @@ public class Optimizer
 
                             foreach (Rune rune2 in typedStattedSlottedRunes[type2][stat2][RuneSlot.TWO])
                             {
-                                if (used2.Contains(rune2)) continue;
+                                if (used2.Contains(rune2.Id)) continue;
                                 if ((rune2.EquippedOn != "") && (rune2.EquippedOn != _req.MonsterId)) continue;
-                                used2.Add(rune2);
+                                used2.Add(rune2.Id);
 
                                 foreach (RuneType type3 in typeList)
                                 {
@@ -278,9 +280,9 @@ public class Optimizer
                                     {
                                         foreach (Rune rune3 in typedStattedSlottedRunes[type3][stat3][RuneSlot.THREE])
                                         {
-                                            if (used3.Contains(rune3)) continue;
+                                            if (used3.Contains(rune3.Id)) continue;
                                             if ((rune3.EquippedOn != "") && (rune3.EquippedOn != _req.MonsterId)) continue;
-                                            used3.Add(rune3);
+                                            used3.Add(rune3.Id);
 
                                             foreach (RuneType type4 in typeList)
                                             {
@@ -291,9 +293,9 @@ public class Optimizer
                                                     foreach (Rune rune4 in typedStattedSlottedRunes[type4][stat4][RuneSlot.FOUR])
                                                     {
 
-                                                        if (used4.Contains(rune4)) continue;
+                                                        if (used4.Contains(rune4.Id)) continue;
                                                         if ((rune4.EquippedOn != "") && (rune4.EquippedOn != _req.MonsterId)) continue;
-                                                        used4.Add(rune4);
+                                                        used4.Add(rune4.Id);
 
                                                         foreach (RuneType type5 in typeList)
                                                         {
@@ -302,9 +304,9 @@ public class Optimizer
                                                                 foreach (Rune rune5 in typedStattedSlottedRunes[type5][stat5][RuneSlot.FIVE])
                                                                 {
 
-                                                                    if (used5.Contains(rune5)) continue;
+                                                                    if (used5.Contains(rune5.Id)) continue;
                                                                     if ((rune5.EquippedOn != "") && (rune5.EquippedOn != _req.MonsterId)) continue;
-                                                                    used5.Add(rune5);
+                                                                    used5.Add(rune5.Id);
 
                                                                     foreach (RuneType type6 in typeList)
                                                                     {
@@ -313,9 +315,9 @@ public class Optimizer
                                                                             foreach (Rune rune6 in typedStattedSlottedRunes[type6][stat6][RuneSlot.SIX])
                                                                             {
 
-                                                                                if (used6.Contains(rune6)) continue;
+                                                                                if (used6.Contains(rune6.Id)) continue;
                                                                                 if ((rune6.EquippedOn != "") && (rune6.EquippedOn != _req.MonsterId)) continue;
-                                                                                used6.Add(rune6);
+                                                                                used6.Add(rune6.Id);
 
                                                                                 IRuneSet set = new RuneSet();
 
@@ -327,7 +329,7 @@ public class Optimizer
                                                                                 set.RuneSix = rune6;
                                                                                 perms.Add(set);
 
-
+                                                                                counter++;
                                                                             }
                                                                         }
                                                                         used6.Clear();
@@ -353,7 +355,7 @@ public class Optimizer
             }
             used1.Clear();
         }
-
+        time = DateTime.Now;
         return perms;
     }
 
@@ -431,15 +433,15 @@ public class Optimizer
         return typeList;
     }
 
-    public int CalculatePerms()
+    public long CalculatePerms()
     {
        
-        int runeOneCount = 0;
-        int runeTwoCount = 0;
-        int runeThreeCount = 0;
-        int runeFourCount = 0;
-        int runeFiveCount = 0;
-        int runeSixCount = 0;
+        long runeOneCount = 0;
+        long runeTwoCount = 0;
+        long runeThreeCount = 0;
+        long runeFourCount = 0;
+        long runeFiveCount = 0;
+        long runeSixCount = 0;
 
 
         List<RuneType> typeList = buildTypeList();
@@ -458,8 +460,9 @@ public class Optimizer
             }
         }
 
+        long result= runeOneCount * runeTwoCount * runeThreeCount * runeFourCount * runeFiveCount * runeSixCount;
 
-        return runeOneCount*runeTwoCount*runeThreeCount*runeFourCount*runeFiveCount*runeSixCount;
+        return result;
     }
 
     public int CompareMonsters(IRecommendedMonster left, IRecommendedMonster right)

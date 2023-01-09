@@ -14,18 +14,20 @@
                         <DataTemplate >
                             <ViewCell>
                                 <HorizontalStackLayout>
-                                    <Label Text="{Binding MonsterId}"/>
+                                    <Label Text="{Binding MonsterName}">
+                                                        
+                                    </Label>
                                 </HorizontalStackLayout>
                             </ViewCell>
                         </DataTemplate>
                     </ListView.ItemTemplate>
                 </ListView>
-                <Button Text="New" x:Name="NewBtn" Clicked="NewBtn_Clicked"/>
-                <Button x:Name="Save" Text="Save" Clicked="Save_Clicked"/>
+                
+                
             </VerticalStackLayout>
         </Border>
         <VerticalStackLayout>
-             <Grid>
+             <Grid BackgroundColor="LightGray">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="100"/>
 
@@ -49,8 +51,9 @@
                     <RowDefinition Height="100"/>
 
                 </Grid.RowDefinitions>
-                <Picker Grid.Column="0" ItemsSource="{Binding VisibleMonsters}" x:Name="monsterPicker" ItemDisplayBinding="{Binding Name}" SelectedItem="{Binding NewSelectedMonster,Mode=TwoWay}" SelectedIndexChanged="monsterPicker_SelectedIndexChanged"/>
-                 
+                <Picker Grid.Column="0" ItemsSource="{Binding VisibleMonsters}" x:Name="monsterPicker"
+                        ItemDisplayBinding="{Binding Name}" SelectedItem="{Binding NewSelectedMonster,Mode=TwoWay}"
+                        SelectedIndexChanged="monsterPicker_SelectedIndexChanged"/>
                 <Picker Grid.Column="1" ItemsSource="{Binding AttributeList}" SelectedItem="{Binding Path=NewRequest.PrimaryAttribute}"/>
                 <Picker Grid.Column="2" ItemsSource="{Binding AttributeList}" SelectedItem="{Binding Path=NewRequest.SecondaryAttribute}"/> 
                 <Picker Grid.Column="3" ItemsSource="{Binding AttributeList}" SelectedItem="{Binding Path=NewRequest.TertiaryAttribute}"/>  
@@ -68,7 +71,7 @@
                                 ></CollectionView>
 
                 <Button Grid.Column="8" x:Name="Add" Text="Add" Clicked="Add_Clicked"/>
-                <Label Grid.Column="9" x:Name="Count" Text="{Binding NewRequestCount, Mode=OneWay}" />
+                <Label Grid.Column="9" x:Name="Count" Text="{Binding NewRequestCount, Mode=OneWay,StringFormat='{0:#,0}'}" />
 
             </Grid>
             <Grid>
@@ -146,7 +149,7 @@
                
                 <Button Grid.Column="8" x:Name="Del" Text="Del" Clicked="Del_Clicked"/>
                 <Button Grid.Column="9" x:Name="Upd" Text="Upd" Clicked="Upd_Clicked"/>
-                <Button Grid.Column="10" x:Name="Execute" Text="{Binding RequestCount, Mode=OneWay}" Clicked="Execute_Clicked"/>
+                <Button Grid.Column="10" x:Name="Execute" Text="{Binding RequestCount, Mode=OneWay, StringFormat='{0:#,0}'}" Clicked="Execute_Clicked" HeightRequest="30" WidthRequest="130"/>
 
             </Grid>
         </VerticalStackLayout>

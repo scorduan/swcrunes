@@ -20,32 +20,51 @@
         <Label Text="Things"/>
         -->
         <HorizontalStackLayout Background="gray" >
+            <ListView ItemsSource="{Binding RequestList}" ItemSelected="requestList_ItemSelected"
+                      x:Name="requestList" SelectedItem="{Binding SelectedRequest,Mode=TwoWay}" WidthRequest="100">
+                <ListView.ItemTemplate>
+                    <DataTemplate x:DataType="lib:IRequest">
+                        <ViewCell>
+                            <HorizontalStackLayout>
+                                <Label Text="{Binding MonsterName}">
+
+                                </Label>
+                            </HorizontalStackLayout>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
             <VerticalStackLayout>
-            <Border StrokeThickness="5" Padding="5" WidthRequest="100" HeightRequest="1000">
-                <ListView ItemsSource="{Binding Monsters}"
+               <HorizontalStackLayout><Label Text="Count: "/><Label Text="{Binding RequestRecommendationCount}"/> </HorizontalStackLayout>
+                <Border StrokeThickness="5" Padding="5" WidthRequest="100" HeightRequest="1000" Stroke="#FF0000">
+                    
+                    <ListView ItemsSource="{Binding Monsters}"
                           ItemSelected="recommendList_ItemSelected"
                           x:Name="recommendList"
                           WidthRequest="95"
                           RowHeight="70"
                           
                           >
-                    <ListView.ItemTemplate>
-                        <DataTemplate >
-                            <ViewCell x:DataType="lib:RecommendedMonster">
-                                <Border WidthRequest="60" HeightRequest="60">
-                                <VerticalStackLayout>
-                                    <Label Text="{Binding FirstValue }" WidthRequest="50" />
-                                    <Label Text="{Binding SecondValue }" WidthRequest="50" />
-                                    <Label Text="{Binding ThirdValue }" WidthRequest="50" />
-                                </VerticalStackLayout>
-                                </Border>
-                            </ViewCell>
-                        </DataTemplate>
-                    </ListView.ItemTemplate>
-                </ListView>
-            </Border>
+                        <ListView.ItemTemplate>
+                            <DataTemplate >
+                                <ViewCell x:DataType="lib:RecommendedMonster">
+                                    <Border WidthRequest="60" HeightRequest="60">
+                                        <VerticalStackLayout>
+                                            <Label Text="{Binding FirstValue }" WidthRequest="50" />
+                                            <Label Text="{Binding SecondValue }" WidthRequest="50" />
+                                            <Label Text="{Binding ThirdValue }" WidthRequest="50" />
+                                        </VerticalStackLayout>
+                                    </Border>
+                                </ViewCell>
+                            </DataTemplate>
+                        </ListView.ItemTemplate>
+                    </ListView>
+                </Border>
             </VerticalStackLayout>
-            <components:Monster WidthRequest="1000" HeightRequest="350" x:Name="monsterDisplay"/>
+            <VerticalStackLayout>
+            <components:Monster WidthRequest="1000" HeightRequest="350" x:Name="origMonsterDisplay" />
+            <components:Monster WidthRequest="1000" HeightRequest="350" x:Name="newMonsterDisplay" />
+            </VerticalStackLayout>
             <Button x:Name="equipBtn" Text="Equip" Clicked="equipBtn_Clicked" HeightRequest="100" WidthRequest="100" />
         </HorizontalStackLayout>
     </VerticalStackLayout>

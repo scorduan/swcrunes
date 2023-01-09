@@ -26,6 +26,8 @@ namespace SWCRunesLib
 
 		public List<IMonster> GetAllMonsters();
 
+		public void UnequipRuneSet(string monsterId);
+
 
 		//Request Maint
 		public IRequest GetNewRequest();
@@ -53,8 +55,12 @@ namespace SWCRunesLib
 
 		public void LoadState(string baseLocation);
 
-		public int CalculatePerms(IRequest request);
+		public long CalculatePerms(IRequest request);
 		public IMonster GetMonsterForId(string id);
+
+		public bool MonsterHasRecommendations(string requestId);
+
+		public int RecommendationCount(string requestId);
     }
 }
 

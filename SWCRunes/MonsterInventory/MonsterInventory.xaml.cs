@@ -38,4 +38,9 @@ public partial class MonsterInventory : ContentPage
         
 		_viewModel.RemoveSelected();
     }
+
+    void unequipBtn_Clicked(System.Object sender, System.EventArgs e)
+    {
+        _viewModel.UnequipSelected();
+    }
 }

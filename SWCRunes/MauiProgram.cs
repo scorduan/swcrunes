@@ -32,7 +32,7 @@ public static class MauiProgram
         mauiAppBuilder.Services.AddSingleton<RequestInventoryViewModel>();
         mauiAppBuilder.Services.AddSingleton<RuneInventoryViewModel>();
 		mauiAppBuilder.Services.AddSingleton<MonsterInventoryViewModel>();
-        
+        mauiAppBuilder.Services.AddSingleton<Components.IDToMonsterNameConverter>();
         return mauiAppBuilder;
     }
 

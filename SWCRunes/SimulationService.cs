@@ -129,6 +129,7 @@ namespace SWCRunes
         public void Optimize(IRequest request)
         {
             _simulation.Optimize(request);
+            DateTime time = DateTime.Now;
         }
 
         public List<IRecommendedMonster> GetRecommendationPageForMonster(string monsterId, int pageNum, int pageSize, out int numPages)
@@ -163,11 +164,25 @@ namespace SWCRunes
             return _simulation.GetMonsterForId(id);
         }
 
-        public int CalcPerms(IRequest request)
+        public long CalcPerms(IRequest request)
         {
             return _simulation.CalculatePerms(request);
         }
 
+        internal void UnequipAllMonster(Monster monster)
+        {
+            _simulation.UnequipRuneSet(monster.Id);
+        }
+
+        internal bool RequestHasRecommendations(IRequest request)
+        {
+            return _simulation.MonsterHasRecommendations(request.MonsterId);
+        }
+
+        internal int RecommendationCount(IRequest request)
+        {
+            return _simulation.RecommendationCount(request.MonsterId);
+        }
     }
 }
 

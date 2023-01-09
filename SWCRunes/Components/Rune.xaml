@@ -15,7 +15,7 @@
                 <Label Text="Type:" FontFamily="" FontAttributes="Bold" WidthRequest="45"/>
                 <Label Text="{Binding Type}" WidthRequest="75"/>
                 <Label Text="Equipped:" FontFamily="" FontAttributes="Bold" WidthRequest="75"/>
-                <Label Text="{Binding EquippedOn}" WidthRequest="75"/>
+                <Label Text="{Binding EquippedMonster.Name}" WidthRequest="75"/>
             </HorizontalStackLayout>
         <Border>
             <HorizontalStackLayout BackgroundColor="LightYellow">

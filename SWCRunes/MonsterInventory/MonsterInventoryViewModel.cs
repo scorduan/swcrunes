@@ -55,6 +55,7 @@ namespace SWCRunes
         public void SaveSelected()
         {
             _simulationService.UpdateMonster(SelectedMonster);
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("SelectedMonster"));
         }
 
         public void AddNewMonstersToList()
@@ -67,6 +68,12 @@ namespace SWCRunes
         public void RemoveSelected()
         {
             _simulationService.DeleteMonster(SelectedMonster.Id);
+        }
+
+        internal void UnequipSelected()
+        {
+            _simulationService.UnequipAllMonster(SelectedMonster);
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("SelectedMonster"));
         }
     }
 }

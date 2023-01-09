@@ -1,4 +1,5 @@
 ﻿namespace SWCRunes;
+
 using SWCRunesLib;
 
 public partial class RecommendationInventory : ContentPage
@@ -18,8 +19,13 @@ public partial class RecommendationInventory : ContentPage
 
     void recommendList_ItemSelected(System.Object sender, Microsoft.Maui.Controls.SelectedItemChangedEventArgs e)
     {
-        monsterDisplay.BindingContext = ((ListView)sender).SelectedItem;
-        _viewModel.ChangeSelectedMonster((RecommendedMonster)((ListView)sender).SelectedItem);
+        IRecommendedMonster recommendedMonster = (IRecommendedMonster)((ListView)sender).SelectedItem;
+        origMonsterDisplay.BindingContext = recommendedMonster.Original;
+        newMonsterDisplay.BindingContext = recommendedMonster.Updated;
+
+        
+        _viewModel.ChangeSelectedMonster(recommendedMonster);
+        
 
     }
 
@@ -31,5 +37,11 @@ public partial class RecommendationInventory : ContentPage
     void equipBtn_Clicked(System.Object sender, System.EventArgs e)
     {
         _viewModel.EquipSelectedSet();
+    }
+
+    void requestList_ItemSelected(System.Object sender, Microsoft.Maui.Controls.SelectedItemChangedEventArgs e)
+    {
+        _viewModel.ChangeSelectedRequest();
+        
     }
 }

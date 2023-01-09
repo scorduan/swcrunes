@@ -9,6 +9,8 @@ public interface IRequest
 
     public string MonsterId { get; set; }
 
+    public string MonsterName { get; set; }
+
     public string PrimaryAttribute { get; set; }
 
     public string SecondaryAttribute { get; set; }
@@ -29,6 +31,9 @@ public class Request :IRequest
 
     public string MonsterId { get; set; }
 
+    public string MonsterName { get; set; }
+
+
     public string PrimaryAttribute { get; set; }
 
     public string SecondaryAttribute { get; set; }
@@ -48,6 +53,7 @@ public class Request :IRequest
         Id = id;
 
         MonsterId = "";
+        MonsterName = "";
         PrimaryAttribute = "ATK";
         SecondaryAttribute = "DEF";
         TertiaryAttribute = "HP";

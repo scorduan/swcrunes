@@ -98,6 +98,12 @@ namespace SWCRunesLib
             SaveState();
         }
 
+        public void UnequipRuneSet(string monsterId)
+        {
+            _monsters[monsterId].UnequipAll();
+            SaveState();
+        }
+
         public List<IMonster> GetAllMonsters()
         {
             return _monsters.Values.ToList<IMonster>();
@@ -126,15 +132,20 @@ namespace SWCRunesLib
 
         public List<IRecommendedMonster> GetRecommendationPageForMonster(string monsterId, int pageNum, int pageSize, out int numPages)
         {
-            List<IRecommendedMonster> allRecommends = _recommendedMonsters[monsterId];
+            
             List<IRecommendedMonster> foundMonsters = new List<IRecommendedMonster>();
-            int totalMonsters = allRecommends.Count();
-            numPages = (int)Math.Ceiling((float)totalMonsters / (float)pageSize);
-            int startingPoint = (pageNum - 1) * pageSize;
-            int endingPoint = Math.Min(pageNum * pageSize, numPages * pageSize);
-            for (int i = startingPoint; i < endingPoint; i++)
+            numPages = 0;
+            if (_recommendedMonsters.ContainsKey(monsterId))
             {
-                foundMonsters.Add(allRecommends[i]);
+                List<IRecommendedMonster> allRecommends = _recommendedMonsters[monsterId];
+                int totalMonsters = allRecommends.Count();
+                numPages = (int)Math.Ceiling((float)totalMonsters / (float)pageSize);
+                int startingPoint = (pageNum - 1) * pageSize;
+                int endingPoint = Math.Min(pageNum * pageSize, numPages * pageSize);
+                for (int i = startingPoint; i < endingPoint; i++)
+                {
+                    foundMonsters.Add(allRecommends[i]);
+                }
             }
 
             return foundMonsters;
@@ -216,6 +227,7 @@ namespace SWCRunesLib
             foreach (IRequest request in requests)
             {
                 if (request.Id == "") request.Id = GetNewRequestId();
+                if (request.MonsterId != "") request.MonsterName = _monsters[request.MonsterId].Name;
                 _requests.Add(request.Id, request);
             }
 
@@ -241,7 +253,7 @@ namespace SWCRunesLib
             await RuneSerializer.SaveRequests(_requests.Values.ToList(), _requestsFile);
         }
 
-        public int CalculatePerms(IRequest request)
+        public long CalculatePerms(IRequest request)
         {
             Optimizer optimizer = new Optimizer(_allRunes.Values.ToList());
             optimizer.UpdateReq(request);
@@ -252,6 +264,25 @@ namespace SWCRunesLib
         public IMonster GetMonsterForId(string id)
         {
             return _monsters[id];
+        }
+
+        public bool MonsterHasRecommendations(string monsterId)
+        {
+            return _recommendedMonsters.ContainsKey(monsterId);
+        }
+
+        public int RecommendationCount(string monsterId)
+        {
+            int count = 0;
+            if (MonsterHasRecommendations(monsterId))
+            {
+                if (_recommendedMonsters[monsterId] != null)
+                {
+                    count = _recommendedMonsters[monsterId].Count;
+                }
+                
+            }
+            return count;
         }
     }
 }
