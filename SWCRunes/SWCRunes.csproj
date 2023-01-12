@@ -53,6 +53,7 @@
 
 	<ItemGroup>
 		<PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="7.0.0" />
+		<PackageReference Include="sqlite-net-pcl" Version="1.8.116" />
 	</ItemGroup>
 
 	<ItemGroup>
@@ -80,6 +81,15 @@
 	  <MauiXaml Condition=" '$(EnableDefaultXamlItems)' == 'true' " Update="RequestInventory\MonsterInventory.xaml">
 	    <SubType></SubType>
 	  </MauiXaml>
+	  <MauiXaml Update="TeamInventory\TeamInventory.xaml">
+	    <SubType></SubType>
+	  </MauiXaml>
+	  <MauiXaml Update="TeamInventory\TeamNewPage.xaml">
+	    <SubType></SubType>
+	  </MauiXaml>
+	  <MauiXaml Update="RecommendationInventory\RecommendationDetail.xaml">
+	    <SubType></SubType>
+	  </MauiXaml>
 	</ItemGroup>
 	<ItemGroup>
 	  <None Remove="RuneInventory\" />
@@ -87,12 +97,15 @@
 	  <None Remove="Components\" />
 	  <None Remove="SonarAnalyzer.CSharp" />
 	  <None Remove="RequestInventory\" />
+	  <None Remove="TeamInventory\" />
+	  <None Remove="sqlite-net-pcl" />
 	</ItemGroup>
 	<ItemGroup>
 	  <Folder Include="RuneInventory\" />
 	  <Folder Include="MonsterInventory\" />
 	  <Folder Include="Components\" />
 	  <Folder Include="RequestInventory\" />
+	  <Folder Include="TeamInventory\" />
 	</ItemGroup>
 	<ItemGroup>
 	  <ProjectReference Include="..\SWCRunesLib\SWCRunesLib.csproj" />

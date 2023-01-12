@@ -18,24 +18,30 @@ namespace SWCRunes
         }
 
 
-        public ObservableCollection<IRequest> RequestList { get; set; }
+        public ObservableCollection<Request> RequestList { get; set; }
 
         private SimulationService _simulationService;
 
-        public ObservableCollection<IRecommendedMonster> Monsters { get; set; }
+        public ObservableCollection<RecommendedMonster> Monsters { get; set; }
 
-        public IRequest SelectedRequest { get; set; }
+        public Request SelectedRequest { get; set; }
 
 
-        public IRecommendedMonster SelectedMonster { get; set; }
+        public RecommendedMonster SelectedMonster { get; set; }
 
         public bool RequestHasRecommendation { get => _simulationService.RequestHasRecommendations(SelectedRequest); }
         public int RequestRecommendationCount
         {
             get
             {
+                try
+                {
+                    int retVal = _simulationService.RecommendationCount(SelectedRequest);
+                }
+                catch (Exception e)
+                {
 
-                //int retVal = _simulationService.RecommendationCount(SelectedRequest);
+                }
                 return 0;
             }
         }
@@ -48,7 +54,7 @@ namespace SWCRunes
                 
         }
 
-        public void ChangeSelectedMonster(IRecommendedMonster monster)
+        public void ChangeSelectedMonster(RecommendedMonster monster)
         {
             SelectedMonster = monster;
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("SelectedMonster"));
@@ -60,8 +66,8 @@ namespace SWCRunes
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("Monsters"));
             
 
-            List<IRecommendedMonster> recommendedMonsters= _simulationService.GetRecommendationPageForMonster(SelectedRequest.MonsterId, 1, 10, out int pages);
-            Monsters = new ObservableCollection<IRecommendedMonster>(recommendedMonsters);
+            List<RecommendedMonster> recommendedMonsters= _simulationService.GetRecommendationPageForMonster(SelectedRequest.MonsterId, 1, 10, out int pages);
+            Monsters = new ObservableCollection<RecommendedMonster>(recommendedMonsters);
            
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("Monsters"));
         }
@@ -70,7 +76,7 @@ namespace SWCRunes
 
         internal void EquipSelectedSet()
         {
-            _simulationService.EquipIRuneSet(SelectedMonster.Original.Id, SelectedMonster.Updated.Runes);
+            _simulationService.EquipRuneSet(SelectedMonster.Original.Id, SelectedMonster.Updated.Runes);
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("SelectedMonster"));
 
         }

@@ -32,7 +32,7 @@ public static class MauiProgram
         mauiAppBuilder.Services.AddSingleton<RequestInventoryViewModel>();
         mauiAppBuilder.Services.AddSingleton<RuneInventoryViewModel>();
 		mauiAppBuilder.Services.AddSingleton<MonsterInventoryViewModel>();
-        mauiAppBuilder.Services.AddSingleton<Components.IDToMonsterNameConverter>();
+        mauiAppBuilder.Services.AddSingleton<TeamInventoryViewModel>();
         return mauiAppBuilder;
     }
 
@@ -50,6 +50,10 @@ public static class MauiProgram
         mauiAppBuilder.Services.AddSingleton<MonsterInventory>();
         mauiAppBuilder.Services.AddSingleton<RuneInventory>();
         mauiAppBuilder.Services.AddSingleton<RequestInventory>();
+        mauiAppBuilder.Services.AddSingleton<TeamInventory>();
+        mauiAppBuilder.Services.AddSingleton<TeamNewPage>();
+        mauiAppBuilder.Services.AddSingleton<RecommendationDetail>();
+        mauiAppBuilder.Services.AddSingleton<AppShell>();
         return mauiAppBuilder;
     }
 }

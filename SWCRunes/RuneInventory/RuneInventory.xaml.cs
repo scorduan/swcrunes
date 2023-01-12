@@ -19,13 +19,13 @@ public partial class RuneInventory : ContentPage
 
 	void OnSaveClicked(System.Object sender, System.EventArgs e)
 	{
-        IRune rune = (IRune)((Button)sender).BindingContext;
+        Rune rune = (Rune)((Button)sender).BindingContext;
 		_viewModel.SaveUpdatedRune(rune);
 	}
 
     void OnDelClicked(System.Object sender, System.EventArgs e)
     {
-		IRune rune = (IRune)((Button)sender).BindingContext;
+		Rune rune = (Rune)((Button)sender).BindingContext;
 		_viewModel.DeleteRune(rune);
     }
 

@@ -1,34 +1,31 @@
 ﻿using System;
 namespace SWCRunesLib
 {
-    public interface IRecommendedMonster
-    {
-        public IMonster Original { get; }
-        public IMonster Updated { get; }
 
-        public int FirstValue { get; }
-        public int SecondValue { get; }
-        public int ThirdValue { get; }
 
-    }
+    public class RecommendedMonster  {
 
-    public class RecommendedMonster : IRecommendedMonster
-    {
-
-        public RecommendedMonster(IMonster original, IMonster updated)
+        public RecommendedMonster(Monster original, Monster updated, Request request)
         {
 
             Original = original;
             Updated = updated;
+            SourceRequest = request;
         }
 
-        public IMonster Original
+        public Monster Original
         {
             get;
             set;
         }
 
-        public IMonster Updated
+        public Monster Updated
+        {
+            get;
+            set;
+        }
+
+        public Request SourceRequest
         {
             get;
             set;

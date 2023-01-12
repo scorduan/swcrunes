@@ -36,9 +36,9 @@ namespace SWCRunes
 
         // Binding Properties
 
-        public ObservableCollection<IMonster> VisibleMonsters { get; private set; }
+        public ObservableCollection<Monster> VisibleMonsters { get; private set; }
 
-        public IMonster NewMonster { get; set; }
+        public Monster NewMonster { get; set; }
 
         private SimulationService _simulationService;
 
@@ -67,7 +67,7 @@ namespace SWCRunes
 
         public void RemoveSelected()
         {
-            _simulationService.DeleteMonster(SelectedMonster.Id);
+            _simulationService.DeleteMonster(SelectedMonster);
         }
 
         internal void UnequipSelected()

@@ -1,0 +1,15 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="SWCRunes.RecommendationDetail"
+             xmlns:local="clr-namespace:SWCRunes"
+             xmlns:components="clr-namespace:SWCRunes.Components"
+             xmlns:lib="clr-namespace:SWCRunesLib;assembly=SWCRunesLib"
+             x:DataType="lib:RecommendedMonster"
+             Title="Recommendation Detail">
+    <VerticalStackLayout>
+        <components:Monster WidthRequest="1000" HeightRequest="350" BindingContext="{Binding Original}"/>
+        <components:Monster WidthRequest="1000" HeightRequest="350" BindingContext="{Binding Updated}"/>
+        <Button x:Name="equipBtn" Text="Equip" Clicked="equipBtn_Clicked" HeightRequest="100" WidthRequest="100" />
+    </VerticalStackLayout>
+</ContentPage>

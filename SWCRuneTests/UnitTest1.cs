@@ -10,7 +10,7 @@ namespace netswop.tests
     [SetUp]
     public void Setup()
     {
-        m.Runes= new IRuneSet();
+        m.Runes= new RuneSet();
         m.HP=200;
         m.ATK=201;
         m.DEF=202;
@@ -261,7 +261,7 @@ namespace netswop.tests
 
         Monster expected = new Monster();
         Monster actual=Monster.FromJson(monsterJson);
-        actual.Runes=new IRuneSet();
+        actual.Runes=new RuneSet();
         actual.Runes.RuneOne=Rune.FromJson(rune1Json);
         actual.Runes.RuneTwo=Rune.FromJson(rune2Json);
         actual.Runes.RuneThree=Rune.FromJson(rune3Json);
@@ -301,7 +301,7 @@ namespace netswop.tests
         MonsterStorage monsters = RuneSerializer.ReadMonstersFromFile("monsters.data");
 
         Monster source = monsters.Monsters[0];
-        source.Runes=new IRuneSet();
+        source.Runes=new RuneSet();
         source.Runes.RuneOne=runes.Runes[0];
         source.Runes.RuneTwo=runes.Runes[1];
         source.Runes.RuneThree=runes.Runes[2];

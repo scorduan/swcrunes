@@ -1,0 +1,18 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="SWCRunes.TeamNewPage"
+             Title="Edit Team"
+             xmlns:local="clr-namespace:SWCRunes"
+             xmlns:components="clr-namespace:SWCRunes.Components"
+             xmlns:lib="clr-namespace:SWCRunesLib;assembly=SWCRunesLib"
+             x:DataType="local:TeamInventoryViewModel">
+    <VerticalStackLayout>
+        <Entry Text="{Binding SelectedTeam.Job}" Placeholder="Dungeon" />
+        <Entry Text="{Binding SelectedTeam.Weight}" Placeholder="Weight" />
+        <Picker ItemsSource="{Binding AllMonsters}" SelectedItem="{Binding SelectedTeam.SoulMonster}" ItemDisplayBinding="{Binding Name}"/>
+        <Picker ItemsSource="{Binding AllMonsters}" SelectedItem="{Binding SelectedTeam.OtherMonster1}" ItemDisplayBinding="{Binding Name}"/>
+        <Picker ItemsSource="{Binding AllMonsters}" SelectedItem="{Binding SelectedTeam.OtherMonster2}" ItemDisplayBinding="{Binding Name}"/>
+        <Button x:Name="Save" Text="Save" Clicked="Save_Clicked" />
+    </VerticalStackLayout>
+</ContentPage>

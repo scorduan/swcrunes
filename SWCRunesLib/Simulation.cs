@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.ObjectModel;
+using System.Data;
 using System.Text;
 
 namespace SWCRunesLib
@@ -8,54 +9,58 @@ namespace SWCRunesLib
     {
         public Simulation()
         {
-            _typedSlottedRunes[RuneType.Energy] = new Dictionary<RuneSlot, List<IRune>>();
+            _typedSlottedRunes[RuneType.Energy] = new Dictionary<RuneSlot, List<Rune>>();
             initSlottedRunes(_typedSlottedRunes[RuneType.Energy]);
-            _typedSlottedRunes[RuneType.Guard] = new Dictionary<RuneSlot, List<IRune>>();
+            _typedSlottedRunes[RuneType.Guard] = new Dictionary<RuneSlot, List<Rune>>();
             initSlottedRunes(_typedSlottedRunes[RuneType.Guard]);
 
-            _typedSlottedRunes[RuneType.Rage] = new Dictionary<RuneSlot, List<IRune>>();
+            _typedSlottedRunes[RuneType.Rage] = new Dictionary<RuneSlot, List<Rune>>();
             initSlottedRunes(_typedSlottedRunes[RuneType.Rage]);
-            _typedSlottedRunes[RuneType.Blade] = new Dictionary<RuneSlot, List<IRune>>();
+            _typedSlottedRunes[RuneType.Blade] = new Dictionary<RuneSlot, List<Rune>>();
             initSlottedRunes(_typedSlottedRunes[RuneType.Blade]);
 
-            _typedSlottedRunes[RuneType.Fatal] = new Dictionary<RuneSlot, List<IRune>>();
+            _typedSlottedRunes[RuneType.Fatal] = new Dictionary<RuneSlot, List<Rune>>();
             initSlottedRunes(_typedSlottedRunes[RuneType.Fatal]);
-            _typedSlottedRunes[RuneType.Swift] = new Dictionary<RuneSlot, List<IRune>>();
+            _typedSlottedRunes[RuneType.Swift] = new Dictionary<RuneSlot, List<Rune>>();
             initSlottedRunes(_typedSlottedRunes[RuneType.Swift]);
 
-            _typedSlottedRunes[RuneType.Focus] = new Dictionary<RuneSlot, List<IRune>>();
+            _typedSlottedRunes[RuneType.Focus] = new Dictionary<RuneSlot, List<Rune>>();
             initSlottedRunes(_typedSlottedRunes[RuneType.Focus]);
-            _typedSlottedRunes[RuneType.Endure] = new Dictionary<RuneSlot, List<IRune>>();
+            _typedSlottedRunes[RuneType.Endure] = new Dictionary<RuneSlot, List<Rune>>();
             initSlottedRunes(_typedSlottedRunes[RuneType.Endure]);
 
-            _typedSlottedRunes[RuneType.Foresight] = new Dictionary<RuneSlot, List<IRune>>();
+            _typedSlottedRunes[RuneType.Foresight] = new Dictionary<RuneSlot, List<Rune>>();
             initSlottedRunes(_typedSlottedRunes[RuneType.Foresight]);
-            _typedSlottedRunes[RuneType.Assemble] = new Dictionary<RuneSlot, List<IRune>>();
+            _typedSlottedRunes[RuneType.Assemble] = new Dictionary<RuneSlot, List<Rune>>();
             initSlottedRunes(_typedSlottedRunes[RuneType.Assemble]);
 
 
         }
 
-        private void initSlottedRunes(Dictionary<RuneSlot, List<IRune>> slottedRunes)
+        private SimulationDatabase db;
+
+        private void initSlottedRunes(Dictionary<RuneSlot, List<Rune>> slottedRunes)
         {
-            slottedRunes[RuneSlot.ONE] = new List<IRune>();
-            slottedRunes[RuneSlot.TWO] = new List<IRune>();
-            slottedRunes[RuneSlot.THREE] = new List<IRune>();
-            slottedRunes[RuneSlot.FOUR] = new List<IRune>();
-            slottedRunes[RuneSlot.FIVE] = new List<IRune>();
-            slottedRunes[RuneSlot.SIX] = new List<IRune>();
+            slottedRunes[RuneSlot.ONE] = new List<Rune>();
+            slottedRunes[RuneSlot.TWO] = new List<Rune>();
+            slottedRunes[RuneSlot.THREE] = new List<Rune>();
+            slottedRunes[RuneSlot.FOUR] = new List<Rune>();
+            slottedRunes[RuneSlot.FIVE] = new List<Rune>();
+            slottedRunes[RuneSlot.SIX] = new List<Rune>();
 
         }
 
-        private Dictionary<string, IMonster> _monsters = new Dictionary<string, IMonster>();
+        private Dictionary<string, Monster> _monsters = new Dictionary<string, Monster>();
 
-        private Dictionary<string, IRequest> _requests = new Dictionary<string, IRequest>();
+        private Dictionary<string, Request> _requests = new Dictionary<string, Request>();
 
-        private Dictionary<string, IRune> _allRunes = new Dictionary<string, IRune>();
+        private Dictionary<string, Team> _teams = new Dictionary<string, Team>();
 
-        private Dictionary<RuneType, Dictionary<RuneSlot, List<IRune>>> _typedSlottedRunes = new Dictionary<RuneType, Dictionary<RuneSlot, List<IRune>>>();
+        private Dictionary<string, Rune> _allRunes = new Dictionary<string, Rune>();
 
-        private Dictionary<string, List<IRecommendedMonster>> _recommendedMonsters = new Dictionary<string, List<IRecommendedMonster>>();
+        private Dictionary<RuneType, Dictionary<RuneSlot, List<Rune>>> _typedSlottedRunes = new Dictionary<RuneType, Dictionary<RuneSlot, List<Rune>>>();
+
+        private Dictionary<string, List<RecommendedMonster>> _recommendedMonsters = new Dictionary<string, List<RecommendedMonster>>();
 
         private string _monstersFile = "";
 
@@ -63,81 +68,123 @@ namespace SWCRunesLib
 
         private string _runesFile = "";
 
-
-        public void DeleteMonster(string monsterId)
+        private string _teamsFile = "";
+        public void DeleteTeam(Team team)
         {
-            _monsters.Remove(monsterId);
-            SaveState();
+            _teams.Remove(team.Id);
+            db.DeleteTeam(team);
         }
 
-        public void DeleteRequest(string requestId)
+        public void DeleteMonster(Monster monster)
         {
-            _requests.Remove(requestId);
-            SaveState();
+            _monsters.Remove(monster.Id);
+            db.DeleteMonster(monster);
         }
 
-        public void DeleteRune(string runeId)
+        public void DeleteRequest(Request request)
         {
-            IRune rune = _allRunes[runeId];
-            _allRunes.Remove(runeId);
+            _requests.Remove(request.Id);
+            db.DeleteRequest(request);
+        }
+
+        public void DeleteRune(Rune rune)
+        {
+
+            _allRunes.Remove(rune.Id);
             _typedSlottedRunes[rune.Type][rune.Slot].Remove(rune);
-            SaveState();
+            db.DeleteRune(rune);
         }
 
         public void EquipRune(string monsterId, string runeId)
         {
-            IRune rune = _allRunes[runeId];
-            _monsters[monsterId].EquipOne(rune);
-            SaveState();
+            Rune rune = _allRunes[runeId];
+            Rune? oldRune=_monsters[monsterId].EquipOne(rune);
+            db.SaveMonster(_monsters[monsterId]);
+            db.SaveRune(oldRune);
+            db.SaveRune(rune);
 
         }
 
-        public void EquipIRuneSet(string monsterId, IRuneSet IRuneSet)
+        public void EquipRuneSet(string monsterId, RuneSet RuneSet)
         {
-            _monsters[monsterId].EquipSet(IRuneSet);
-            SaveState();
+            RuneSet oldRunes=_monsters[monsterId].EquipSet(RuneSet);
+            db.SaveMonster(_monsters[monsterId]);
+            db.SaveRune(oldRunes.RuneOne);
+            db.SaveRune(RuneSet.RuneOne);
+            db.SaveRune(oldRunes.RuneTwo);
+            db.SaveRune(RuneSet.RuneTwo);
+            db.SaveRune(oldRunes.RuneThree);
+            db.SaveRune(RuneSet.RuneThree);
+            db.SaveRune(oldRunes.RuneFour);
+            db.SaveRune(RuneSet.RuneFour);
+            db.SaveRune(oldRunes.RuneFive);
+            db.SaveRune(RuneSet.RuneFive);
+            db.SaveRune(oldRunes.RuneSix);
+            db.SaveRune(RuneSet.RuneFive);
         }
 
         public void UnequipRuneSet(string monsterId)
         {
-            _monsters[monsterId].UnequipAll();
-            SaveState();
+            RuneSet oldRunes=_monsters[monsterId].UnequipAll();
+            db.SaveMonster(_monsters[monsterId]);
+            db.SaveRune(oldRunes.RuneOne);
+            
+            db.SaveRune(oldRunes.RuneTwo);
+            
+            db.SaveRune(oldRunes.RuneThree);
+            
+            db.SaveRune(oldRunes.RuneFour);
+            
+            db.SaveRune(oldRunes.RuneFive);
+
+            db.SaveRune(oldRunes.RuneSix);
         }
 
-        public List<IMonster> GetAllMonsters()
+
+        public Team GetNewTeam()
         {
-            return _monsters.Values.ToList<IMonster>();
+            return new Team(GetNewTeamId());
         }
 
-        public List<IRequest> GetAllRequests()
+        public List<Team> GetAllTeams()
         {
-            return _requests.Values.ToList<IRequest>();
+            return _teams.Values.ToList<Team>();
         }
 
-        public IMonster GetNewMonster()
+        public List<Monster> GetAllMonsters()
+        {
+            return _monsters.Values.ToList<Monster>();
+        }
+
+        public List<Request> GetAllRequests()
+        {
+            return _requests.Values.ToList<Request>();
+        }
+
+        public Monster GetNewMonster()
         {
 
             return new Monster(GetNewMonsterId());
         }
 
-        public IRequest GetNewRequest()
+        public Request GetNewRequest()
         {
             return new Request(GetNewRequestId());
         }
 
-        public IRune GetNewRune()
+        public Rune GetNewRune()
         {
             return new Rune(GetNewRuneId());
         }
 
-        public List<IRecommendedMonster> GetRecommendationPageForMonster(string monsterId, int pageNum, int pageSize, out int numPages)
+        public List<RecommendedMonster> GetRecommendationPageForMonster(string monsterId, int pageNum, int pageSize, out int numPages)
         {
-            
-            List<IRecommendedMonster> foundMonsters = new List<IRecommendedMonster>();
+
+            List<RecommendedMonster> foundMonsters = new List<RecommendedMonster>();
             numPages = 0;
             if (_recommendedMonsters.ContainsKey(monsterId))
             {
-                List<IRecommendedMonster> allRecommends = _recommendedMonsters[monsterId];
+                List<RecommendedMonster> allRecommends = _recommendedMonsters[monsterId];
                 int totalMonsters = allRecommends.Count();
                 numPages = (int)Math.Ceiling((float)totalMonsters / (float)pageSize);
                 int startingPoint = (pageNum - 1) * pageSize;
@@ -152,37 +199,42 @@ namespace SWCRunesLib
 
         }
 
-        public List<IRune> GetRunesByTypeSlot(RuneType runeType, RuneSlot runeSlot)
+        public List<Rune> GetRunesByTypeSlot(RuneType runeType, RuneSlot runeSlot)
         {
             return _typedSlottedRunes[runeType][runeSlot];
         }
 
-
-
-        public void UpdateMonster(IMonster monster)
+        public void UpdateTeam(Team team)
         {
-            _monsters[monster.Id] = monster;
-            SaveState();
+
+            db.SaveTeam(team);
+            _teams[team.Id] = team;
         }
 
-        public void UpdateRequest(IRequest request)
+        public void UpdateMonster(Monster monster)
+        {
+            db.SaveMonster(monster);
+            _monsters[monster.Id] = monster;
+        }
+
+        public void UpdateRequest(Request request)
         {
             _requests[request.Id] = request;
-            SaveState();
+            db.SaveRequest(request);
         }
 
-        public void UpdateRune(IRune rune)
+        public void UpdateRune(Rune rune)
         {
             if (_allRunes.ContainsKey(rune.Id))
             {
-                IRune oldRune = _allRunes[rune.Id];
+                Rune oldRune = _allRunes[rune.Id];
                 _typedSlottedRunes[oldRune.Type][oldRune.Slot].Remove(oldRune);
 
             }
 
             _allRunes[rune.Id] = rune;
             _typedSlottedRunes[rune.Type][rune.Slot].Add(rune);
-            SaveState();
+            db.SaveRune(rune);
 
         }
 
@@ -201,49 +253,95 @@ namespace SWCRunesLib
             return Guid.NewGuid().ToString();
         }
 
-        public void Optimize(IRequest request)
+        internal string GetNewTeamId()
+        {
+            return Guid.NewGuid().ToString();
+        }
+
+
+        public void Optimize(Request request)
         {
             Optimizer optimizer = new Optimizer(_allRunes.Values.ToList());
-            List<IRecommendedMonster> recommendedMonsters= optimizer.ProcessReq(request, _monsters[request.MonsterId]);
+            List<RecommendedMonster> recommendedMonsters = optimizer.ProcessReq(request, _monsters[request.MonsterId]);
             _recommendedMonsters[request.MonsterId] = recommendedMonsters;
         }
 
-        public void LoadState(string baseLocation)
+
+        // Declare the event.
+        public event ISimulation.LoadCompleteHandler LoadCompleteEvent;
+
+        public async Task LoadState(string baseLocation)
         {
+            db = new SimulationDatabase(baseLocation);
             _monstersFile = System.IO.Path.Combine(baseLocation, "monsters.data");
             _runesFile = System.IO.Path.Combine(baseLocation, "runes.data");
             _requestsFile = System.IO.Path.Combine(baseLocation, "requests.data");
+            _teamsFile = System.IO.Path.Combine(baseLocation, "teams.data");
 
-            List<IMonster> mons = RuneSerializer.ReadMonstersFromFile(_monstersFile);
-            List<IRune> runes = RuneSerializer.ReadRunesFromFile(_runesFile);
-            List<IRequest> requests = RuneSerializer.ReadRequestsFromFile(_requestsFile);
-
-            foreach (IMonster monster in mons)
+            try
             {
-                if (monster.Id == "") monster.Id = GetNewMonsterId();
-                _monsters.Add(monster.Id, monster);
-            }
+                List<Monster> mons = await db.GetAllMonsters();
+                List<Rune> runes = await db.GetAllRunes();
+                List<Request> requests = await db.GetAllRequests();
+                List<Team> teams = await db.GetAllTeams();
 
-            foreach (IRequest request in requests)
-            {
-                if (request.Id == "") request.Id = GetNewRequestId();
-                if (request.MonsterId != "") request.MonsterName = _monsters[request.MonsterId].Name;
-                _requests.Add(request.Id, request);
-            }
 
-            foreach (IRune rune in runes)
-            {
-                if (rune.Id == "") rune.Id = GetNewRuneId();
-                _allRunes.Add(rune.Id, rune);
-                _typedSlottedRunes[rune.Type][rune.Slot].Add(rune);
-                if (rune.EquippedOn!="")
+
+                foreach (Monster monster in mons)
                 {
-                    if (_monsters.ContainsKey(rune.EquippedOn))
+                    if (monster.Id == "") monster.Id = GetNewMonsterId();
+                    _monsters.Add(monster.Id, monster);
+                    await db.SaveMonster(monster);
+                }
+
+                foreach (Request request in requests)
+                {
+                    if (request.Id == "") request.Id = GetNewRequestId();
+                    if (request.MonsterId != "") request.MonsterName = _monsters[request.MonsterId].Name;
+                    _requests.Add(request.Id, request);
+                    await db.SaveRequest(request);
+                }
+
+                foreach (Rune rune in runes)
+                {
+                    if (rune.Id == "") rune.Id = GetNewRuneId();
+                    _allRunes.Add(rune.Id, rune);
+                    _typedSlottedRunes[rune.Type][rune.Slot].Add(rune);
+                    await db.SaveRune(rune);
+                    if (rune.EquippedOn != "")
                     {
-                        _monsters[rune.EquippedOn].EquipOne(rune);
+                        if (_monsters.ContainsKey(rune.EquippedOn))
+                        {
+                            _monsters[rune.EquippedOn].EquipOne(rune);
+                        }
                     }
                 }
+
+                foreach (Team team in teams)
+                {
+                    if (team.SoulMonsterId != "")
+                    {
+                        team.SoulMonster = _monsters[team.SoulMonsterId];
+                    }
+                    if (team.OtherMonster1Id != "")
+                    {
+                        team.OtherMonster1 = _monsters[team.OtherMonster1Id];
+                    }
+                    if (team.OtherMonster2Id != "")
+                    {
+                        team.OtherMonster2 = _monsters[team.OtherMonster2Id];
+                    }
+
+                    _teams.Add(team.Id, team);
+                    await db.SaveTeam(team);
+                }
             }
+            catch (Exception e)
+            {
+
+            }
+
+            LoadCompleteEvent?.Invoke(this);
         }
 
         private async Task SaveState()
@@ -251,9 +349,10 @@ namespace SWCRunesLib
             await RuneSerializer.SaveRunes(_allRunes.Values.ToList(), _runesFile);
             await RuneSerializer.SaveMonsters(_monsters.Values.ToList(), _monstersFile);
             await RuneSerializer.SaveRequests(_requests.Values.ToList(), _requestsFile);
+            await RuneSerializer.SaveTeams(_teams.Values.ToList(), _teamsFile);
         }
 
-        public long CalculatePerms(IRequest request)
+        public long CalculatePerms(Request request)
         {
             Optimizer optimizer = new Optimizer(_allRunes.Values.ToList());
             optimizer.UpdateReq(request);
@@ -261,7 +360,7 @@ namespace SWCRunesLib
         }
 
 
-        public IMonster GetMonsterForId(string id)
+        public Monster GetMonsterForId(string id)
         {
             return _monsters[id];
         }
@@ -280,7 +379,7 @@ namespace SWCRunesLib
                 {
                     count = _recommendedMonsters[monsterId].Count;
                 }
-                
+
             }
             return count;
         }

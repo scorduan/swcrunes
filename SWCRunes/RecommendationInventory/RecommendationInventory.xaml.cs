@@ -19,29 +19,33 @@ public partial class RecommendationInventory : ContentPage
 
     void recommendList_ItemSelected(System.Object sender, Microsoft.Maui.Controls.SelectedItemChangedEventArgs e)
     {
-        IRecommendedMonster recommendedMonster = (IRecommendedMonster)((ListView)sender).SelectedItem;
-        origMonsterDisplay.BindingContext = recommendedMonster.Original;
-        newMonsterDisplay.BindingContext = recommendedMonster.Updated;
+        RecommendedMonster recommendedMonster = (RecommendedMonster)((ListView)sender).SelectedItem;
 
         
         _viewModel.ChangeSelectedMonster(recommendedMonster);
-        
+        Shell.Current.GoToAsync("recommendations/details");
 
     }
 
-    void recommendList_Refreshing(System.Object sender, System.EventArgs e)
-    {
-        //_viewModel.AddAdditional();
-    }
-
-    void equipBtn_Clicked(System.Object sender, System.EventArgs e)
-    {
-        _viewModel.EquipSelectedSet();
-    }
 
     void requestList_ItemSelected(System.Object sender, Microsoft.Maui.Controls.SelectedItemChangedEventArgs e)
     {
+        try
+        {
         _viewModel.ChangeSelectedRequest();
-        
+        }
+        catch (Exception ex)
+        {
+
+        }
+
+
     }
+
+    void view_Clicked(System.Object sender, System.EventArgs e)
+    {
+        _viewModel.ChangeSelectedMonster((RecommendedMonster)((Button)sender).BindingContext);
+        Shell.Current.GoToAsync("detail");
+    }
+
 }

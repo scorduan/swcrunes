@@ -63,13 +63,13 @@ namespace SWCRunes
 
 
         // Bindable Properties
-        public ObservableCollection<IRune> VisibleRunes { get; private set; }
+        public ObservableCollection<Rune> VisibleRunes { get; private set; }
 
         public RuneType SelectedType { get; set; } = RuneType.Energy;
 
         public RuneSlot SelectedSlot { get; set; } = RuneSlot.ONE;
 
-        public IRune NewRune { get; set; }
+        public Rune NewRune { get; set; }
 
         // Service updaters methods
 
@@ -84,7 +84,7 @@ namespace SWCRunes
         }
 
 
-        public void SaveUpdatedRune(IRune rune)
+        public void SaveUpdatedRune(Rune rune)
         {
             _simulationService.UpdateRune(rune);
         }
@@ -95,9 +95,9 @@ namespace SWCRunes
             UpdateList();
         }
 
-        public void DeleteRune(IRune rune)
+        public void DeleteRune(Rune rune)
         {
-            _simulationService.DeleteRune(rune.Id);
+            _simulationService.DeleteRune(rune);
             UpdateList();
         }
     

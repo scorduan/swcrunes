@@ -5,12 +5,12 @@ using System.Collections.Generic;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
-public class RuneSerializer
+internal class RuneSerializer
 {
 
-    public static List<IRune> ReadRunesFromFile(string location)
+    public static List<Rune> ReadRunesFromFile(string location)
     {
-        List<IRune> runes = new List<IRune>();
+        List<Rune> runes = new List<Rune>();
         foreach (string line in System.IO.File.ReadLines(location))
         {
             runes.Add(Rune.FromJson(line));
@@ -19,9 +19,20 @@ public class RuneSerializer
         return runes;
     }
 
-    public static List<IMonster> ReadMonstersFromFile(string location)
+    public static List<Team> ReadTeamsFromFile(string location)
     {
-        List<IMonster> monsters = new List<IMonster>();
+        List<Team> teams = new List<Team>();
+        foreach (string line in System.IO.File.ReadLines(location))
+        {
+            teams.Add(Team.FromJson(line));
+        }
+
+        return teams;
+    }
+
+    public static List<Monster> ReadMonstersFromFile(string location)
+    {
+        List<Monster> monsters = new List<Monster>();
         foreach (string line in System.IO.File.ReadLines(location))
         {
             monsters.Add(Monster.FromJson(line));
@@ -30,9 +41,9 @@ public class RuneSerializer
         return monsters;
     }
 
-    public static List<IRequest> ReadRequestsFromFile(string location)
+    public static List<Request> ReadRequestsFromFile(string location)
     {
-        List<IRequest> requests = new List<IRequest>();
+        List<Request> requests = new List<Request>();
         foreach (string line in System.IO.File.ReadLines(location))
         {
             requests.Add(Request.FromJson(line));
@@ -49,7 +60,7 @@ public class RuneSerializer
         }
     }
 
-    public static async Task SaveRunes(List<IRune> runes, string location)
+    public static async Task SaveRunes(List<Rune> runes, string location)
     {
         using StreamWriter file = new(location);
 
@@ -61,7 +72,7 @@ public class RuneSerializer
         }
     }
 
-    public static async Task SaveMonsters(List<IMonster> monsters, string location)
+    public static async Task SaveMonsters(List<Monster> monsters, string location)
     {
         using StreamWriter file = new(location);
 
@@ -74,7 +85,7 @@ public class RuneSerializer
     }
 
 
-    public static async Task SaveRequests(List<IRequest> requests, string location)
+    public static async Task SaveRequests(List<Request> requests, string location)
     {
         using StreamWriter file = new(location);
 
@@ -82,6 +93,18 @@ public class RuneSerializer
         {
 
             await file.WriteLineAsync(request.ToJson());
+
+        }
+    }
+
+    public static async Task SaveTeams(List<Team> teams, string location)
+    {
+        using StreamWriter file = new(location);
+
+        foreach (Team team in teams)
+        {
+
+            await file.WriteLineAsync(team.ToJson());
 
         }
     }

@@ -33,6 +33,8 @@ namespace SWCRunes
             AttributeList.Add("Survival");
             AttributeList.Add("Damage");
             AttributeList.Add("BasicDamage");
+            AttributeList.Add("DEFDamageR");
+            AttributeList.Add("HPDamageR");
 
             StatList.Add("ATKP");
             StatList.Add("ATKF");
@@ -92,9 +94,9 @@ namespace SWCRunes
         public ObservableCollection<Object> SelectedStats { get; set; } = new ObservableCollection<Object>();
         public ObservableCollection<Object> NewSelectedStats { get; set; } = new ObservableCollection<Object>();
 
-        public ObservableCollection<IMonster> VisibleMonsters { get; set; }
+        public ObservableCollection<Monster> VisibleMonsters { get; set; }
 
-        public IMonster NewSelectedMonster { get; set; }
+        public Monster NewSelectedMonster { get; set; }
 
         public string SelectedMonsterName
         {
@@ -174,9 +176,9 @@ namespace SWCRunes
 
         // Binding Properties
 
-        public ObservableCollection<IRequest> VisibleRequests { get; private set; }
+        public ObservableCollection<Request> VisibleRequests { get; private set; }
 
-        public IRequest NewRequest { get; set; }
+        public Request NewRequest { get; set; }
 
         private SimulationService _simulationService;
 
@@ -193,7 +195,7 @@ namespace SWCRunes
             SaveUpdatedRequest(SelectedRequest);
         }
 
-        public void SaveUpdatedRequest(IRequest request)
+        public void SaveUpdatedRequest(Request request)
         {
             _simulationService.UpdateRequest(request);
         }
@@ -205,9 +207,9 @@ namespace SWCRunes
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("NewRequest"));
         }
 
-        public void DeleteRequest(IRequest request)
+        public void DeleteRequest(Request request)
         {
-            _simulationService.DeleteRequest(request.Id);
+            _simulationService.DeleteRequest(request);
         }
 
         internal void SelectedRequestChanged()

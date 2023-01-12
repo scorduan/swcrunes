@@ -2,31 +2,11 @@ namespace SWCRunesLib;
 using System.Collections.Generic;
 using System.Text.Json;
 using System.Text.Json.Serialization;
+using SQLite;
+using SQLitePCL;
 
-public interface IRequest
-{
-    public string Id { get; set; }
 
-    public string MonsterId { get; set; }
-
-    public string MonsterName { get; set; }
-
-    public string PrimaryAttribute { get; set; }
-
-    public string SecondaryAttribute { get; set; }
-
-    public string TertiaryAttribute { get; set; }
-
-    public RuneType RestrictSetOne { get; set; }
-
-    public RuneType RestrictSetTwo { get; set; }
-
-    public RuneType RestrictSetThree { get; set; }
-
-    public List<string> FocusStats { get; set; } 
-}
-
-public class Request :IRequest
+public class Request
 {
 
     public string MonsterId { get; set; }
@@ -46,7 +26,33 @@ public class Request :IRequest
 
     public RuneType RestrictSetThree { get; set; } = RuneType.Null;
 
+    [Ignore]
     public List<string> FocusStats { get; set; } = new List<string>();
+
+    public string FocusStatString
+        {
+        get
+        {
+            return string.Join(",", FocusStats.ToArray());
+        }
+        set
+        {
+            FocusStats.Clear();
+            FocusStats.AddRange(value.Split(","));
+        }
+        }
+
+
+    public Request()
+    {
+
+        MonsterId = "";
+        MonsterName = "";
+        PrimaryAttribute = "ATK";
+        SecondaryAttribute = "DEF";
+        TertiaryAttribute = "HP";
+    }
+
 
     public Request(string id="")
     {
@@ -70,7 +76,7 @@ public class Request :IRequest
         return JsonSerializer.Deserialize<Request>(text);
     }
 
-    
+    [PrimaryKey]
     public string Id { get; set; }
 
 }

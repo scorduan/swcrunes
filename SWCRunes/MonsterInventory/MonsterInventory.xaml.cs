@@ -43,4 +43,5 @@ public partial class MonsterInventory : ContentPage
     {
         _viewModel.UnequipSelected();
     }
+
 }

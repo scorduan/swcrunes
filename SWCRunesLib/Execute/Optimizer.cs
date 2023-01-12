@@ -4,7 +4,7 @@ using System;
 using System.Collections.Generic;
 public class Optimizer
 {
-    public Optimizer(List<IRune> vRunes)
+    public Optimizer(List<Rune> vRunes)
     {
 
 
@@ -122,26 +122,26 @@ public class Optimizer
     private Dictionary<RuneType, Dictionary<string, Dictionary<RuneSlot, List<Rune>>>> typedStattedSlottedRunes = new Dictionary<RuneType, Dictionary<string, Dictionary<RuneSlot, List<Rune>>>>();
 
     
-    private IRequest _req;
+    private Request _req;
 
 
-    public void UpdateReq(IRequest inReq)
+    public void UpdateReq(Request inReq)
     {
         _req = inReq;
     }
 
-    public List<IRecommendedMonster> ProcessReq(IRequest inReq,IMonster origMonster)
+    public List<RecommendedMonster> ProcessReq(Request inReq,Monster origMonster)
     {
         DateTime time = DateTime.Now;
         _req = inReq;
-        List<IRuneSet> runeSets = BuildRunePermutations();
+        List<RuneSet> runeSets = BuildRunePermutations();
         time = DateTime.Now;
-        List<IRecommendedMonster> results = new List<IRecommendedMonster>();
+        List<RecommendedMonster> results = new List<RecommendedMonster>();
 
 
-        foreach (IRuneSet set in runeSets)
+        foreach (RuneSet set in runeSets)
         {
-            IMonster m = (IMonster)origMonster.Clone();
+            Monster m = (Monster)origMonster.Clone();
             // Ensure that anything that happens to the clone doesn't happen...
             m.EquipSet(set,true);
             
@@ -162,9 +162,9 @@ public class Optimizer
         return results;
     }
 
-    private RecommendedMonster getRecommendedMonster(IMonster origMonster, IMonster m, IRequest req)
+    private RecommendedMonster getRecommendedMonster(Monster origMonster, Monster m, Request req)
     {
-        RecommendedMonster recMon = new RecommendedMonster(origMonster, m);
+        RecommendedMonster recMon = new RecommendedMonster(origMonster, m,req);
 
         if (req.PrimaryAttribute == "ATK") recMon.FirstValue = m.ATK;
         if (req.PrimaryAttribute == "DEF") recMon.FirstValue = m.DEF;
@@ -185,6 +185,8 @@ public class Optimizer
         if (req.PrimaryAttribute == "BasicDamage") recMon.FirstValue = m.BasicDamage;
         if (req.PrimaryAttribute == "Survival") recMon.FirstValue = m.Survival;
         if (req.PrimaryAttribute == "EffectiveHP") recMon.FirstValue = m.EffectiveHP;
+        if (req.PrimaryAttribute == "DEFDamageR") recMon.FirstValue = m.DEFDamageR;
+        if (req.PrimaryAttribute == "HPDamageR") recMon.FirstValue = m.HPDamageR;
 
         if (req.SecondaryAttribute == "ATK") recMon.SecondValue = m.ATK;
         if (req.SecondaryAttribute == "DEF") recMon.SecondValue = m.DEF;
@@ -205,6 +207,8 @@ public class Optimizer
         if (req.SecondaryAttribute == "BasicDamage") recMon.SecondValue = m.BasicDamage;
         if (req.SecondaryAttribute == "Survival") recMon.SecondValue = m.Survival;
         if (req.SecondaryAttribute == "EffectiveHP") recMon.SecondValue = m.EffectiveHP;
+        if (req.SecondaryAttribute == "DEFDamageR") recMon.SecondValue = m.DEFDamageR;
+        if (req.SecondaryAttribute == "HPDamageR") recMon.SecondValue = m.HPDamageR;
 
         if (req.TertiaryAttribute == "ATK") recMon.ThirdValue = m.ATK;
         if (req.TertiaryAttribute == "DEF") recMon.ThirdValue = m.DEF;
@@ -225,13 +229,15 @@ public class Optimizer
         if (req.TertiaryAttribute == "BasicDamage") recMon.ThirdValue = m.BasicDamage;
         if (req.TertiaryAttribute == "Survival") recMon.ThirdValue = m.Survival;
         if (req.TertiaryAttribute == "EffectiveHP") recMon.ThirdValue = m.EffectiveHP;
+        if (req.TertiaryAttribute == "DEFDamageR") recMon.ThirdValue = m.DEFDamageR;
+        if (req.TertiaryAttribute == "HPDamageR") recMon.ThirdValue = m.HPDamageR;
 
         return recMon;
     }
 
-    public List<IRuneSet> BuildRunePermutations()
+    public List<RuneSet> BuildRunePermutations()
     {
-        List<IRuneSet> perms = new List<IRuneSet>();
+        List<RuneSet> perms = new List<RuneSet>();
 
 
         List<RuneType> typeList = new List<RuneType>();
@@ -319,7 +325,7 @@ public class Optimizer
                                                                                 if ((rune6.EquippedOn != "") && (rune6.EquippedOn != _req.MonsterId)) continue;
                                                                                 used6.Add(rune6.Id);
 
-                                                                                IRuneSet set = new RuneSet();
+                                                                                RuneSet set = new RuneSet();
 
                                                                                 set.RuneOne = rune1;
                                                                                 set.RuneTwo = rune2;
@@ -465,7 +471,7 @@ public class Optimizer
         return result;
     }
 
-    public int CompareMonsters(IRecommendedMonster left, IRecommendedMonster right)
+    public int CompareMonsters(RecommendedMonster left, RecommendedMonster right)
     {
         //TODO: above target threshold is equal
         int result = 0;

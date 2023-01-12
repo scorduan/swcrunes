@@ -7,60 +7,76 @@ namespace SWCRunesLib
 
 
 		//Rune Maint
-		public IRune GetNewRune();
+		public Rune GetNewRune();
 
-		public void UpdateRune(IRune rune);
+		public void UpdateRune(Rune rune);
 
-		public void DeleteRune(string runeId);
+		public void DeleteRune(Rune rune);
 
-		public List<IRune> GetRunesByTypeSlot(RuneType runeType, RuneSlot runeSlot);
+		public List<Rune> GetRunesByTypeSlot(RuneType runeType, RuneSlot runeSlot);
 
 
 
 		//Monster Maint
-		public IMonster GetNewMonster();
+		public Monster GetNewMonster();
 
-		public void UpdateMonster(IMonster monster);
+		public void UpdateMonster(Monster monster);
 
-		public void DeleteMonster(string monsterId);
+		public void DeleteMonster(Monster monster);
 
-		public List<IMonster> GetAllMonsters();
+		public List<Monster> GetAllMonsters();
 
 		public void UnequipRuneSet(string monsterId);
 
 
 		//Request Maint
-		public IRequest GetNewRequest();
+		public Request GetNewRequest();
 
-		public void UpdateRequest(IRequest request);
+		public void UpdateRequest(Request request);
 
-		public void DeleteRequest(string requestId);
+		public void DeleteRequest(Request request);
 
-		public List<IRequest> GetAllRequests();
+		public List<Request> GetAllRequests();
 
 
 		// Recommendations
-		public void Optimize(IRequest request);
+		public void Optimize(Request request);
 
-		public List<IRecommendedMonster> GetRecommendationPageForMonster(string monsterId, int pageNum, int pageSize, out int numPages);
+		public List<RecommendedMonster> GetRecommendationPageForMonster(string monsterId, int pageNum, int pageSize, out int numPages);
 
-		public void EquipIRuneSet(string monsterId, IRuneSet IRuneSet);
+		public void EquipRuneSet(string monsterId, RuneSet RuneSet);
 
 		public void EquipRune(string monsterId, string runeId);
 
 
 
-		// Global
+        //Team Maint
+        public Team GetNewTeam();
+
+        public void UpdateTeam(Team team);
+
+        public void DeleteTeam(Team team);
+
+        public List<Team> GetAllTeams();
 
 
-		public void LoadState(string baseLocation);
+        // Global
 
-		public long CalculatePerms(IRequest request);
-		public IMonster GetMonsterForId(string id);
+
+        public Task LoadState(string baseLocation);
+
+		public long CalculatePerms(Request request);
+		public Monster GetMonsterForId(string id);
 
 		public bool MonsterHasRecommendations(string requestId);
 
 		public int RecommendationCount(string requestId);
+
+        // Declare the delegate (if using non-generic pattern).
+        public delegate void LoadCompleteHandler(object sender);
+
+        // Declare the event.
+        public event LoadCompleteHandler LoadCompleteEvent;
     }
 }
 

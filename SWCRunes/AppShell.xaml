@@ -5,47 +5,47 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:local="clr-namespace:SWCRunes"
     >
-    <FlyoutItem Title="Home">
-        <Tab>
-    <ShellContent
+    <FlyoutItem FlyoutDisplayOptions="AsMultipleItems">
+
+        
+        <ShellContent 
         Title="Home"
         ContentTemplate="{DataTemplate local:MainPage}"
-        Route="MainPage" />
-    </Tab>
-    </FlyoutItem>
-    <FlyoutItem Title="Monsters">
-        <Tab>
-    <ShellContent
+        Route="Home" />
+
+
+        <ShellContent
         Title="Monsters"
         ContentTemplate="{DataTemplate local:MonsterInventory}"
-        Route="MainPage" />
-    </Tab>
-    </FlyoutItem>
-    <FlyoutItem Title="Runes">
-        <Tab>
-    <ShellContent
+        Route="monsters" />
+
+
+        <ShellContent
         Title="Runes"
         ContentTemplate="{DataTemplate local:RuneInventory}"
-        Route="MainPage" />
-    </Tab>
-    </FlyoutItem>
-    <FlyoutItem Title="Requests">
-        <Tab>
-    <ShellContent
+        Route="runes" />
+
+        
+        <ShellContent
         Title="Requests"
         ContentTemplate="{DataTemplate local:RequestInventory}"
-        Route="MainPage" />
-    </Tab>
-    </FlyoutItem>
-    <FlyoutItem Title="Recommendations">
-        <Tab>
-    <ShellContent
+        Route="requests" />
+
+
+        <ShellContent
         Title="Recommendations"
         ContentTemplate="{DataTemplate local:RecommendationInventory}"
-        Route="MainPage" />
-    </Tab>
-    </FlyoutItem>
+        Route="recommendations" />
+         
 
+        <Tab Title="Teams" Route="teams">
+            <ShellContent
+            Title="Teams"
+            ContentTemplate="{DataTemplate local:TeamInventory}"
+            Route="list" />
+        
+            </Tab>
+    </FlyoutItem>
 
 </Shell>
 
