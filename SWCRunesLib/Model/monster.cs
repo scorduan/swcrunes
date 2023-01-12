@@ -3,105 +3,19 @@ using System;
 using System.Collections.Generic;
 using System.Text.Json.Serialization;
 using System.Text.Json;
+using static System.Net.Mime.MediaTypeNames;
+using SQLite;
 
-public interface IMonster : ICloneable
+[Table("Monster")]
+public class Monster :IComparable<Monster>
 {
-    public string Id { get; set; }
 
-    public IRuneSet Runes { get; set; }
-
-    public void EquipSet(IRuneSet IRuneSet, bool isTemporary = false);
-
-    public void UnequipSlot(RuneSlot slot);
-
-    public void UnequipAll();
-
-    public void EquipOne(IRune rune);
-
-
-    public string Name
+    public Monster()
     {
-        get; set;
+        Id = "";
     }
 
 
-    public int BaseATK { get; set; }
-    public int BaseATKBoost { get; set; }
-
-
-    public int BaseDEF { get; set; }
-    public int BaseDEFBoost { get; set; }
-
-    public int BaseHP { get; set; }
-    public int BaseHPBoost { get; set; }
-
-    public int BaseSPD { get; set; }
-
-
-    public int BaseCR { get; set; }
-    public int BaseCD { get; set; }
-
-    public int BaseACC { get; set; }
-    public int BaseRES { get; set; }
-    public int BaseRESBoost { get; set; }
-
-    public int BasePR { get; set; }
-    public int BaseEV { get; set; }
-
-
-    public int ATK { get; }
-    public int ATKBoost { get; }
-
-    public int DEF { get; }
-    public int DEFBoost { get; }
-
-    public int HP { get; }
-    public int HPBoost { get; }
-
-    public int SPD { get; }
-    public int SPDBoost { get; }
-
-    public int CR { get; }
-    public int CRBoost { get; }
-    public int CD { get; }
-
-
-    public int ACC { get; }
-    public int ACCBoost { get; }
-    public int RES { get; }
-    public int RESBoost { get; }
-
-    public int PR { get; }
-    public int PRBoost { get; }
-    public int EV { get; }
-    public int EVBoost { get; }
-
-    public int EffectiveHP
-    {
-        get;
-    }
-    public int Survival
-    {
-
-        get;
-    }
-
-    public int Damage
-    {
-        get;
-    }
-
-    public int BasicDamage
-    {
-        get;
-    }
-
-
-
-
-}
-public class Monster : IMonster
-{
     [JsonConstructor]
     public Monster(string id = "")
     {
@@ -116,7 +30,37 @@ public class Monster : IMonster
     public string Name { get; set; } = "";
 
     [JsonIgnore]
-    public IRuneSet Runes { get; set; } = new RuneSet();
+
+
+    public List<Team> Teams { get; private set; } = new List<Team>();
+
+    public void AddTeam(Team team)
+    {
+        Teams.Add(team);
+        refreshWeight();
+    }
+
+    private void refreshWeight()
+    {
+        Weight = 0;
+        foreach (Team team in Teams)
+        {
+            Weight = Weight + team.Weight;
+        }
+    }
+
+    public void RemoveTeam(Team team)
+    {
+        Teams.Remove(team);
+        refreshWeight();
+    }
+
+    
+
+    public int Weight { get; private set; } = 0;
+
+    [Ignore]
+    public RuneSet Runes { get; set; } = new RuneSet();
 
     private int _baseATK;
     public int BaseATK
@@ -316,6 +260,7 @@ public class Monster : IMonster
 
 
 
+    [PrimaryKey]
     public string Id { get; set; }
 
     public int EffectiveHP
@@ -346,7 +291,23 @@ public class Monster : IMonster
         private set;
     }
 
+    public int DEFDamageR
+    {
+        get;
+
+        private set;
+    }
+
+    public int HPDamageR
+    {
+        get;
+
+        private set;
+    }
+
     private Dictionary<RuneType, int> _setCount = new Dictionary<RuneType, int>();
+
+
 
     private void updateSetCounts()
     {
@@ -391,12 +352,12 @@ public class Monster : IMonster
         int numForesightSets = (int)Math.Floor((double)_setCount[RuneType.Foresight] / 2d);
         int numAssembleSets = (int)Math.Floor((double)_setCount[RuneType.Assemble] / 2d);
 
-        IRune runeOne = new Rune();
-        IRune runeTwo = new Rune();
-        IRune runeThree = new Rune();
-        IRune runeFour = new Rune();
-        IRune runeFive = new Rune();
-        IRune runeSix = new Rune();
+        Rune runeOne = new Rune();
+        Rune runeTwo = new Rune();
+        Rune runeThree = new Rune();
+        Rune runeFour = new Rune();
+        Rune runeFive = new Rune();
+        Rune runeSix = new Rune();
 
 
         if (Runes != null)
@@ -453,6 +414,8 @@ public class Monster : IMonster
         EffectiveHP = CalcEffectiveHP();
         Survival = CalcSurvival();
         BasicDamage = SPD * Damage;
+        DEFDamageR = CalcDEFDamageR();
+        HPDamageR = CalcHPDamageR();
 
     }
 
@@ -471,11 +434,31 @@ public class Monster : IMonster
     private int CalcDamage()
     {
         int damage = ATK;
+        return damage + DamageBonusCalc(damage);
+    }
+
+    private int CalcDEFDamageR()
+    {
+        int damage = ATK / 2 + DEF;
+
+        return damage + DamageBonusCalc(damage);
+    }
+
+    private int CalcHPDamageR()
+    {
+        int damage = HP/5;
+
+        return damage + DamageBonusCalc(damage);
+    }
+
+    private int DamageBonusCalc(int baseDamage)
+    {
         double dblCR = (double)CR / 1000d;
         double dblCD = (double)CD / 1000d;
-        int bonusDamage = (int)Math.Floor((double)damage * dblCR * dblCD);
-        return damage + bonusDamage;
+        int bonusDamage = (int)Math.Floor((double)baseDamage * dblCR * dblCD);
+        return bonusDamage;
     }
+
     private int CalcSurvival()
     {
 
@@ -520,6 +503,8 @@ public class Monster : IMonster
         return (int)percBoost;
     }
 
+
+
     public string ToJson()
     {
         return JsonSerializer.Serialize<Monster>(this);
@@ -531,8 +516,9 @@ public class Monster : IMonster
         return JsonSerializer.Deserialize<Monster>(text);
     }
 
-    public void EquipSet(IRuneSet IRuneSet, bool isTemporary = false)
+    public RuneSet EquipSet(RuneSet RuneSet, bool isTemporary = false)
     {
+        RuneSet oldRunes = Runes;
         if (!isTemporary)
         {
             if (Runes != null)
@@ -569,8 +555,8 @@ public class Monster : IMonster
                 }
             }
         }
-
-        Runes = IRuneSet;
+        
+        Runes = RuneSet;
         if (!isTemporary)
         {
             if (Runes.RuneOne != null)
@@ -605,14 +591,17 @@ public class Monster : IMonster
             }
         }
         UpdateStats();
+        return oldRunes;
     }
 
-    public void UnequipSlot(RuneSlot slot)
+    public Rune? UnequipSlot(RuneSlot slot)
     {
+        Rune oldRune = null;
         if (slot == RuneSlot.ONE)
         {
             if (Runes.RuneOne != null)
             {
+                oldRune = Runes.RuneOne;
                 Runes.RuneOne.EquippedOn = "";
                 Runes.RuneOne.EquippedMonster = null;
             }
@@ -622,6 +611,7 @@ public class Monster : IMonster
         {
             if (Runes.RuneTwo != null)
             {
+                oldRune = Runes.RuneTwo;
                 Runes.RuneTwo.EquippedOn = "";
                 Runes.RuneTwo.EquippedMonster = null;
             }
@@ -631,6 +621,7 @@ public class Monster : IMonster
         {
             if (Runes.RuneThree != null)
             {
+                oldRune = Runes.RuneThree;
                 Runes.RuneThree.EquippedOn = "";
                 Runes.RuneThree.EquippedMonster = null;
             }
@@ -640,6 +631,7 @@ public class Monster : IMonster
         {
             if (Runes.RuneFour != null)
             {
+                oldRune = Runes.RuneFour;
                 Runes.RuneFour.EquippedOn = "";
                 Runes.RuneFour.EquippedMonster = null;
             }
@@ -649,6 +641,7 @@ public class Monster : IMonster
         {
             if (Runes.RuneFive != null)
             {
+                oldRune = Runes.RuneFive;
                 Runes.RuneFive.EquippedOn = "";
                 Runes.RuneFive.EquippedMonster = null;
             }
@@ -658,29 +651,37 @@ public class Monster : IMonster
         {
             if (Runes.RuneSix != null)
             {
+                oldRune = Runes.RuneSix;
                 Runes.RuneSix.EquippedOn = "";
                 Runes.RuneSix.EquippedMonster = null;
             }
             Runes.RuneSix = null;
         }
         UpdateStats();
+
+        return oldRune;
     }
 
-    public void UnequipAll()
+    public RuneSet UnequipAll()
     {
-        UnequipSlot(RuneSlot.ONE);
-        UnequipSlot(RuneSlot.TWO);
-        UnequipSlot(RuneSlot.THREE);
-        UnequipSlot(RuneSlot.FOUR);
-        UnequipSlot(RuneSlot.FIVE);
-        UnequipSlot(RuneSlot.SIX);
+        RuneSet oldRunes = new RuneSet();
+        oldRunes.RuneOne= UnequipSlot(RuneSlot.ONE);
+        oldRunes.RuneTwo = UnequipSlot(RuneSlot.TWO);
+        oldRunes.RuneThree = UnequipSlot(RuneSlot.THREE);
+        oldRunes.RuneFour = UnequipSlot(RuneSlot.FOUR);
+        oldRunes.RuneFive = UnequipSlot(RuneSlot.FIVE);
+        oldRunes.RuneSix = UnequipSlot(RuneSlot.SIX);
+
+        return oldRunes;
     }
 
-    public void EquipOne(IRune rune)
+    public Rune? EquipOne(Rune rune)
     {
+        Rune? oldRune = null;
         if (rune.Slot == RuneSlot.ONE)
         {
             if (Runes.RuneOne != null) Runes.RuneOne.EquippedOn = "";
+            oldRune = Runes.RuneOne;
             Runes.RuneOne = rune;
             Runes.RuneOne.EquippedOn = this.Id;
             Runes.RuneOne.EquippedMonster = this;
@@ -689,6 +690,7 @@ public class Monster : IMonster
         if (rune.Slot == RuneSlot.TWO)
         {
             if (Runes.RuneTwo != null) Runes.RuneTwo.EquippedOn = "";
+            oldRune = Runes.RuneOne;
             Runes.RuneTwo = rune;
             Runes.RuneTwo.EquippedOn = this.Id;
             Runes.RuneTwo.EquippedMonster = this;
@@ -697,6 +699,7 @@ public class Monster : IMonster
         if (rune.Slot == RuneSlot.THREE)
         {
             if (Runes.RuneThree != null) Runes.RuneThree.EquippedOn = "";
+            oldRune = Runes.RuneThree;
             Runes.RuneThree = rune;
             Runes.RuneThree.EquippedOn = this.Id;
             Runes.RuneThree.EquippedMonster = this;
@@ -705,6 +708,7 @@ public class Monster : IMonster
         if (rune.Slot == RuneSlot.FOUR)
         {
             if (Runes.RuneFour != null) Runes.RuneFour.EquippedOn = "";
+            oldRune = Runes.RuneFour;
             Runes.RuneFour = rune;
             Runes.RuneFour.EquippedOn = this.Id;
             Runes.RuneFour.EquippedMonster = this;
@@ -713,6 +717,7 @@ public class Monster : IMonster
         if (rune.Slot == RuneSlot.FIVE)
         {
             if (Runes.RuneFive != null) Runes.RuneFive.EquippedOn = "";
+            oldRune = Runes.RuneFive;
             Runes.RuneFive = rune;
             Runes.RuneFive.EquippedOn = this.Id;
             Runes.RuneFive.EquippedMonster = this;
@@ -721,16 +726,23 @@ public class Monster : IMonster
         if (rune.Slot == RuneSlot.SIX)
         {
             if (Runes.RuneSix != null) Runes.RuneSix.EquippedOn = "";
+            oldRune = Runes.RuneSix;
             Runes.RuneSix = rune;
             Runes.RuneSix.EquippedOn = this.Id;
             Runes.RuneSix.EquippedMonster = this;
         }
         UpdateStats();
+        return oldRune;
     }
 
     public object Clone()
     {
         return MemberwiseClone();
+    }
+
+    public int CompareTo(Monster? other)
+    {
+        return this.Weight.CompareTo(other?.Weight) * -1;
     }
 }
 
