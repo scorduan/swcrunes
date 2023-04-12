@@ -1,0 +1,87 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="SWCRunes.RequestDetail"
+                         xmlns:local="clr-namespace:SWCRunes"
+             xmlns:lib="clr-namespace:SWCRunesLib;assembly=SWCRunesLib"
+             xmlns:components="clr-namespace:SWCRunes.Components"
+             x:DataType="local:RequestInventoryViewModel"
+             Title="Request Detail">
+    <VerticalStackLayout>
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="100"/>
+
+                <ColumnDefinition Width="100"/>
+                <ColumnDefinition Width="100"/>
+                <ColumnDefinition Width="100"/>
+
+                <ColumnDefinition Width="100"/>
+                <ColumnDefinition Width="100"/>
+                <ColumnDefinition Width="100"/>
+
+                <ColumnDefinition Width="100"/>
+
+                <ColumnDefinition Width="100"/>
+                <ColumnDefinition Width="100"/>
+                <ColumnDefinition Width="100"/>
+
+
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="40"/>
+                <RowDefinition Height="300"/>
+
+            </Grid.RowDefinitions>
+            
+            <Picker Grid.Column="0" SelectedItem="{Binding SelectedRequest.Monster}" ItemsSource="{Binding VisibleMonsters}" ItemDisplayBinding="{Binding Name}" />
+            <Picker Grid.Column="1" ItemsSource="{Binding AttributeList}" SelectedItem="{Binding Path=SelectedRequest.PrimaryAttribute}"/>
+            <Picker Grid.Column="2" ItemsSource="{Binding AttributeList}" SelectedItem="{Binding Path=SelectedRequest.SecondaryAttribute}"/>
+            <Picker Grid.Column="3" ItemsSource="{Binding AttributeList}" SelectedItem="{Binding Path=SelectedRequest.TertiaryAttribute}"/>
+
+            <Picker Grid.Column="4" ItemsSource="{Binding TypeList}" SelectedItem="{Binding Path=SelectedRequest.RestrictSetOne}" />
+            <Picker Grid.Column="5" ItemsSource="{Binding TypeList}" SelectedItem="{Binding Path=SelectedRequest.RestrictSetTwo}" />
+            <Picker Grid.Column="6" ItemsSource="{Binding TypeList}" SelectedItem="{Binding Path=SelectedRequest.RestrictSetThree}" />
+
+
+            <CollectionView Grid.Column="5" Grid.Row="1" Grid.ColumnSpan="3"
+                                ItemsSource="{Binding StatList}"
+                                SelectedItems="{Binding SelectedStats, Mode=TwoWay}"
+                                SelectionMode="Multiple"
+                                x:Name="statSelector"
+                                SelectionChanged="statSelector_SelectionChanged"
+                                ></CollectionView>
+
+            <CheckBox Grid.Column="8" IsChecked="{Binding Path=SelectedRequest.StealLowerPriority}"/>
+            <Border Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="3" Stroke="#AA00AA">
+                <VerticalStackLayout >
+                    <Border Stroke="#00DDDD">
+                        <CollectionView  ItemsSource="{Binding SelectedRequest.Thresholds}" HeightRequest="250">
+                            <CollectionView.ItemTemplate>
+                                <DataTemplate x:DataType="lib:StatThreshold">
+                                    <VerticalStackLayout>
+                                        <HorizontalStackLayout>
+                                            <Label Text="{Binding CheckStat}"/>
+                                            <Label Text=": "/>
+                                            <Label Text="{Binding Threshold}"/>
+
+                                        </HorizontalStackLayout>
+                                        <Button x:Name="Edit" Text="Edit" Clicked="Edit_Clicked"/>
+                                        <Button x:Name="Del" Text="Del" Clicked="Del_Clicked"/>
+                                    </VerticalStackLayout>
+                                </DataTemplate>
+
+                            </CollectionView.ItemTemplate>
+
+                        </CollectionView>
+                    </Border>
+                    <Button x:Name="Add" Text="Add" Clicked="Add_Clicked"/>
+
+                </VerticalStackLayout>
+            </Border>
+            <Button Grid.Column="10" x:Name="Execute" Text="{Binding RequestCount, Mode=OneWay, StringFormat='{0:#,0}'}" Clicked="Execute_Clicked" HeightRequest="30" WidthRequest="130"/>
+
+        </Grid>
+        <Button x:Name="save" Text="Save" Clicked="save_Clicked"/>
+    </VerticalStackLayout>
+</ContentPage>

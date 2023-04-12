@@ -35,9 +35,12 @@
                 </ListView.ItemTemplate>
             </ListView>
             <VerticalStackLayout>
-               <HorizontalStackLayout><Label Text="Count: "/><Label Text="{Binding RequestRecommendationCount}"/> </HorizontalStackLayout>
+                <HorizontalStackLayout>
+                    <Label Text="Count: "/>
+                    <Label Text="{Binding SelectedRequest.ResultCount}"/>
+                </HorizontalStackLayout>
                 <Border StrokeThickness="5" Padding="5" WidthRequest="1000" HeightRequest="900" Stroke="#FF0000">
-                    
+
                     <CollectionView ItemsSource="{Binding Monsters}"
                           x:Name="recommendList"
                           WidthRequest="1000"
@@ -46,16 +49,29 @@
                           >
                         <CollectionView.ItemTemplate>
                             <DataTemplate x:DataType="lib:RecommendedMonster">
-                                
-                                    <Border WidthRequest="60" HeightRequest="60" Stroke="#000000">
-                                        <VerticalStackLayout>
-                                            <Label Text="{Binding FirstValue }" WidthRequest="50" />
-                                            <Label Text="{Binding SecondValue }" WidthRequest="50" />
-                                            <Label Text="{Binding ThirdValue }" WidthRequest="50" />
-                                            <Button Text="View" x:Name="view" Clicked="view_Clicked"/>
-                                        </VerticalStackLayout>
-                                    </Border>
-                                
+
+                                <Border WidthRequest="200"  Stroke="#000000">
+                                    <VerticalStackLayout>
+                                        <HorizontalStackLayout>
+                                            <Label Text="{Binding SourceRequest.PrimaryAttribute}" Style="{StaticResource labelLabelStyle}"/>
+                                            <Label Text=": " Style="{StaticResource labelLabelStyle}"/>
+                                            <Label Text="{Binding FirstValue }" />
+                                        </HorizontalStackLayout>
+                                        <HorizontalStackLayout>
+                                            <Label Text="{Binding SourceRequest.SecondaryAttribute}" Style="{StaticResource labelLabelStyle}"/>
+                                            <Label Text=": " Style="{StaticResource labelLabelStyle}"/>
+                                            <Label Text="{Binding SecondValue }" />
+                                        </HorizontalStackLayout>
+                                        <HorizontalStackLayout>
+                                            <Label Text="{Binding SourceRequest.TertiaryAttribute}" Style="{StaticResource labelLabelStyle}"/>
+                                            <Label Text=": " Style="{StaticResource labelLabelStyle}"/>
+                                            <Label Text="{Binding ThirdValue }" />
+                                        </HorizontalStackLayout>
+
+                                        <Button Text="View" x:Name="view" Clicked="view_Clicked"/>
+                                    </VerticalStackLayout>
+                                </Border>
+
                             </DataTemplate>
                         </CollectionView.ItemTemplate>
                     </CollectionView>
@@ -63,7 +79,7 @@
             </VerticalStackLayout>
             <VerticalStackLayout>
             </VerticalStackLayout>
-            
+
         </HorizontalStackLayout>
     </VerticalStackLayout>
 

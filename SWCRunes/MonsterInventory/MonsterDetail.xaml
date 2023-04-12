@@ -1,0 +1,207 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="SWCRunes.MonsterDetail"
+             xmlns:local="clr-namespace:SWCRunes"
+             xmlns:lib="clr-namespace:SWCRunesLib;assembly=SWCRunesLib"
+             xmlns:components="clr-namespace:SWCRunes.Components"
+             x:DataType="lib:Monster"
+             Title="Monster Detail">
+    <VerticalStackLayout>
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="70"/>
+                <ColumnDefinition Width="70"/>
+                <ColumnDefinition Width="70"/>
+
+                <ColumnDefinition Width="70"/>
+                <ColumnDefinition Width="70"/>
+                <ColumnDefinition Width="70"/>
+
+                <ColumnDefinition Width="70"/>
+                <ColumnDefinition Width="70"/>
+                <ColumnDefinition Width="70"/>
+
+                <ColumnDefinition Width="70"/>
+                <ColumnDefinition Width="70"/>
+                <ColumnDefinition Width="70"/>
+
+                <ColumnDefinition Width="70"/>
+                <ColumnDefinition Width="70"/>
+                <ColumnDefinition Width="70"/>
+                <ColumnDefinition Width="70"/>
+                <ColumnDefinition Width="70"/>
+
+
+            </Grid.ColumnDefinitions>
+            <Label Grid.Column="0" Text="Name"/>
+            <Label Grid.Column="1" Text="ATK"/>
+            <Label Grid.Column="2" Text="Bonus"/>
+            <Label Grid.Column="3" Text="DEF"/>
+            <Label Grid.Column="4" Text="Bonus"/>
+            <Label Grid.Column="5" Text="HP"/>
+            <Label Grid.Column="6" Text="Bonus"/>
+            <Label Grid.Column="7" Text="SPD"/>
+            <Label Grid.Column="8" Text="CR"/>
+            <Label Grid.Column="9" Text="CD"/>
+            <Label Grid.Column="10" Text="ACC"/>
+            <Label Grid.Column="11" Text="RES"/>
+            <Label Grid.Column="12" Text="Bonus"/>
+            <Label Grid.Column="13" Text="PR"/>
+            <Label Grid.Column="14" Text="EV"/>
+            <Label Grid.Column="15" Text="Bonus"/>
+        </Grid>
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="70"/>
+                <ColumnDefinition Width="70"/>
+                <ColumnDefinition Width="70"/>
+
+                <ColumnDefinition Width="70"/>
+                <ColumnDefinition Width="70"/>
+                <ColumnDefinition Width="70"/>
+
+                <ColumnDefinition Width="70"/>
+                <ColumnDefinition Width="70"/>
+                <ColumnDefinition Width="70"/>
+
+                <ColumnDefinition Width="70"/>
+                <ColumnDefinition Width="70"/>
+                <ColumnDefinition Width="70"/>
+
+                <ColumnDefinition Width="70"/>
+                <ColumnDefinition Width="70"/>
+                <ColumnDefinition Width="70"/>
+
+                <ColumnDefinition Width="70"/>
+                <ColumnDefinition Width="70"/>
+                <ColumnDefinition Width="70"/>
+            </Grid.ColumnDefinitions>
+            <Entry Grid.Column="0" Text="{Binding Path=Name}"/>
+
+            <Entry Grid.Column="1" Text="{Binding Path=BaseATK}"/>
+            <Entry Grid.Column="2" Text="{Binding Path=BaseATKBoost}"/>
+            <Entry Grid.Column="3" Text="{Binding Path=BaseDEF}"/>
+            <Entry Grid.Column="4" Text="{Binding Path=BaseDEFBoost}"/>
+            <Entry Grid.Column="5" Text="{Binding Path=BaseHP}"/>
+            <Entry Grid.Column="6" Text="{Binding Path=BaseHPBoost}"/>
+            <Entry Grid.Column="7" Text="{Binding Path=BaseSPD}"/>
+            <Entry Grid.Column="8" Text="{Binding Path=BaseCR, Converter={components:Int3ToPercConverter}}"/>
+            <Entry Grid.Column="9" Text="{Binding Path=BaseCD, Converter={components:Int3ToPercConverter}}"/>
+            <Entry Grid.Column="10" Text="{Binding Path=BaseACC, Converter={components:Int3ToPercConverter}}"/>
+            <Entry Grid.Column="11" Text="{Binding Path=BaseRES, Converter={components:Int3ToPercConverter}}"/>
+            <Entry Grid.Column="12" Text="{Binding Path=BaseRESBoost, Converter={components:Int3ToPercConverter}}"/>
+            <Entry Grid.Column="13" Text="{Binding Path=BasePR, Converter={components:Int3ToPercConverter}}"/>
+            <Entry Grid.Column="14" Text="{Binding Path=BaseEV, Converter={components:Int3ToPercConverter}}"/>
+            <Entry Grid.Column="15" Text="{Binding Path=BaseEVBoost, Converter={components:Int3ToPercConverter}}"/>
+
+        </Grid>
+        <Button x:Name="save" Text="Save" Clicked="save_Clicked"/>
+        <Grid HeightRequest="300">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="45"/>
+                <!--ATK -->
+                <ColumnDefinition Width="45"/>
+
+                <ColumnDefinition Width="100"/>
+                <!--DEF -->
+                <ColumnDefinition Width="45"/>
+
+                <ColumnDefinition Width="110"/>
+                <!--HP -->
+                <ColumnDefinition Width="45"/>
+
+
+                <ColumnDefinition Width="45"/>
+                <!--SPD -->
+                <ColumnDefinition Width="500"/>
+
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="17"/>
+                <!-- ATK -->
+                <RowDefinition Height="17"/>
+                <!-- DEF -->
+                <RowDefinition Height="17"/>
+                <!-- HP -->
+
+                <RowDefinition Height="17"/>
+                <!-- SPD -->
+
+                <RowDefinition Height="17"/>
+                <!-- CR -->
+                <RowDefinition Height="17"/>
+                <!-- CD -->
+
+                <RowDefinition Height="17"/>
+                <!-- ACC -->
+                <RowDefinition Height="17"/>
+                <!-- RES -->
+
+                <RowDefinition Height="17"/>
+                <!-- PR -->
+                <RowDefinition Height="17"/>
+                <!-- EV -->
+                <RowDefinition Height="120"/>
+
+            </Grid.RowDefinitions>
+
+            <Label Grid.Column="0" Grid.Row="0" Style="{StaticResource labelLabelStyle}" Text="ATK: "/>
+            <Label Grid.Column="1" Grid.Row="0" Style="{StaticResource valueLabelStyle}" Text="{Binding ATK}"/>
+
+            <Label Grid.Column="0" Grid.Row="1" Style="{StaticResource labelLabelStyle}" Text="DEF: "/>
+            <Label Grid.Column="1" Grid.Row="1" Style="{StaticResource valueLabelStyle}" Text="{Binding DEF}"/>
+
+            <Label Grid.Column="0" Grid.Row="2" Style="{StaticResource labelLabelStyle}" Text="HP: "/>
+            <Label Grid.Column="1" Grid.Row="2" Style="{StaticResource valueLabelStyle}" Text="{Binding HP}"/>
+
+
+            <Label Grid.Column="0" Grid.Row="3" Style="{StaticResource labelLabelStyle}" Text="SPD: "/>
+            <Label Grid.Column="1" Grid.Row="3" Style="{StaticResource valueLabelStyle}" Text="{Binding SPD}"/>
+
+
+            <Label Grid.Column="0" Grid.Row="4" Style="{StaticResource labelLabelStyle}" Text="CR: "/>
+            <Label Grid.Column="1" Grid.Row="4" Style="{StaticResource valueLabelStyle}" Text="{Binding CR}"/>
+
+            <Label Grid.Column="0" Grid.Row="5" Style="{StaticResource labelLabelStyle}" Text="CD: "/>
+            <Label Grid.Column="1" Grid.Row="5" Style="{StaticResource valueLabelStyle}" Text="{Binding CD}"/>
+
+
+            <Label Grid.Column="0" Grid.Row="6" Style="{StaticResource labelLabelStyle}" Text="ACC: "/>
+            <Label Grid.Column="1" Grid.Row="6" Style="{StaticResource valueLabelStyle}" Text="{Binding ACC}"/>
+
+            <Label Grid.Column="0" Grid.Row="7" Style="{StaticResource labelLabelStyle}" Text="RES: "/>
+            <Label Grid.Column="1" Grid.Row="7" Style="{StaticResource valueLabelStyle}" Text="{Binding RES}"/>
+
+
+            <Label Grid.Column="0" Grid.Row="8" Style="{StaticResource labelLabelStyle}" Text="PR: "/>
+            <Label Grid.Column="1" Grid.Row="8" Style="{StaticResource valueLabelStyle}" Text="{Binding PR}"/>
+
+            <Label Grid.Column="0" Grid.Row="9" Style="{StaticResource labelLabelStyle}" Text="EV: "/>
+            <Label Grid.Column="1" Grid.Row="9" Style="{StaticResource valueLabelStyle}" Text="{Binding EV}"/>
+
+            <Label Grid.Column="2" Grid.Row="0" Style="{StaticResource labelLabelStyle}" Text="EffectiveHP: "/>
+            <Label Grid.Column="3" Grid.Row="0" Style="{StaticResource valueLabelStyle}" Text="{Binding EffectiveHP}"/>
+
+            <Label Grid.Column="2" Grid.Row="1" Style="{StaticResource labelLabelStyle}" Text="Survival: "/>
+            <Label Grid.Column="3" Grid.Row="1" Style="{StaticResource valueLabelStyle}" Text="{Binding Survival}"/>
+
+            <Label Grid.Column="4" Grid.Row="0" Style="{StaticResource labelLabelStyle}" Text="Damage: "/>
+            <Label Grid.Column="5" Grid.Row="0" Style="{StaticResource valueLabelStyle}" Text="{Binding Damage}"/>
+
+            <Label Grid.Column="4" Grid.Row="1" Style="{StaticResource labelLabelStyle}" Text="BasicDamage: "/>
+            <Label Grid.Column="5" Grid.Row="1" Style="{StaticResource valueLabelStyle}" Text="{Binding BasicDamage}"/>
+
+            <Label Grid.Column="4" Grid.Row="2" Style="{StaticResource labelLabelStyle}" Text="DEFDamageR: "/>
+            <Label Grid.Column="5" Grid.Row="2" Style="{StaticResource valueLabelStyle}" Text="{Binding DEFDamageR}"/>
+
+            <Label Grid.Column="4" Grid.Row="3" Style="{StaticResource labelLabelStyle}" Text="HPDamageR: "/>
+            <Label Grid.Column="5" Grid.Row="3" Style="{StaticResource valueLabelStyle}" Text="{Binding HPDamageR}"/>
+
+            <components:RuneSet Grid.Column="7" Grid.RowSpan="11" BindingContext="{Binding Runes}"/>
+
+        </Grid>
+        <Button x:Name="editRequest" Clicked="editRequest_Clicked" Text="Request"/>
+        <Button x:Name="viewReccome" Clicked="viewReccome_Clicked" Text="Recommendations"/>
+    </VerticalStackLayout>
+</ContentPage>

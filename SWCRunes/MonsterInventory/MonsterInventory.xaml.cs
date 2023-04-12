@@ -15,33 +15,37 @@ public partial class MonsterInventory : ContentPage
 
     private MonsterInventoryViewModel _viewModel;
 
-	void monsterList_ItemSelected(System.Object sender, Microsoft.Maui.Controls.SelectedItemChangedEventArgs e)
-	{
-		monsterDisplay.BindingContext = ((ListView)sender).SelectedItem;
-		_viewModel.ChangeSelectedMonster((Monster)((ListView)sender).SelectedItem);
-
-    }
 
     void Add_Clicked(System.Object sender, System.EventArgs e)
     {
-        _viewModel.AddNewMonster();
+        try
+        {
+            _viewModel.SelectNewMonster();
+            Shell.Current.GoToAsync("//monsters/detail");
+
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine(ex.Message);
+            throw;
+        }
+
     }
 
-    void Upd_Clicked(System.Object sender, System.EventArgs e)
+    void edit_Clicked(System.Object sender, System.EventArgs e)
     {
-        _viewModel.SaveSelected();
-    }
+        try
+        {
 
+        _viewModel.SelectedMonster = (Monster)((Button)sender).BindingContext;
+        Shell.Current.GoToAsync("//monsters/detail");
 
-    void Del_Clicked(System.Object sender, System.EventArgs e)
-    {
-        
-		_viewModel.RemoveSelected();
-    }
-
-    void unequipBtn_Clicked(System.Object sender, System.EventArgs e)
-    {
-        _viewModel.UnequipSelected();
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine(ex.Message);
+            throw;
+        }
     }
 
 }

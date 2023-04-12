@@ -7,151 +7,75 @@
              xmlns:components="clr-namespace:SWCRunes.Components"
              Title="RequestInventory">
     <HorizontalStackLayout VerticalOptions="Start">
-        <Border StrokeThickness="5" Padding="5" WidthRequest="100" HeightRequest="1000">
-            <VerticalStackLayout>
-                <ListView ItemsSource="{Binding VisibleRequests}" ItemSelected="requestList_ItemSelected" x:Name="requestList" SelectedItem="{Binding SelectedRequest,Mode=TwoWay}">
-                    <ListView.ItemTemplate>
-                        <DataTemplate >
-                            <ViewCell>
-                                <HorizontalStackLayout>
-                                    <Label Text="{Binding MonsterName}">
-                                                        
-                                    </Label>
-                                </HorizontalStackLayout>
-                            </ViewCell>
-                        </DataTemplate>
-                    </ListView.ItemTemplate>
-                </ListView>
-                
-                
-            </VerticalStackLayout>
-        </Border>
-        <VerticalStackLayout>
-             <Grid BackgroundColor="LightGray">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="100"/>
+        <Border StrokeThickness="5" Padding="5" WidthRequest="1000" HeightRequest="700">
 
-                    <ColumnDefinition Width="100"/>
-                    <ColumnDefinition Width="100"/>
-                    <ColumnDefinition Width="100"/>
+            <CollectionView ItemsSource="{Binding VisibleRequests, Mode=TwoWay}" x:Name="requestList" >
+                <CollectionView.ItemTemplate >
+                    <DataTemplate x:DataType="lib:Request" >
+                        <Border Stroke="#888888">
+                            <HorizontalStackLayout>
+                                <VerticalStackLayout WidthRequest="125">
 
-                    <ColumnDefinition Width="100"/>
-                    <ColumnDefinition Width="100"/>
-                    <ColumnDefinition Width="100"/>
+                                    <HorizontalStackLayout>
+                                        <Label Text="{Binding Monster.Name}" Style="{StaticResource mediumLabelLabelStyle}"/>
+                                        <Label Text=" "/>
+                                        <Label Text="{Binding Monster.Weight}" Style="{StaticResource subDataLabelStyle}"/>
+                                    </HorizontalStackLayout>
+                                    <Label Text="{Binding PrimaryAttribute}"/>
 
-                    <ColumnDefinition Width="100"/>
-                    
-                    <ColumnDefinition Width="100"/>
-                    <ColumnDefinition Width="100"/>
+                                    <Label Text="{Binding SecondaryAttribute}"/>
 
-                
+                                    <Label Text="{Binding TertiaryAttribute}"/>
 
-                </Grid.ColumnDefinitions>
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="100"/>
 
-                </Grid.RowDefinitions>
-                <Picker Grid.Column="0" ItemsSource="{Binding VisibleMonsters}" x:Name="monsterPicker"
-                        ItemDisplayBinding="{Binding Name}" SelectedItem="{Binding NewSelectedMonster,Mode=TwoWay}"
-                        SelectedIndexChanged="monsterPicker_SelectedIndexChanged"/>
-                <Picker Grid.Column="1" ItemsSource="{Binding AttributeList}" SelectedItem="{Binding Path=NewRequest.PrimaryAttribute}"/>
-                <Picker Grid.Column="2" ItemsSource="{Binding AttributeList}" SelectedItem="{Binding Path=NewRequest.SecondaryAttribute}"/> 
-                <Picker Grid.Column="3" ItemsSource="{Binding AttributeList}" SelectedItem="{Binding Path=NewRequest.TertiaryAttribute}"/>  
-                 
-                <Picker Grid.Column="4" ItemsSource="{Binding TypeList}" SelectedItem="{Binding Path=NewRequest.RestrictSetOne}" SelectedIndexChanged="NewPicker_SelectedIndexChanged"/>
-                <Picker Grid.Column="5" ItemsSource="{Binding TypeList}" SelectedItem="{Binding Path=NewRequest.RestrictSetTwo}" SelectedIndexChanged="NewPicker_SelectedIndexChanged"/>
-                <Picker Grid.Column="6" ItemsSource="{Binding TypeList}" SelectedItem="{Binding Path=NewRequest.RestrictSetThree}" SelectedIndexChanged="NewPicker_SelectedIndexChanged"/>
+                                </VerticalStackLayout>
+                                <VerticalStackLayout WidthRequest="60">
+                                    <Button x:Name="edit" Text="Edit" Clicked="edit_Clicked"/>
+                                    <Button x:Name="run" Text="Run" Clicked="run_Clicked"/>
+                                </VerticalStackLayout>
+                                <VerticalStackLayout>
 
-                <CollectionView Grid.Column="7"
-                                ItemsSource="{Binding StatList}"
-                                SelectedItems="{Binding NewSelectedStats, Mode=TwoWay}"
-                                SelectionMode="Multiple"
-                                x:Name="newStatSelector"
-                                SelectionChanged="newStatSelector_SelectionChanged"
-                                ></CollectionView>
+                                    <HorizontalStackLayout>
+                                        <Label Text="Status: " Style="{StaticResource labelLabelStyle}"/>
+                                        <Label Text="{Binding Status}" Style="{StaticResource valueLabelStyle}"/>
+                                    </HorizontalStackLayout>
+                                    <HorizontalStackLayout>
+                                        <Label Text="Last Run: " Style="{StaticResource labelLabelStyle}"/>
+                                        <Label Text="{Binding LastRun}" Style="{StaticResource valueLabelStyle}"/>
+                                    </HorizontalStackLayout>
+                                    <HorizontalStackLayout>
+                                        <Label Text="Possible Permutations: " Style="{StaticResource labelLabelStyle}"/>
+                                        <Label Text="{Binding PossiblePermutations, StringFormat='{0:#,0}'}" Style="{StaticResource valueLabelStyle}"/>
+                                    </HorizontalStackLayout>
+                                    <HorizontalStackLayout>
+                                        <Label Text="Percent Permutations Evaluated: " Style="{StaticResource labelLabelStyle}"/>
+                                        <Label Text="{Binding PermProgress, StringFormat='{0:#,0}'}" Style="{StaticResource valueLabelStyle}"/>
+                                    </HorizontalStackLayout>
+                                    <HorizontalStackLayout>
+                                        <Label Text="Pre-filtered Count: " Style="{StaticResource labelLabelStyle}"/>
+                                        <Label Text="{Binding PermCount, StringFormat='{0:#,0}'}" Style="{StaticResource valueLabelStyle}"/>
+                                    </HorizontalStackLayout>
+                                    <HorizontalStackLayout>
+                                        <Label Text="Filtered Count: " Style="{StaticResource labelLabelStyle}"/>
+                                        <Label Text="{Binding FilteredCount, StringFormat='{0:#,0}'}" Style="{StaticResource valueLabelStyle}"/>
+                                    </HorizontalStackLayout>
+                                    <HorizontalStackLayout>
+                                    <Label Text="Total Count: " Style="{StaticResource labelLabelStyle}"/>
+                                    <Label Text="{Binding ResultCount, StringFormat='{0:#,0}'}" Style="{StaticResource valueLabelStyle}"/>
+                            </HorizontalStackLayout>
 
-                <Button Grid.Column="8" x:Name="Add" Text="Add" Clicked="Add_Clicked"/>
-                <Label Grid.Column="9" x:Name="Count" Text="{Binding NewRequestCount, Mode=OneWay,StringFormat='{0:#,0}'}" />
-
-            </Grid>
-            <Grid>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="100"/>
-
-                    <ColumnDefinition Width="100"/>
-                    <ColumnDefinition Width="100"/>
-                    <ColumnDefinition Width="100"/>
-
-                    <ColumnDefinition Width="100"/>
-                    <ColumnDefinition Width="100"/>
-                    <ColumnDefinition Width="100"/>
-
-                    <ColumnDefinition Width="100"/>
+                            </VerticalStackLayout>
+                            <Button x:Name="del" Text="Delete" Clicked="Del_Clicked"/>
+    </HorizontalStackLayout>
+    </Border>
+    </DataTemplate>
+    </CollectionView.ItemTemplate>
+    </CollectionView>
 
 
 
-                </Grid.ColumnDefinitions>
-                <Label Grid.Column="0" Text="Name"/>
-
-                <Label Grid.Column="1" Text="1st"/>
-                <Label Grid.Column="2" Text="2nd"/>
-                <Label Grid.Column="3" Text="3rd"/>
-
-                <Label Grid.Column="4" Text="1st Type"/>
-                <Label Grid.Column="5" Text="2nd Type"/>
-                <Label Grid.Column="6" Text="3rd Type"/>
-
-                <Label Grid.Column="7" Text="Stats"/>
-
-
-            </Grid>
-            <Grid>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="100"/>
-
-                    <ColumnDefinition Width="100"/>
-                    <ColumnDefinition Width="100"/>
-                    <ColumnDefinition Width="100"/>
-
-                    <ColumnDefinition Width="100"/>
-                    <ColumnDefinition Width="100"/>
-                    <ColumnDefinition Width="100"/>
-
-                    <ColumnDefinition Width="100"/>
-                    
-                    <ColumnDefinition Width="100"/>
-                    <ColumnDefinition Width="100"/>
-                    <ColumnDefinition Width="100"/>
-                
-
-                </Grid.ColumnDefinitions>
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="100"/>
-
-                </Grid.RowDefinitions>
-                <Label Grid.Column="0" Text="{Binding SelectedMonsterName}"/>
-
-                <Picker Grid.Column="1" ItemsSource="{Binding AttributeList}" SelectedItem="{Binding Path=SelectedRequest.PrimaryAttribute}"/>
-                <Picker Grid.Column="2" ItemsSource="{Binding AttributeList}" SelectedItem="{Binding Path=SelectedRequest.SecondaryAttribute}"/>
-                <Picker Grid.Column="3" ItemsSource="{Binding AttributeList}" SelectedItem="{Binding Path=SelectedRequest.TertiaryAttribute}"/>
-
-                <Picker Grid.Column="4" ItemsSource="{Binding TypeList}" SelectedItem="{Binding Path=SelectedRequest.RestrictSetOne}" SelectedIndexChanged="Picker_SelectedIndexChanged"/>
-                <Picker Grid.Column="5" ItemsSource="{Binding TypeList}" SelectedItem="{Binding Path=SelectedRequest.RestrictSetTwo}" SelectedIndexChanged="Picker_SelectedIndexChanged"/>
-                <Picker Grid.Column="6" ItemsSource="{Binding TypeList}" SelectedItem="{Binding Path=SelectedRequest.RestrictSetThree}" SelectedIndexChanged="Picker_SelectedIndexChanged"/>
-                
-                <CollectionView Grid.Column="7"
-                                ItemsSource="{Binding StatList}"
-                                SelectedItems="{Binding SelectedStats, Mode=TwoWay}"
-                                SelectionMode="Multiple"
-                                x:Name="statSelector"
-                                SelectionChanged="statSelector_SelectionChanged"
-                                ></CollectionView>
-               
-                <Button Grid.Column="8" x:Name="Del" Text="Del" Clicked="Del_Clicked"/>
-                <Button Grid.Column="9" x:Name="Upd" Text="Upd" Clicked="Upd_Clicked"/>
-                <Button Grid.Column="10" x:Name="Execute" Text="{Binding RequestCount, Mode=OneWay, StringFormat='{0:#,0}'}" Clicked="Execute_Clicked" HeightRequest="30" WidthRequest="130"/>
-
-            </Grid>
-        </VerticalStackLayout>
+    </Border>
+    <Button x:Name="add" Text="Add" Clicked="Add_Clicked"/>
+    <Button x:Name="bogus" Text="B" Clicked="bogus_Clicked"/>
     </HorizontalStackLayout>
 </ContentPage>

@@ -2,6 +2,7 @@
 using System.ComponentModel;
 using System.Collections.ObjectModel;
 using SWCRunesLib;
+using SWCRunes.Model;
 
 namespace SWCRunes
 {
@@ -18,13 +19,21 @@ namespace SWCRunes
         }
 
 
-        public ObservableCollection<Request> RequestList { get; set; }
+        public ObservableCollection<ObservableRequest> RequestList { get; set; }
 
         private SimulationService _simulationService;
 
         public ObservableCollection<RecommendedMonster> Monsters { get; set; }
 
-        public Request SelectedRequest { get; set; }
+        private ObservableRequest _selectedRequest;
+        public ObservableRequest SelectedRequest
+        { get => _selectedRequest;
+            set
+            {
+                _selectedRequest = value;
+                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("SelectedRequest"));
+            }
+        }
 
 
         public RecommendedMonster SelectedMonster { get; set; }
@@ -38,9 +47,10 @@ namespace SWCRunes
                 {
                     int retVal = _simulationService.RecommendationCount(SelectedRequest);
                 }
-                catch (Exception e)
+                catch (Exception ex)
                 {
-
+                    Console.WriteLine(ex.Message);
+                    throw;
                 }
                 return 0;
             }

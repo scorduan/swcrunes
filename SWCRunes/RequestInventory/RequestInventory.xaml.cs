@@ -1,5 +1,6 @@
 ﻿namespace SWCRunes;
 using SWCRunesLib;
+using SWCRunes.Model;
 
 public partial class RequestInventory : ContentPage
 {
@@ -14,29 +15,12 @@ public partial class RequestInventory : ContentPage
     private RequestInventoryViewModel _viewModel;
 
 
-    void requestList_ItemSelected(System.Object sender, Microsoft.Maui.Controls.SelectedItemChangedEventArgs e)
-	{
-        
-        _viewModel.SelectedRequestChanged();
-        List<object> selectedStats = new List<object>();
-        foreach (object stat in statSelector.ItemsSource)
-        {
-            if (_viewModel.SelectedRequest.FocusStats.Contains(stat.ToString()))
-            {
-                selectedStats.Add(stat);
-            }
-            
-        }
-        
-        statSelector.UpdateSelectedItems(selectedStats);
-       
-
-    }
 
 
     void Del_Clicked(System.Object sender, System.EventArgs e)
     {
-        _viewModel.RemoveSelected();
+        ObservableRequest req = (ObservableRequest)((Button)sender).BindingContext;
+        _viewModel.RemoveRequest(req);
     }
 
     void Upd_Clicked(System.Object sender, System.EventArgs e)
@@ -46,25 +30,11 @@ public partial class RequestInventory : ContentPage
 
     void Add_Clicked(System.Object sender, System.EventArgs e)
     {
-        _viewModel.AddNewRequestToList();
+        _viewModel.SelectNewRequest();
+        Shell.Current.GoToAsync("//requests/detail");
     }
 
-    void Execute_Clicked(System.Object sender, System.EventArgs e)
-    {
-        _viewModel.ProcessCurrent();
-        DateTime time = DateTime.Now;
 
-    }
-
-    void statSelector_SelectionChanged(System.Object sender, Microsoft.Maui.Controls.SelectionChangedEventArgs e)
-    {
-        _viewModel.UpdateSelectedStats(e.CurrentSelection);
-    }
-
-    void newStatSelector_SelectionChanged(System.Object sender, Microsoft.Maui.Controls.SelectionChangedEventArgs e)
-    {
-        _viewModel.UpdateNewSelectedStats(e.CurrentSelection);
-    }
 
     void Picker_SelectedIndexChanged(System.Object sender, System.EventArgs e)
     {
@@ -76,8 +46,26 @@ public partial class RequestInventory : ContentPage
         _viewModel.NewGeneralSelectedIndexChanged();
     }
 
-    void monsterPicker_SelectedIndexChanged(System.Object sender, System.EventArgs e)
+
+
+    void edit_Clicked(System.Object sender, System.EventArgs e)
     {
-        _viewModel.UpdateNewRequestMonster();
+        _viewModel.SelectedRequest=(ObservableRequest)((Button)sender).BindingContext;
+        Shell.Current.GoToAsync("//requests/detail");
     }
+
+    void run_Clicked(System.Object sender, System.EventArgs e)
+    {
+        _viewModel.SelectedRequest = (ObservableRequest)((Button)sender).BindingContext;
+            _viewModel.ProcessCurrent();
+    }
+
+    void bogus_Clicked(System.Object sender, System.EventArgs e)
+    {
+        foreach (ObservableRequest ob in _viewModel.VisibleRequests)
+        {
+            ob.LastRun = DateTime.Now;
+        }
+    }
+
 }

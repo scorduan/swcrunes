@@ -36,7 +36,7 @@ public partial class RecommendationInventory : ContentPage
         }
         catch (Exception ex)
         {
-
+            Console.WriteLine(ex.Message);
         }
 
 

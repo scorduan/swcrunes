@@ -9,7 +9,7 @@ namespace SWCRunesLib
 {
 
 
-    public class Team 
+    public class Team : ITeam
     {
         public Team()
         {
@@ -38,9 +38,17 @@ namespace SWCRunesLib
             get { return _soulMonster; }
             set
             {
-                if (_soulMonster != null) _soulMonster.RemoveTeam(this);
-                _soulMonster = value;
-                if (_soulMonster != null) _soulMonster.AddTeam(this);
+                try
+                {
+                    if (_soulMonster != null) _soulMonster.RemoveTeam(this);
+                    _soulMonster = value;
+                    if (_soulMonster != null) _soulMonster.AddTeam(this);
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine(e.ToString());
+                    throw;
+                }
             }
         }
 
@@ -56,7 +64,7 @@ namespace SWCRunesLib
             set
             {
                 if (_otherMonster1 != null) _otherMonster1.RemoveTeam(this);
-                _soulMonster = value;
+                _otherMonster1 = value;
                 if (_otherMonster1 != null) _otherMonster1.AddTeam(this);
             }
         }

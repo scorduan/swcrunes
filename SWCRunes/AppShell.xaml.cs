@@ -22,7 +22,9 @@ public partial class AppShell : Shell
 
         Routing.RegisterRoute("teams/new", typeof(TeamNewPage));
         Routing.RegisterRoute("recommendations/detail", typeof(RecommendationDetail));
-
+        Routing.RegisterRoute("monsters/detail", typeof(MonsterDetail));
+        Routing.RegisterRoute("requests/detail", typeof(RequestDetail));
+        Routing.RegisterRoute("requests/detail/threshold", typeof(ThresholdDetail));
 
     }
 }

@@ -1,5 +1,6 @@
 ﻿using System;
 using SWCRunesLib;
+using SWCRunes.Model;
 using System.Collections.ObjectModel;
 using System.Collections.Generic;
 namespace SWCRunes
@@ -24,11 +25,11 @@ namespace SWCRunes
 
         private ISimulation _simulation;
         private ObservableCollection<Monster> _monsters = new ObservableCollection<Monster>();
-        private ObservableCollection<Request> _requests = new ObservableCollection<Request>();
+        private ObservableCollection<ObservableRequest> _requests = new ObservableCollection<ObservableRequest>();
         private ObservableCollection<Rune> _runes = new ObservableCollection<Rune>();
-        private ObservableCollection<Team> _teams = new ObservableCollection<Team>();
-        private SortedList<Monster, Monster> _sortedMonsters = new SortedList<Monster, Monster>();
-        private SortedList<Request, Request> _sortedRequests = new SortedList<Request, Request>();
+        private ObservableCollection<ObservableTeam> _teams = new ObservableCollection<ObservableTeam>();
+        private SortedSet<Monster> _sortedMonsters = new SortedSet<Monster>();
+        private SortedSet<ObservableRequest> _sortedRequests = new SortedSet<ObservableRequest>();
 
         //Rune Maint
         public Rune GetNewRune()
@@ -91,13 +92,22 @@ namespace SWCRunes
 
         private void refreshMonsters()
         {
-            _monsters.Clear();
-            _sortedMonsters.Clear();
-            List<Monster> monsters = _simulation.GetAllMonsters();
-            foreach (Monster m in monsters)
+            try
             {
-                _monsters.Add(m);
-                _sortedMonsters.Add(m,m);
+                _monsters.Clear();
+                _sortedMonsters.Clear();
+                List<Monster> monsters = _simulation.GetAllMonsters();
+                foreach (Monster m in monsters)
+                {
+                    _monsters.Add(m);
+                    _sortedMonsters.Add(m);
+                }
+                _monsters.Sort();
+            }
+            catch (Exception e)
+            {
+                Console.Write(e.ToString());
+                throw;
             }
 
 
@@ -108,48 +118,61 @@ namespace SWCRunes
             return _monsters;
         }
 
-        public SortedList<Monster,Monster> GetSortedMonsters()
+        public SortedSet<ObservableRequest> GetSortedRequests()
+        {
+            return _sortedRequests;
+        }
+
+        public SortedSet<Monster> GetSortedMonsters()
         {
             return _sortedMonsters;
         }
 
         // Request Maint
 
-        public Request GetNewRequest()
+        public ObservableRequest GetNewRequest()
         {
-            return _simulation.GetNewRequest();
+            return new ObservableRequest(_simulation.GetNewRequest());
         }
 
-        public void UpdateRequest(Request request)
+        public void UpdateRequest(ObservableRequest request)
         {
-            _simulation.UpdateRequest(request);
+            _simulation.UpdateRequest(request.Request);
             refreshRequests();
         }
 
-        public void DeleteRequest(Request request)
+        public void DeleteRequest(ObservableRequest request)
         {
-            _simulation.DeleteRequest(request);
+            _simulation.DeleteRequest(request.Request);
             refreshRequests();
         }
 
         private void refreshRequests()
         {
             _requests.Clear();
+            _sortedRequests.Clear();
             List<Request> requests = _simulation.GetAllRequests();
             foreach (Request request in requests)
-                _requests.Add(request);
+            {
+                ObservableRequest newReq = new ObservableRequest(request);
+                _requests.Add(newReq);
+                _sortedRequests.Add(newReq);
+            }
+
+            _requests.Sort();
+                
         }
 
-        public ObservableCollection<Request> GetAllRequests()
+        public ObservableCollection<ObservableRequest> GetAllRequests()
         {
             return _requests;
         }
 
 
         //Recommendations
-        public void Optimize(Request request)
+        public void Optimize(ObservableRequest request)
         {
-            _simulation.Optimize(request);
+            _simulation.Optimize(request.Request);
             DateTime time = DateTime.Now;
         }
 
@@ -185,9 +208,9 @@ namespace SWCRunes
             return _simulation.GetMonsterForId(id);
         }
 
-        public long CalcPerms(Request request)
+        public long CalcPerms(ObservableRequest request)
         {
-            return _simulation.CalculatePerms(request);
+            return _simulation.CalculatePerms(request.Request);
         }
 
         internal void UnequipAllMonster(Monster monster)
@@ -195,17 +218,17 @@ namespace SWCRunes
             _simulation.UnequipRuneSet(monster.Id);
         }
 
-        internal bool RequestHasRecommendations(Request request)
+        internal bool RequestHasRecommendations(ObservableRequest request)
         {
-            return _simulation.MonsterHasRecommendations(request.MonsterId);
+            return _simulation.MonsterHasRecommendations(request.Request.MonsterId);
         }
 
-        internal int RecommendationCount(Request request)
+        internal int RecommendationCount(ObservableRequest request)
         {
             int x = 0;
             if (request != null)
             {
-                x = _simulation.RecommendationCount(request.MonsterId);
+                x = _simulation.RecommendationCount(request.Request.MonsterId);
             }
             return x;
         }
@@ -213,21 +236,21 @@ namespace SWCRunes
 
 
         //Team Maint
-        public Team GetNewTeam()
+        public ObservableTeam GetNewTeam()
         {
-            return _simulation.GetNewTeam();
+            return new ObservableTeam(_simulation.GetNewTeam());
         }
 
-        public void UpdateTeam(Team team)
+        public void UpdateTeam(ObservableTeam team)
         {
-            _simulation.UpdateTeam(team);
+            _simulation.UpdateTeam(team.Team);
             refreshTeams();
         }
 
-        public void DeleteTeam(Team team)
+        public void DeleteTeam(ObservableTeam team)
         {
 
-            _simulation.DeleteTeam(team);
+            _simulation.DeleteTeam((team.Team));
             refreshTeams();
         }
 
@@ -237,14 +260,49 @@ namespace SWCRunes
             _teams.Clear();
             List<Team> teams = _simulation.GetAllTeams();
             foreach (Team t in teams)
-                _teams.Add(t);
+                _teams.Add(new ObservableTeam(t));
         }
 
-        public ObservableCollection<Team> GetAllTeams()
+        public ObservableCollection<ObservableTeam> GetAllTeams()
         {
             return _teams;
         }
 
 
+
+
+
+    }
+
+    public static class ObservableCollectionExtensions
+    {
+        public static void Sort<T>(this ObservableCollection<T> collection)
+where T : IComparable<T>, IEquatable<T>
+        {
+            List<T> sorted = collection.OrderBy(x => x).ToList();
+
+            int ptr = 0;
+            while (ptr < sorted.Count - 1)
+            {
+                if (!collection[ptr].Equals(sorted[ptr]))
+                {
+                    int idx = search(collection, ptr + 1, sorted[ptr]);
+                    collection.Move(idx, ptr);
+                }
+
+                ptr++;
+            }
+        }
+
+        public static int search<T>(ObservableCollection<T> collection, int startIndex, T other)
+        {
+            for (int i = startIndex; i < collection.Count; i++)
+            {
+                if (other.Equals(collection[i]))
+                    return i;
+            }
+
+            return -1; // decide how to handle error case
+        }
     }
 }

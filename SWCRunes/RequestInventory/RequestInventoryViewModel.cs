@@ -2,6 +2,8 @@
 using System.ComponentModel;
 using System.Collections.ObjectModel;
 using SWCRunesLib;
+using SWCRunes.Model;
+using System.Collections.Generic;
 using Microsoft.Maui.Controls.Compatibility;
 using System.Reflection;
 
@@ -10,31 +12,17 @@ namespace SWCRunes
 {
     public class RequestInventoryViewModel : INotifyPropertyChanged
     {
-        public RequestInventoryViewModel(SimulationService simulationService)
+        public RequestInventoryViewModel(SimulationService simulationService, RecommendationInventoryViewModel recommendationInventoryViewModel)
         {
 
             _simulationService = simulationService;
+            _recommendationInventoryViewModel = recommendationInventoryViewModel;
             VisibleRequests = _simulationService.GetAllRequests();
             VisibleMonsters = _simulationService.GetAllMonsters();
-            NewRequest = _simulationService.GetNewRequest();
             
-            AttributeList = new ObservableCollection<string>();
-            AttributeList.Add("ATK");
-            AttributeList.Add("DEF");
-            AttributeList.Add("HP");
-            AttributeList.Add("SPD");
-            AttributeList.Add("CR");
-            AttributeList.Add("CD");
-            AttributeList.Add("ACC");
-            AttributeList.Add("RES");
-            AttributeList.Add("PR");
-            AttributeList.Add("EV");
-            AttributeList.Add("EffectiveHP");
-            AttributeList.Add("Survival");
-            AttributeList.Add("Damage");
-            AttributeList.Add("BasicDamage");
-            AttributeList.Add("DEFDamageR");
-            AttributeList.Add("HPDamageR");
+
+            AttributeList = new ObservableCollection<Stat>(Enum.GetValues(typeof(Stat)).Cast<Stat>().ToList());
+;
 
             StatList.Add("ATKP");
             StatList.Add("ATKF");
@@ -75,17 +63,27 @@ namespace SWCRunes
 
 
 
-            
+
         }
-        
-        
+
+
         public event PropertyChangedEventHandler PropertyChanged;
 
+        private RecommendationInventoryViewModel _recommendationInventoryViewModel;
 
+        private ObservableRequest _selectedRequest;
+        public ObservableRequest SelectedRequest
+        {
+            get => _selectedRequest;
+            set
+            {
+                _selectedRequest = value;
+                _recommendationInventoryViewModel.SelectedRequest = value;
+                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("SelectedRequest"));
+            }
+        }
 
-        public Request SelectedRequest { get; set; }
-
-        public ObservableCollection<String> AttributeList { get; set; }
+        public ObservableCollection<Stat> AttributeList { get; set; }
 
         public ObservableCollection<String> StatList { get; set; } = new ObservableCollection<string>();
 
@@ -98,24 +96,34 @@ namespace SWCRunes
 
         public Monster NewSelectedMonster { get; set; }
 
-        public string SelectedMonsterName
+
+        private StatThreshold _selectedThreshold;
+        public StatThreshold SelectedThreshold
         {
-            get
+            get => _selectedThreshold;
+            set
             {
-                string name = "";
-                if ((SelectedRequest !=null)&&(SelectedRequest.MonsterId!=""))
-                {
-                    name= _simulationService.GetMonsterNameForId(SelectedRequest.MonsterId);
-                }
-                return name;
+                _selectedThreshold = value;
+                PropertyChanged.Invoke(this, new PropertyChangedEventArgs("SelectedThreshold"));
             }
+        }
+
+        public void SaveThreshold(StatThreshold threshold)
+        {
+            if (!SelectedRequest.Thresholds.Contains(threshold))
+            {
+                SelectedRequest.Thresholds.Add(threshold);
+            }
+            PropertyChanged.Invoke(this, new PropertyChangedEventArgs("SelectedRequest"));
         }
 
         internal void ProcessCurrent()
         {
-            _simulationService.Optimize(SelectedRequest);
-            DateTime time = DateTime.Now;
+           Task.Run(()=>_simulationService.Optimize(SelectedRequest));
+            
 
+            DateTime now = DateTime.Now;
+            //PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("VisibleRequests"));
         }
 
         internal void UpdateSelectedStats(IReadOnlyList<object> currentSelection)
@@ -131,15 +139,6 @@ namespace SWCRunes
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("RequestCount"));
         }
 
-        internal void UpdateNewSelectedStats(IReadOnlyList<object> currentSelection)
-        {
-            NewRequest.FocusStats.Clear();
-            foreach (string stat in currentSelection)
-            {
-                NewRequest.FocusStats.Add(stat);
-            }
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("NewRequestCount"));
-        }
 
         internal void GeneralSelectedIndexChanged()
         {
@@ -151,7 +150,28 @@ namespace SWCRunes
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("NewRequestCount"));
         }
 
-       
+        public void SelectNewRequest()
+        {
+            SelectedRequest = _simulationService.GetNewRequest();
+
+        }
+
+        public void SaveSelected()
+        {
+            try
+            {
+
+            
+            _simulationService.UpdateRequest(SelectedRequest);
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("SelectedRequest"));
+            
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                throw;
+            }
+        }
 
         public long RequestCount
         {
@@ -166,28 +186,22 @@ namespace SWCRunes
             }
         }
 
-        public long NewRequestCount
-        {
-            get
-            {
-                return _simulationService.CalcPerms(NewRequest);
-            }
-        }
+        
 
         // Binding Properties
 
-        public ObservableCollection<Request> VisibleRequests { get; private set; }
 
-        public Request NewRequest { get; set; }
+        public ObservableCollection<ObservableRequest> VisibleRequests { get; private set; }
+
 
         private SimulationService _simulationService;
 
         // Simulation Updaters 
 
         public SimulationService Service { get => _simulationService; }
-        public void RemoveSelected()
+        public void RemoveRequest(ObservableRequest req)
         {
-            DeleteRequest(SelectedRequest);
+            DeleteRequest(req);
         }
 
         public void SaveSelectedRequest()
@@ -195,34 +209,23 @@ namespace SWCRunes
             SaveUpdatedRequest(SelectedRequest);
         }
 
-        public void SaveUpdatedRequest(Request request)
+        public void SaveUpdatedRequest(ObservableRequest request)
         {
             _simulationService.UpdateRequest(request);
         }
 
-        public void AddNewRequestToList()
-        {
-            _simulationService.UpdateRequest(NewRequest);
-            NewRequest = _simulationService.GetNewRequest();
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("NewRequest"));
-        }
 
-        public void DeleteRequest(Request request)
+        public void DeleteRequest(ObservableRequest request)
         {
-            _simulationService.DeleteRequest(request);
-        }
-
-        internal void SelectedRequestChanged()
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("SelectedMonsterName"));
             
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("SelectedRequest"));
+            _simulationService.DeleteRequest(request);
+            
         }
 
-        internal void UpdateNewRequestMonster()
+
+        internal void RemoveThreshold(StatThreshold remove)
         {
-            NewRequest.MonsterId = NewSelectedMonster.Id;
-            NewRequest.MonsterName = _simulationService.GetMonsterNameForId(NewRequest.MonsterId);
+            SelectedRequest.Thresholds.Remove(remove);
         }
     }
 }

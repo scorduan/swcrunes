@@ -13,7 +13,8 @@ public static class MauiProgram
 			{
 				fonts.AddFont("OpenSans-Regular.ttf", "OpenSansRegular");
 				fonts.AddFont("OpenSans-Semibold.ttf", "OpenSansSemibold");
-			})
+                fonts.AddFont("armalite.ttf", "armalite");
+            })
 			.RegisterServices()
 			.RegisterViewModels()
 			.RegisterViews();
@@ -53,6 +54,9 @@ public static class MauiProgram
         mauiAppBuilder.Services.AddSingleton<TeamInventory>();
         mauiAppBuilder.Services.AddSingleton<TeamNewPage>();
         mauiAppBuilder.Services.AddSingleton<RecommendationDetail>();
+        mauiAppBuilder.Services.AddSingleton<MonsterDetail>();
+        mauiAppBuilder.Services.AddSingleton<RequestDetail>();
+        mauiAppBuilder.Services.AddSingleton<ThresholdDetail>();
         mauiAppBuilder.Services.AddSingleton<AppShell>();
         return mauiAppBuilder;
     }

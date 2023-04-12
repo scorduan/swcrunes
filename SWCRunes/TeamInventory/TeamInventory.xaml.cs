@@ -1,4 +1,5 @@
 ﻿using SWCRunesLib;
+using SWCRunes.Model;
 
 namespace SWCRunes;
 
@@ -23,14 +24,14 @@ public partial class TeamInventory : ContentPage
 
     void edit_Clicked(System.Object sender, System.EventArgs e)
     {
-        Team team = (Team)((Button)sender).BindingContext;
+        ObservableTeam team = (ObservableTeam)((Button)sender).BindingContext;
         _viewModel.ChangeSelectedTeam(team);
         Shell.Current.GoToAsync("//teams/new");
     }
 
     void deleted_Clicked(System.Object sender, System.EventArgs e)
     {
-        Team team = (Team)((Button)sender).BindingContext;
+        ObservableTeam team = (ObservableTeam)((Button)sender).BindingContext;
         _viewModel.DeleteTeam(team);
     }
 }

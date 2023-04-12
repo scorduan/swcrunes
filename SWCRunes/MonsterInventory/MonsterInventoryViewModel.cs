@@ -9,11 +9,12 @@ namespace SWCRunes
 {
     public class MonsterInventoryViewModel : INotifyPropertyChanged
     {
-        public MonsterInventoryViewModel(SimulationService simService)
+        public MonsterInventoryViewModel(SimulationService simService, RequestInventoryViewModel requestInventoryViewModel)
         {
 
             
             _simulationService = simService;
+            _requestInventoryViewModel = requestInventoryViewModel;
             VisibleMonsters = _simulationService.GetAllMonsters();
             NewMonster = _simulationService.GetNewMonster();
         }
@@ -21,17 +22,18 @@ namespace SWCRunes
         
         public event PropertyChangedEventHandler PropertyChanged;
 
+        private RequestInventoryViewModel _requestInventoryViewModel;
 
-
-        public Monster SelectedMonster { get; set; }
-
-
-
-        internal void ChangeSelectedMonster(Monster selectedItem)
+        private Monster _selectedMonster;
+        public Monster SelectedMonster
         {
-            SelectedMonster = selectedItem;
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("SelectedMonster"));
-            //PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("Monsters"));
+            get => _selectedMonster;
+            set
+            {
+                _selectedMonster = value;
+                //_requestInventoryViewModel.SelectedRequest = _selectedMonster.Request;
+                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("SelectedMonster"));
+            }
         }
 
         // Binding Properties
@@ -74,6 +76,12 @@ namespace SWCRunes
         {
             _simulationService.UnequipAllMonster(SelectedMonster);
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("SelectedMonster"));
+        }
+
+        internal void SelectNewMonster()
+        {
+            SelectedMonster = _simulationService.GetNewMonster();
+            
         }
     }
 }

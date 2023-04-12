@@ -32,7 +32,7 @@ namespace SWCRunesLib
             }
             catch (Exception e)
             {
-
+                throw;
             }
         }
 
@@ -104,9 +104,19 @@ namespace SWCRunesLib
 
         internal async Task<int> SaveRequest(Request request)
         {
-            await Init();
-            Task<int> result = Database.InsertOrReplaceAsync(request);
-            await result;
+            Task<int> result = null;
+            try
+            {
+
+
+                await Init();
+                 result = Database.InsertOrReplaceAsync(request);
+                await result;
+            }
+            catch (Exception e)
+            {
+                throw;
+            }
             return result.Result;
         }
 

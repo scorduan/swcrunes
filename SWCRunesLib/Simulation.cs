@@ -262,7 +262,8 @@ namespace SWCRunesLib
         public void Optimize(Request request)
         {
             Optimizer optimizer = new Optimizer(_allRunes.Values.ToList());
-            List<RecommendedMonster> recommendedMonsters = optimizer.ProcessReq(request, _monsters[request.MonsterId]);
+            List<RecommendedMonster> recommendedMonsters = optimizer.ProcessReq(request, _monsters[request.MonsterId]).ToList<RecommendedMonster>();
+            db.SaveRequest(request);
             _recommendedMonsters[request.MonsterId] = recommendedMonsters;
         }
 
@@ -291,15 +292,21 @@ namespace SWCRunesLib
                 {
                     if (monster.Id == "") monster.Id = GetNewMonsterId();
                     _monsters.Add(monster.Id, monster);
-                    await db.SaveMonster(monster);
+                    
                 }
 
                 foreach (Request request in requests)
                 {
                     if (request.Id == "") request.Id = GetNewRequestId();
-                    if (request.MonsterId != "") request.MonsterName = _monsters[request.MonsterId].Name;
+                    if (request.MonsterId != "")
+                    {
+                        request.MonsterName = _monsters[request.MonsterId].Name;
+                        request.Monster = _monsters[request.MonsterId];
+                        _monsters[request.MonsterId].Request = request;
+                    }
+                    
                     _requests.Add(request.Id, request);
-                    await db.SaveRequest(request);
+                    
                 }
 
                 foreach (Rune rune in runes)
@@ -307,7 +314,7 @@ namespace SWCRunesLib
                     if (rune.Id == "") rune.Id = GetNewRuneId();
                     _allRunes.Add(rune.Id, rune);
                     _typedSlottedRunes[rune.Type][rune.Slot].Add(rune);
-                    await db.SaveRune(rune);
+                    
                     if (rune.EquippedOn != "")
                     {
                         if (_monsters.ContainsKey(rune.EquippedOn))
@@ -333,12 +340,13 @@ namespace SWCRunesLib
                     }
 
                     _teams.Add(team.Id, team);
-                    await db.SaveTeam(team);
+                    
                 }
             }
             catch (Exception e)
             {
-
+                Console.WriteLine(e.ToString());
+                throw;
             }
 
             LoadCompleteEvent?.Invoke(this);

@@ -1,5 +1,6 @@
 ﻿using System;
 using SWCRunesLib;
+using SWCRunes.Model;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 
@@ -19,7 +20,7 @@ namespace SWCRunes
 
         public event PropertyChangedEventHandler PropertyChanged;
 
-        public Team SelectedTeam { get; private set; }
+        public ObservableTeam SelectedTeam { get; private set; }
 
         public Monster SelectedSoulLink { get; set; }
 
@@ -27,7 +28,7 @@ namespace SWCRunes
 
         public Monster SelectedOther2 { get; set; }
 
-		public ObservableCollection<Team> AllTeams { get; set; }
+		public ObservableCollection<ObservableTeam> AllTeams { get; set; }
 
         public ObservableCollection<Monster> AllMonsters { get; set; }
 
@@ -38,7 +39,7 @@ namespace SWCRunes
 
         }
 
-        public void ChangeSelectedTeam(Team team)
+        public void ChangeSelectedTeam(ObservableTeam team)
         {
             SelectedTeam = team;
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("SelectedTeam"));
@@ -56,15 +57,16 @@ namespace SWCRunes
             _simulationService.UpdateTeam(SelectedTeam);
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("AllTeams"));
             }
-            catch (Exception e)
+            catch (Exception ex)
             {
-
+                Console.WriteLine(ex.Message);
+                throw;
             }
 
 
         }
 
-        public void DeleteTeam(Team team)
+        public void DeleteTeam(ObservableTeam team)
         {
             _simulationService.DeleteTeam(team);
             

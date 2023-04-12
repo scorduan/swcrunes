@@ -5,211 +5,51 @@
              xmlns:local="clr-namespace:SWCRunes"
              xmlns:lib="clr-namespace:SWCRunesLib;assembly=SWCRunesLib"
              xmlns:components="clr-namespace:SWCRunes.Components"
-             Title="MonsterInventory">
-    <HorizontalStackLayout VerticalOptions="Start">
-        <Border StrokeThickness="5" Padding="5" WidthRequest="100" HeightRequest="1000">
-            <VerticalStackLayout>
-                <ListView ItemsSource="{Binding VisibleMonsters, Mode=TwoWay}" ItemSelected="monsterList_ItemSelected" x:Name="monsterList">
-                    <ListView.ItemTemplate>
-                        <DataTemplate >
-                            <ViewCell>
-                                <HorizontalStackLayout>
-                                    <Label Text="{Binding Name}"/>
-                                </HorizontalStackLayout>
-                            </ViewCell>
-                        </DataTemplate>
-                    </ListView.ItemTemplate>
-                </ListView>
-            </VerticalStackLayout>
+             Title="MonsterInventory" x:DataType="local:MonsterInventoryViewModel">
+    <VerticalStackLayout >
+        <Border Stroke="#DD00DD" WidthRequest="1000" HeightRequest="700">
+            <CollectionView ItemsSource="{Binding VisibleMonsters}" x:Name="monsterList">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate x:DataType="lib:Monster" >
+                        <VerticalStackLayout>
+                            <HorizontalStackLayout>
+                                
+                            </HorizontalStackLayout>
+                            <Grid HeightRequest="45">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="45"/> <!--ATK -->
+                                    <ColumnDefinition Width="45"/>
+
+                                    <ColumnDefinition Width="45"/> <!--DEF -->
+                                    <ColumnDefinition Width="45"/>
+
+                                    <ColumnDefinition Width="45"/> <!--HP -->
+                                    <ColumnDefinition Width="45"/>
+
+                                    
+                                    <ColumnDefinition Width="45"/> <!--SPD -->
+                                    <ColumnDefinition Width="45"/>
+
+
+                                </Grid.ColumnDefinitions>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="30"/>
+                                    <RowDefinition />
+                                </Grid.RowDefinitions>
+                                <Label Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="3" Style="{StaticResource mediumLabelLabelStyle}" Text="{Binding Name}"/>
+                                <Label Grid.Column="3" Grid.Row="0" Style="{StaticResource valueLabelStyle}" Text="{Binding Weight}"/>
+                                <Button Grid.Column="9" Grid.Row="0" x:Name="edit" Text="Edit" Clicked="edit_Clicked" WidthRequest="60"/>
+                                <Label Grid.Column="0" Grid.Row="1" Grid.ColumnSpan="3" Style="{StaticResource subDataLabelStyle}" Text="{Binding Request.PrimaryAttribute}" />
+                                <Label Grid.Column="3" Grid.Row="1" Grid.ColumnSpan="3" Style="{StaticResource subDataLabelStyle}" Text="{Binding Request.SecondaryAttribute}"/>
+                                <Label Grid.Column="6" Grid.Row="1" Grid.ColumnSpan="3" Style="{StaticResource subDataLabelStyle}" Text="{Binding Request.TertiaryAttribute}"/>
+
+                            </Grid>
+                            
+                            </VerticalStackLayout>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
         </Border>
-        <VerticalStackLayout>
-            <Grid>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="70"/>
-                    <ColumnDefinition Width="70"/>
-                    <ColumnDefinition Width="70"/>
-
-                    <ColumnDefinition Width="70"/>
-                    <ColumnDefinition Width="70"/>
-                    <ColumnDefinition Width="70"/>
-
-                    <ColumnDefinition Width="70"/>
-                    <ColumnDefinition Width="70"/>
-                    <ColumnDefinition Width="70"/>
-
-                    <ColumnDefinition Width="70"/>
-                    <ColumnDefinition Width="70"/>
-                    <ColumnDefinition Width="70"/>
-
-                    <ColumnDefinition Width="70"/>
-                    <ColumnDefinition Width="70"/>
-                    <ColumnDefinition Width="70"/>
-                    <ColumnDefinition Width="70"/>
-                    <ColumnDefinition Width="70"/>
-
-
-                </Grid.ColumnDefinitions>
-                <Label Grid.Column="0" Text="Name"/>
-                <Label Grid.Column="1" Text="ATK"/>
-                <Label Grid.Column="2" Text="Bonus"/>
-                <Label Grid.Column="3" Text="DEF"/>
-                <Label Grid.Column="4" Text="Bonus"/>
-                <Label Grid.Column="5" Text="HP"/>
-                <Label Grid.Column="6" Text="Bonus"/>
-                <Label Grid.Column="7" Text="SPD"/>
-                <Label Grid.Column="8" Text="CR"/>
-                <Label Grid.Column="9" Text="CD"/>
-                <Label Grid.Column="10" Text="ACC"/>
-                <Label Grid.Column="11" Text="RES"/>
-                <Label Grid.Column="12" Text="Bonus"/>
-                <Label Grid.Column="13" Text="PR"/>
-                <Label Grid.Column="14" Text="EV"/>
-                <Label Grid.Column="15" Text="Bonus"/>
-            </Grid>
-            <Grid>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="70"/>
-                    <ColumnDefinition Width="70"/>
-                    <ColumnDefinition Width="70"/>
-
-                    <ColumnDefinition Width="70"/>
-                    <ColumnDefinition Width="70"/>
-                    <ColumnDefinition Width="70"/>
-
-                    <ColumnDefinition Width="70"/>
-                    <ColumnDefinition Width="70"/>
-                    <ColumnDefinition Width="70"/>
-
-                    <ColumnDefinition Width="70"/>
-                    <ColumnDefinition Width="70"/>
-                    <ColumnDefinition Width="70"/>
-
-                    <ColumnDefinition Width="70"/>
-                    <ColumnDefinition Width="70"/>
-                    <ColumnDefinition Width="70"/>
-
-                    <ColumnDefinition Width="70"/>
-                    <ColumnDefinition Width="70"/>
-                    <ColumnDefinition Width="70"/>
-                </Grid.ColumnDefinitions>
-                <Entry Grid.Column="0" Text="{Binding Path=NewMonster.Name}"/>
-
-                <Entry Grid.Column="1" Text="{Binding Path=NewMonster.BaseATK}"/>
-                <Entry Grid.Column="2" Text="{Binding Path=NewMonster.BaseATKBoost}"/>
-                <Entry Grid.Column="3" Text="{Binding Path=NewMonster.BaseDEF}"/>
-                <Entry Grid.Column="4" Text="{Binding Path=NewMonster.BaseDEFBoost}"/>
-                <Entry Grid.Column="5" Text="{Binding Path=NewMonster.BaseHP}"/>
-                <Entry Grid.Column="6" Text="{Binding Path=NewMonster.BaseHPBoost}"/>
-                <Entry Grid.Column="7" Text="{Binding Path=NewMonster.BaseSPD}"/>
-                <Entry Grid.Column="8" Text="{Binding Path=NewMonster.BaseCR, Converter={components:Int3ToPercConverter}}"/>
-                <Entry Grid.Column="9" Text="{Binding Path=NewMonster.BaseCD, Converter={components:Int3ToPercConverter}}"/>
-                <Entry Grid.Column="10" Text="{Binding Path=NewMonster.BaseACC, Converter={components:Int3ToPercConverter}}"/>
-                <Entry Grid.Column="11" Text="{Binding Path=NewMonster.BaseRES, Converter={components:Int3ToPercConverter}}"/>
-                <Entry Grid.Column="12" Text="{Binding Path=NewMonster.BaseRESBoost, Converter={components:Int3ToPercConverter}}"/>
-                <Entry Grid.Column="13" Text="{Binding Path=NewMonster.BasePR, Converter={components:Int3ToPercConverter}}"/>
-                <Entry Grid.Column="14" Text="{Binding Path=NewMonster.BaseEV, Converter={components:Int3ToPercConverter}}"/>
-                <Entry Grid.Column="15" Text="{Binding Path=NewMonster.BaseEVBoost, Converter={components:Int3ToPercConverter}}"/>
-                <Button Grid.Column="16" x:Name="Add" Text="Add" Clicked="Add_Clicked"/>
-
-            </Grid>
-            <HorizontalStackLayout>
-            <components:Monster WidthRequest="1000" HeightRequest="350" x:Name="monsterDisplay"/>
-                <VerticalStackLayout>
-                <Button WidthRequest="100" HeightRequest="30" Text="Unequip" x:Name="unequipBtn" Clicked="unequipBtn_Clicked"/>
-                    </VerticalStackLayout>
-                </HorizontalStackLayout>
-            <Label>Base Values</Label>
-            <Grid>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="70"/>
-                    <ColumnDefinition Width="70"/>
-                    <ColumnDefinition Width="70"/>
-
-                    <ColumnDefinition Width="70"/>
-                    <ColumnDefinition Width="70"/>
-                    <ColumnDefinition Width="70"/>
-
-                    <ColumnDefinition Width="70"/>
-                    <ColumnDefinition Width="70"/>
-                    <ColumnDefinition Width="70"/>
-
-                    <ColumnDefinition Width="70"/>
-                    <ColumnDefinition Width="70"/>
-                    <ColumnDefinition Width="70"/>
-
-                    <ColumnDefinition Width="70"/>
-                    <ColumnDefinition Width="70"/>
-                    <ColumnDefinition Width="70"/>
-                    <ColumnDefinition Width="70"/>
-                    <ColumnDefinition Width="70"/>
-
-
-                </Grid.ColumnDefinitions>
-                <Label Grid.Column="0" Text="Name"/>
-                <Label Grid.Column="1" Text="ATK"/>
-                <Label Grid.Column="2" Text="Bonus"/>
-                <Label Grid.Column="3" Text="DEF"/>
-                <Label Grid.Column="4" Text="Bonus"/>
-                <Label Grid.Column="5" Text="HP"/>
-                <Label Grid.Column="6" Text="Bonus"/>
-                <Label Grid.Column="7" Text="SPD"/>
-                <Label Grid.Column="8" Text="CR"/>
-                <Label Grid.Column="9" Text="CD"/>
-                <Label Grid.Column="10" Text="ACC"/>
-                <Label Grid.Column="11" Text="RES"/>
-                <Label Grid.Column="12" Text="Bonus"/>
-                <Label Grid.Column="13" Text="PR"/>
-                <Label Grid.Column="14" Text="EV"/>
-                <Label Grid.Column="15" Text="Bonus"/>
-            </Grid>
-            <Grid>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="70"/>
-                    <ColumnDefinition Width="70"/>
-                    <ColumnDefinition Width="70"/>
-
-                    <ColumnDefinition Width="70"/>
-                    <ColumnDefinition Width="70"/>
-                    <ColumnDefinition Width="70"/>
-
-                    <ColumnDefinition Width="70"/>
-                    <ColumnDefinition Width="70"/>
-                    <ColumnDefinition Width="70"/>
-
-                    <ColumnDefinition Width="70"/>
-                    <ColumnDefinition Width="70"/>
-                    <ColumnDefinition Width="70"/>
-
-                    <ColumnDefinition Width="70"/>
-                    <ColumnDefinition Width="70"/>
-                    <ColumnDefinition Width="70"/>
-
-                    <ColumnDefinition Width="70"/>
-                    <ColumnDefinition Width="70"/>
-                    <ColumnDefinition Width="70"/>
-                    <ColumnDefinition Width="70"/>
-                </Grid.ColumnDefinitions>
-                <Entry Grid.Column="0" Text="{Binding Path=SelectedMonster.Name}"/>
-
-                <Entry Grid.Column="1" Text="{Binding Path=SelectedMonster.BaseATK}"/>
-                <Entry Grid.Column="2" Text="{Binding Path=SelectedMonster.BaseATKBoost}"/>
-                <Entry Grid.Column="3" Text="{Binding Path=SelectedMonster.BaseDEF}"/>
-                <Entry Grid.Column="4" Text="{Binding Path=SelectedMonster.BaseDEFBoost}"/>
-                <Entry Grid.Column="5" Text="{Binding Path=SelectedMonster.BaseHP}"/>
-                <Entry Grid.Column="6" Text="{Binding Path=SelectedMonster.BaseHPBoost}"/>
-                <Entry Grid.Column="7" Text="{Binding Path=SelectedMonster.BaseSPD}"/>
-                <Entry Grid.Column="8" Text="{Binding Path=SelectedMonster.BaseCR, Converter={components:Int3ToPercConverter}}"/>
-                <Entry Grid.Column="9" Text="{Binding Path=SelectedMonster.BaseCD, Converter={components:Int3ToPercConverter}}"/>
-                <Entry Grid.Column="10" Text="{Binding Path=SelectedMonster.BaseACC, Converter={components:Int3ToPercConverter}}"/>
-                <Entry Grid.Column="11" Text="{Binding Path=SelectedMonster.BaseRES, Converter={components:Int3ToPercConverter}}"/>
-                <Entry Grid.Column="12" Text="{Binding Path=SelectedMonster.BaseRESBoost, Converter={components:Int3ToPercConverter}}"/>
-                <Entry Grid.Column="13" Text="{Binding Path=SelectedMonster.BasePR, Converter={components:Int3ToPercConverter}}"/>
-                <Entry Grid.Column="14" Text="{Binding Path=SelectedMonster.BaseEV, Converter={components:Int3ToPercConverter}}"/>
-                <Entry Grid.Column="15" Text="{Binding Path=SelectedMonster.BaseEVBoost, Converter={components:Int3ToPercConverter}}"/>
-                <Button Grid.Column="16" x:Name="Del" Text="Del" Clicked="Del_Clicked"/>
-                <Button Grid.Column="17" x:Name="Upd" Text="Upd" Clicked="Upd_Clicked"/>
-
-            </Grid>
-        </VerticalStackLayout>
-    </HorizontalStackLayout>
+        <Button x:Name="Add" Text="Add" Clicked="Add_Clicked"/>
+    </VerticalStackLayout>
 </ContentPage>

@@ -57,6 +57,10 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <MauiXaml Remove="Resources\Styles\Styles.xaml" />
+	  <MauiXaml Remove="Resources\Styles\Colors.xaml" />
+	</ItemGroup>
+	<ItemGroup>
 	  <MauiXaml Update="RecommendationInventory\RecommendationInventory.xaml">
 	    <SubType></SubType>
 	  </MauiXaml>
@@ -90,6 +94,15 @@
 	  <MauiXaml Update="RecommendationInventory\RecommendationDetail.xaml">
 	    <SubType></SubType>
 	  </MauiXaml>
+	  <MauiXaml Update="MonsterInventory\MonsterDetail.xaml">
+	    <SubType></SubType>
+	  </MauiXaml>
+	  <MauiXaml Update="RequestInventory\RequestDetail.xaml">
+	    <SubType></SubType>
+	  </MauiXaml>
+	  <MauiXaml Update="RequestInventory\ThresholdDetail.xaml">
+	    <SubType></SubType>
+	  </MauiXaml>
 	</ItemGroup>
 	<ItemGroup>
 	  <None Remove="RuneInventory\" />
@@ -99,6 +112,8 @@
 	  <None Remove="RequestInventory\" />
 	  <None Remove="TeamInventory\" />
 	  <None Remove="sqlite-net-pcl" />
+	  <None Remove="Resources\Fonts\armalite.ttf" />
+	  <None Remove="Model\" />
 	</ItemGroup>
 	<ItemGroup>
 	  <Folder Include="RuneInventory\" />
@@ -106,8 +121,17 @@
 	  <Folder Include="Components\" />
 	  <Folder Include="RequestInventory\" />
 	  <Folder Include="TeamInventory\" />
+	  <Folder Include="Model\" />
+	  <Folder Include="Resources\Styles\" />
 	</ItemGroup>
 	<ItemGroup>
-	  <ProjectReference Include="..\SWCRunesLib\SWCRunesLib.csproj" />
+	  <ProjectReference Include="..\SWCRunesLib\SWCRunesLib.csproj">
+	    <ReferenceSourceTarget>ProjectReference</ReferenceSourceTarget>
+	  </ProjectReference>
+	</ItemGroup>
+	<ItemGroup>
+	  <BundleResource Include="Resources\Fonts\armalite.ttf" />
+	  <BundleResource Include="Resources\Styles\Styles.xaml" />
+	  <BundleResource Include="Resources\Styles\Colors.xaml" />
 	</ItemGroup>
 </Project>
